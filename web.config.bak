@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <system.webServer>
+
+        <defaultDocument enabled="true">
+            <files>
+                <clear />
+                <add value="Index.php" />
+                <add value="Index.aspx" />
+                <add value="Index.html" />
+                <add value="pdfread.aspxl" />
+                <add value="Index.htm" />
+                <add value="Index.cfm" />
+                <add value="Index.shtml" />
+                <add value="Index.shtm" />
+                <add value="Index.stm" />
+                <add value="Index.php3" />
+                <add value="Index.asp" />
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="Default.aspx" />
+            </files>
+        </defaultDocument>
+		<directoryBrowse enabled="false" />
+      
+        <httpRedirect enabled="false" destination="https://swc.ltts.com/" exactDestination="false" childOnly="false" httpResponseStatus="Permanent" />
+         
+         <rewrite>
+            <rules>
+                <clear />
+                <rule name="WWW Rewrite" enabled="true">
+                    <match url="(.*)" />
+                    <conditions>
+                        <add input="{HTTP_HOST}" negate="true" pattern="^www\.(.*)$" />
+                    </conditions>
+                    <action type="Redirect" url="https://swc.ltts.com/{R:0}" appendQueryString="true" redirectType="Permanent" />
+                </rule>
+            </rules>
+        </rewrite>  
+        
+     <handlers>
+            <remove name="PHP54_via_FastCGI" />
+            <remove name="PHP_via_FastCGI9" />
+            <remove name="PHP_via_FastCGI7" />
+            <remove name="PHP_via_FastCGI8" />
+            <remove name="PHP_via_FastCGI6" />
+            <remove name="PHP_via_FastCGI5" />
+            <remove name="PHP_via_FastCGI4" />
+            <remove name="PHP_via_FastCGI3" />
+            <remove name="PHP_via_FastCGI2" />
+            <remove name="PHP_via_FastCGI13" />
+            <remove name="PHP_via_FastCGI12" />
+            <remove name="PHP_via_FastCGI11" />
+            <remove name="PHP_via_FastCGI10" />
+            <remove name="PHP_via_FastCGI1" />
+            <remove name="PHP_via_FastCGI" />
+            <remove name="PHP55_via_FastCGI" />
+        </handlers>
+        <security>
+            <requestFiltering allowDoubleEscaping="true">
+                <requestLimits maxQueryString="4096" />
+            </requestFiltering>
+        </security>
+        
+    </system.webServer>
+	
+    <system.web>
+        <customErrors mode="Off" />
+        <compilation debug="true" />
+    </system.web>
+    <system.net>
+        <!-- <mailSettings> -->
+            <!-- <smtp from="webadmin@swc.ltts.com"> -->
+                <!-- <network defaultCredentials="false" host="smtp.swc.ltts.com" password="hatyKXG3" userName="webadmin@swc.ltts.com" /> -->
+            <!-- </smtp> -->
+        <!-- </mailSettings> -->
+    </system.net>
+
+
+</configuration>

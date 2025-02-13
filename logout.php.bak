@@ -1,0 +1,9 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+session_destroy();
+ //header("location:https://swc.ltts.com/logout");
+ //header("location: https://swift.swc.ltts.com/logout");
+header("location:index.php");
+?>
