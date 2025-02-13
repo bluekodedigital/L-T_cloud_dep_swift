@@ -1,9 +1,7 @@
 <?php
 
 include_once("../config/inc_function.php");
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 $pack_id = mssql_escape($_POST['key']);
 $from = mssql_escape($_POST['from']);
 $tostage = mssql_escape($_POST['to']);
@@ -25,8 +23,8 @@ if ($_SESSION['milcom'] == '1') {
     $mil = "";
 }
 foreach ($res as $key => $value) {
-    $planned_date = formatDate($value['revised_planned_date'], 'd-M-Y');
-    $mat_req_date = formatDate($value['pm_revised_material_req'], 'd-M-Y');
+    $planned_date = date('d-M-Y', strtotime($value['revised_planned_date']));
+    $mat_req_date = date('d-M-Y', strtotime($value['pm_revised_material_req']));
     $current_stage = $value['stage_name'];
     $next_stage = $value['next_stage'];
     $from_remark = $value['to_remark'];
@@ -61,7 +59,7 @@ foreach ($res as $key => $value) {
         $exp_date = $value['ps_expdate'];
         $exp_date = $value['ps_expdate'];
     }
-    $exp_date = formatDate($exp_date, 'd-M-Y');
+    $exp_date = date('d-M-Y', strtotime($exp_date));
 
 
     $pm_packagename = $value['pm_packagename'];
@@ -72,7 +70,7 @@ echo json_encode(
         //    'mat_req_date' => $mat_req_date,
         'mat_req_date' => $exp_date,
         'pm_packagename' => sanitize_decode($pm_packagename),
-        'current_stage' => $current_stage,
+        'current_stage' => sanitize_decode($current_stage),
         'next_stage' => $next_stage,
         'file_attach' => $file_attach,
         'exp_date' => $exp_date,

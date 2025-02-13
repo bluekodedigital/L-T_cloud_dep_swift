@@ -11,11 +11,11 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Database connection using sqlsrv_connect
-$serverName = "bserver";
+$serverName = "10.15.3.40";
 $connectionOptions = [
-    "Database" => "lnt_trackv2",
+    "Database" => "lnt_track_v2",
     "Uid" => "sa",
-    "PWD" => "Bks&123##"
+    "PWD" => "Bl@kode.1?"
 ];
 
 $con = sqlsrv_connect($serverName, $connectionOptions);
