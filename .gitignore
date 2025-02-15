@@ -6,7 +6,7 @@ web.config
 /uploads
 /downloads
 /classes/db_con2.php
-/config/db_con.php
+
 /code/fetch_om_uploaddocument_view.php
 /code/fetch_ops_exp_uploaddocument_view.php
 /code/fetch_exp_uploaddocument_view.php
