@@ -43,8 +43,8 @@ include_once('layout/leftsidebar.php');
                     <option value="">--Select Payment due in--</option>
                     <option value="all" <?php echo ($due == 'all' ) ? 'selected' : ''; ?> >--All--</option>
                     <option value="<?php echo $today; ?>" <?php echo ($due == $today ) ? 'selected' : ''; ?>>Today</option>
-                    <option value="<?php echo date('Y-m-d', strtotime($today . '+1 days')); ?>" <?php echo ($due == date('Y-m-d', strtotime($today . '+1 days')) ) ? 'selected' : ''; ?>>Tomorrow</option>
-                    <option value="<?php echo date('Y-m-d', strtotime($today . '+5 days')); ?>" <?php echo ($due == date('Y-m-d', strtotime($today . '+5 days')) ) ? 'selected' : ''; ?>> in 5 days</option>
+                    <option value="<?php echo formatDate($today . '+1 days', 'Y-m-d'); ?>" <?php echo ($due == formatDate($today . '+1 days', 'Y-m-d') ) ? 'selected' : ''; ?>>Tomorrow</option>
+                    <option value="<?php echo formatDate($today . '+5 days', 'Y-m-d'); ?>" <?php echo ($due == formatDate($today . '+5 days', 'Y-m-d') ) ? 'selected' : ''; ?>> in 5 days</option>
                 </select>
             </div>
             <div class="col-lg-3 col-md-3">
@@ -142,7 +142,7 @@ include_once('layout/leftsidebar.php');
                                                 <td  class="pay_term"   id="pay_term<?php echo $value['lcr_id']; ?>"><?php echo $value['lcr_payterms']; ?></td>
                                                 <td class="supply_value text-right" id="supply_value<?php echo $value['lcr_id']; ?>" > <?php echo $value['lcr_supply']; ?></td>
                                                 <td class="popay_value text-right" onkeyup="cal_total_po('<?php echo $value['lcr_id']; ?>')" onkeypress="return isNumberKey(event)" id="popay_value<?php echo $value['lcr_id']; ?>" > <?php // echo $value['lcr_supply'];       ?></td>
-                                                <td class="supply_date"    ><input disabled type="date" id="supply_date<?php echo $value['lcr_id']; ?>"  value="<?php echo date('Y-m-d', strtotime($value['lcr_supply_date'])); ?>"></td>
+                                                <td class="supply_date"    ><input disabled type="date" id="supply_date<?php echo $value['lcr_id']; ?>"  value="<?php echo formatDate($value['lcr_supply_date'], 'Y-m-d'); ?>"></td>
                                                 <td class="exchage_rate "  id="exchage_rate<?php echo $value['lcr_id']; ?>"><?php echo $value['lcr_supply_exchange']; ?></td>
                                                 <td><?php
                                                     if ($value['payment_due'] == 0) {
@@ -151,7 +151,7 @@ include_once('layout/leftsidebar.php');
                                                         echo $value['payment_due'];
                                                     }
                                                     ?></td>
-                                                <td><?php echo date('d-M-Y', strtotime($value['DateAdd'])); ?></td>
+                                                <td><?php echo formatDate($value['DateAdd'], 'd-M-Y'); ?></td>
                                             </tr>
                                             <?php
                                             $total_po += $value['lcr_povalue'];

@@ -8,9 +8,9 @@ if (isset($_REQUEST['rpamst_create'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $rpa_number = $rpa_num;
-    $rpa_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $rpa_date)));
-    $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $from_rpa)));
-    $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $to_rpa)));
+    $rpa_date = formatDate(str_replace('/', '-', $rpa_date), 'Y-m-d h:i:s');
+    $valid_from = formatDate(str_replace('/', '-', $from_rpa), 'Y-m-d h:i:s');
+    $valid_to = formatDate(str_replace('/', '-', $to_rpa), 'Y-m-d h:i:s');
     $vendor = $vendor;
 // Check LC already Exsits for selected Vendor    
     $sql = "select * from swift_rpamaster where  rpa_num='" . $rpa_number . "'";
@@ -34,9 +34,9 @@ if (isset($_REQUEST['rpamst_update'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $rpa_number = $rpa_num;
-    $rpa_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $rpa_date)));
-    $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $from_rpa)));
-    $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $to_rpa)));
+    $rpa_date = formatDate(str_replace('/', '-', $rpa_date), 'Y-m-d h:i:s');
+    $valid_from = formatDate(str_replace('/', '-', $from_rpa), 'Y-m-d h:i:s');
+    $valid_to = formatDate(str_replace('/', '-', $to_rpa), 'Y-m-d h:i:s');
     $vendor = $vendor;
   
 // Check LC already Exsits for selected Vendor    

@@ -397,10 +397,10 @@ $generate_token= generate_token();
                                                 <td>
                                                 <span style=" background-color: rgb(44, 36, 158); color:white;" class="badge badge-pill  font-medium text-black ml-1 recfrm">
                                                        <?php if ($sent_back == 1) {
-                                                           $sent = $stage_names[0];
+                                                           $sent = $stage_names['cur_stage'];
                                                            echo $current_status = 'Sent back by ' . $sent . '<br>(' . $fromname . ' / ' . $value['nodays'] . ' Days )';
                                                        } else {
-                                                           echo $current_status = $stage_names[0] . '<br>(' . $sendername . ' / ' . $value['nodays'] . ' Days )';
+                                                           echo $current_status = $stage_names['cur_stage'] . '<br>(' . $sendername . ' / ' . $value['nodays'] . ' Days )';
                                                        } ?>
                                                 </span>
                                                 </td>
@@ -408,8 +408,8 @@ $generate_token= generate_token();
                                                     <span class="badge badge-pill font-medium text-white ml-1 recfrm fromtostage">
                                                         <?php if ($Next_stage == 13) {
                                                             echo "Smart Signoff";
-                                                        } else { ?>         <?php echo $stage_names[0];
-                                                        } ?> - <?php echo $stage_names[1] ?>
+                                                        } else { ?>         <?php echo $stage_names['cur_stage'];
+                                                        } ?> - <?php echo  $stage_names['next_stage'] ?>
                                                     </span>
                                                 </td>
 
@@ -1093,45 +1093,39 @@ $generate_token= generate_token();
     //     });
 
     function appendName() {
-        //alert(pack_id);
+    var packageid = $('#packageid').val();
+    var projectid = $('#projectid').val();
+    var stageid = $('#senbackstage').val();
 
-        var packageid = $('#packageid').val();
-        var projectid = $('#projectid').val();
+    $.post("functions/name_append.php", {
+        pack_id: packageid,
+        stageid: stageid,
+        projectid: projectid
+    }, function(response) {
+        try {
+            var parsedData = JSON.parse(response); // First parse
+            var userlist = JSON.parse(parsedData.userlist); // Second parse
+            
+            if (!Array.isArray(userlist)) {
+                console.error("Invalid userlist format:", parsedData.userlist);
+                return;
+            }
 
-        var stageid = $('#senbackstage').val();
-        $.post("functions/name_append.php", {
-            pack_id: packageid,
-            stageid: stageid,
-            projectid: projectid
-        }, function(data) {
-            
-            //  var userlist = JSON.parse(data).userlist;
-            //  console.log(userlist);
-            var users = JSON.parse(data).userlist;
-            var a = JSON.stringify(users);
-            var userlist = JSON.parse(users);
-            
+            console.log(userlist);
 
-            var uid = JSON.parse(data).uid;
-            var uname = JSON.parse(data).uname;
-            
-            var option = '<option value="" >--- Select Send Back User --</option>';
-            $(userlist).each(function(key, value) {
-                if(uid==value[0]){
-                   var sel= 'selected';
-                }else{
-                    var sel= '';
-                }
-                option += '<option value="' + value[0] + '"  '+sel+'>' + value[1]+ '</option>';
+            var options = '<option value="">--- Select Send Back User ---</option>';
+            $.each(userlist, function(index, value) {
+                options += `<option value="${value.uid}">${value.name}</option>`;
             });
-             $('#senbackuid').html('');
-             $('#senbackuid').append(option);
 
-            //$('#senbackuid').val(uid);
-           // $('#uname').val(uname);
-        });
+            $('#senbackuid').html(options);
+        } catch (error) {
+            console.error("Error parsing response:", error);
+        }
+    });
+}
 
-    }
+
 </script>
 
 <script>

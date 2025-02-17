@@ -806,7 +806,7 @@ where a.Sol_id=b.sol_id and a.Quote_id=c.vq_doc_id and c.vq_venid=d.sup_id and b
         if ($actual == "" || $actual == "NULL") {
             $actualdate = "-";
         } else {
-            $actualdate = date('d-M-Y', strtotime($actual));
+            $actualdate = formatDate($actual, 'd-M-Y');
         }
         echo $actualdate;
     }

@@ -129,18 +129,18 @@ if (isset($_GET['pid'])) {
                                                         echo 'Engg.to Ops for Vendor Design Approval';
                                                     }
                                                     ?>
-                                                    <br> (<?php echo date('d-M-Y', strtotime($value['tech_sentdate'])); ?>)
+                                                    <br> (<?php echo formatDate($value['tech_sentdate'], 'd-M-Y'); ?>)
                                                 </span>
                                             </td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                                            <td><?php // echo date('d-M-Y', strtotime($value['ps_expdate']));    ?>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                                            <td><?php // echo formatDate($value['ps_expdate'], 'd-M-Y');    ?>
                                                 <div class="input-group" id="expdiv" style=" float: left;">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="icon-calender"></i></span>
                                                     </div>
-                                                    <input type="text" value="<?php echo date('d-M-Y', strtotime($exp_date)); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['tech_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
+                                                    <input type="text" value="<?php echo formatDate($exp_date, 'd-M-Y'); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['tech_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
 
                                                 </div>
                                                 <div class=" saveexp" style=" float: right;">
@@ -150,7 +150,7 @@ if (isset($_GET['pid'])) {
                                                 </div>
 
                                             </td>
-                                            <!--<td><?php // echo date('d-M-Y', strtotime($value['actual']));    ?></td>-->
+                                            <!--<td><?php // echo formatDate($value['actual'], 'd-M-Y');    ?></td>-->
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange" data-toggle="tooltip" data-original-title="Remarks" style=" cursor: pointer;" onclick="swal({html: true, title: 'Remarks', text: '<?php echo $value['tech_remarks']; ?>'});"><i class="fas fa-comment"></i>Remarks</label></td>
                                             <td>                                               
                                                 <span onclick="filesfor_techapp('<?php echo $value['tech_packid'] ?>', '<?php echo $value['tech_status'] ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send for Tech approval">

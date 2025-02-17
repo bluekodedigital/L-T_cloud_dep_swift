@@ -214,7 +214,7 @@ $generate_token = generate_token();
                                                 <?php echo formatDate($value['planned'], 'd-M-Y'); ?>
                                             </td>
                                             <td style=" min-width: 130px !important;">
-                                                <?php // echo date('d-M-Y', strtotime($value['actual']));       
+                                                <?php // echo formatDate($value['actual'], 'd-M-Y');       
                                                     ?>
                                                 <div class="input-group" id="expdiv" style=" float: left;">
                                                     <div class="input-group-append">
@@ -240,7 +240,7 @@ $generate_token = generate_token();
                                             </td>
 
                                             </td>
-                                            <!--                                            <td><?php //  echo date('d-M-Y', strtotime($value['actual']));        
+                                            <!--                                            <td><?php //  echo formatDate($value['actual'], 'd-M-Y');        
                                                 ?></td>-->
                                             <td>
                                                 <!--                                                <span onclick="filesfrom_smartsign('<?php echo $value['so_pack_id'] ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send Packages">

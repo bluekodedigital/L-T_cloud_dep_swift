@@ -117,7 +117,7 @@ include_once('layout/leftsidebar.php');
                                             <td class="supply_value text-right" onkeyup="cal_total_po('<?php echo $value['lcr_id']; ?>')" onkeypress="return isNumberKey(event)" id="supply_value<?php echo $value['lcr_id']; ?>" > <?php echo $value['lcr_supply']; ?></td>
                                             <td class="supply_date"    ><input disabled type="date" id="supply_date<?php echo $value['lcr_id']; ?>"  value="<?php
                                                 if ($value['lcr_supply_date'] != "") {
-                                                    echo date('Y-m-d', strtotime($value['lcr_supply_date']));
+                                                    echo formatDate($value['lcr_supply_date'], 'Y-m-d');
                                                 }
                                                 ?>"></td>
                                             <td class="exchage_rate "  id="exchage_rate<?php echo $value['lcr_id']; ?>"><?php echo $value['lcr_supply_exchange']; ?></td>

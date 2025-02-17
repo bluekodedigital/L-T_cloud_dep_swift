@@ -86,7 +86,7 @@ if ($num_rows > 0) {
                            <input type="checkbox" <?php echo $check; ?> id="keyattach_flags<?php echo $i?>" name="keyattach_flag<?php echo $i?>" onclick="add_keyflag2('<?php echo $i?>','<?php echo $row['upid']; ?>', '<?php echo $row['up_projid']; ?>', '<?php echo $row['up_packid']; ?>','<?php echo $row['up_stage']; ?>');">
                            <label for="keyattach_flags<?php echo $i?>"> </label>
                         </td>
-                    <td class=" text-center"> <?php echo date('d-M-Y', strtotime($row['up_update'])); ?></td>
+                    <td class=" text-center"> <?php echo formatDate($row['up_update'], 'd-M-Y'); ?></td>
                     <!-- <td class=" text-center"> <?php echo $row['rev'];  ?></td> -->
                     <td class=" text-center"> <?php echo $row['up_filename']; ?></td>
                     <td class=" text-center"><a href="uploads/document/<?php echo $path; ?>" class=" text-purple" target="_blank"> <?php echo $path; ?></a></td>

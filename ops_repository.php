@@ -112,9 +112,9 @@ if (isset($_GET['pid'])) {
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
                                             <td><span class="badge badge-pill badge-info font-medium text-black ml-1"><?php echo $value['stage_name']; ?></span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                             <td><?php echo $value['pm_revised_lead_time']; ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                              <td><?php 
                                              $get_acual=$cls_user->get_acual($value['ps_packid']);
                                              ?>

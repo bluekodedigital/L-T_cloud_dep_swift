@@ -10,7 +10,7 @@ $check_poc = $cls_user->check_poc($pack_id);
 $poc = $check_poc['cm_poc_required'];
 
 $deviations = $package_details['daysdif'];
-$expdelivery = date('d-M-Y', strtotime($package_details['pm_revised_material_req'] . ' +' . $deviations . 'days'));
+$expdelivery = formatDate($package_details['pm_revised_material_req'] . ' +' . $deviations . 'days', 'd-M-Y');
 ?>
 <div class="modal-header" style="margin-top: 0px;">                          
     <h4 class="modal-title" id="exampleModalLabel1"><?php echo $package_details['proj_name']; ?> - <small><?php echo $package_details['pm_packagename']; ?></small></h4> 
@@ -19,7 +19,7 @@ $expdelivery = date('d-M-Y', strtotime($package_details['pm_revised_material_req
 <div class="row">
     <div class="container-fluid" >
         <div class=" col-md-6" id="pd">
-            <small>Planned Date:- <span class="badge badge-pill badge-info font-12 text-white ml-1" id="pdate"><?php echo date('d-M-y', strtotime($package_details['pm_revised_material_req'])); ?></span></small>                           
+            <small>Planned Date:- <span class="badge badge-pill badge-info font-12 text-white ml-1" id="pdate"><?php echo formatDate($package_details['pm_revised_material_req'], 'd-M-y'); ?></span></small>                           
         </div>
         <div class=" col-md-6" id="ps" >
             <small>Expected Date:- <span class="badge badge-pill badge-primary font-12 text-white ml-1" id="mtred"><?php echo $expdelivery; ?></span></small>                          

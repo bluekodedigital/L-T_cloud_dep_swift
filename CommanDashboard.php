@@ -249,31 +249,32 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                         } else {
                                             $current_status = $value['shot_name'] . '<br>(' . $value['name'] . ' / ' . $value['nodays'] . ' Days )';
                                         }
-                                        if ($value['po_actdate'] == '') {
-                                            $po_act = "";
-                                        } else {
+                                        $po_act = $po_plan = $ss_act = $ss_plan = '';
+
+                                        // Check if 'po_actdate' exists and is not empty
+                                        if (!empty($value['po_actdate'])) {
                                             $po_actdate = formatDate($value['po_actdate'], 'd-M-Y');
                                             $po_act = "<span class='badge badge-pill badge-info font-medium text-white ml-1'>$po_actdate</span>";
                                         }
-                                        if ($value['po_planneddate'] == '') {
-                                            $po_plan = "";
-                                        } else {
+                                        
+                                        // Check if 'po_planneddate' exists and is not empty
+                                        if (!empty($value['po_planneddate'])) {
                                             $po_plandate = formatDate($value['po_planneddate'], 'd-M-Y');
                                             $po_plan = "<span class='badge badge-pill badge-primary font-medium text-white ml-1'>$po_plandate</span>";
                                         }
-                                        if ($value['ss_app_actualdate'] == '') {
-                                            $ss_act = '';
-                                        } else {
+                                        
+                                        // Check if 'ss_app_actualdate' exists and is not empty
+                                        if (!empty($value['ss_app_actualdate'])) {
                                             $ss_actdate = formatDate($value['ss_app_actualdate'], 'd-M-Y');
                                             $ss_act = "<span class='badge badge-pill badge-info font-medium text-white ml-1'>$ss_actdate</span>";
                                         }
-                                        if ($value['ss_app_plandate'] == '') {
-                                            $ss_plan = '';
-                                        } else {
+                                        
+                                        // Check if 'ss_app_plandate' exists and is not empty
+                                        if (!empty($value['ss_app_plandate'])) {
                                             $ss_planneddate = formatDate($value['ss_app_plandate'], 'd-M-Y');
                                             $ss_plan = "<span class='badge badge-pill badge-primary font-medium text-white ml-1'>$ss_planneddate</span>";
                                         }
-                                        // $ss_planneddate  = date('d-M-Y', strtotime($value['ss_app_plandate']));
+                                        // $ss_planneddate  = formatDate($value['ss_app_plandate'], 'd-M-Y');
                                         // $ss_app_actualdate      = $value['ss_app_actualdate'];
                                         // $Ini_app_actualdate     = $value['Ini_app_actualdate'];
                                     
@@ -292,13 +293,13 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                         //     if (trim($ss_app_actualdate) == "") {
                                         //         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . 'days'));
                                         //     } else {
-                                        //         $expdelivery = date('d-M-Y', strtotime($ss_app_actualdate));
+                                        //         $expdelivery = formatDate($ss_app_actualdate, 'd-M-Y');
                                         //     }
                                     
                                         //     if (trim($Ini_app_actualdate) == "") {
                                         //         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . 'days'));
                                         //     } else {
-                                        //         $ssInidate = date('d-M-Y', strtotime($Ini_app_actualdate));
+                                        //         $ssInidate = formatDate($Ini_app_actualdate, 'd-M-Y');
                                         //     }
                                         // } else {
                                     
@@ -306,13 +307,13 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                         //     if (trim($ss_app_actualdate) == "") {
                                         //         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' +' . abs($deviations) . 'days'));
                                         //     } else {
-                                        //         $expdelivery = date('d-M-Y', strtotime($ss_app_actualdate));
+                                        //         $expdelivery = formatDate($ss_app_actualdate, 'd-M-Y');
                                         //     }
                                     
                                         //     if (trim($Ini_app_actualdate) == "") {
                                         //         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' +' . abs($deviations) . 'days'));
                                         //     } else {
-                                        //         $ssInidate = date('d-M-Y', strtotime($Ini_app_actualdate));
+                                        //         $ssInidate = formatDate($Ini_app_actualdate, 'd-M-Y');
                                         //     }
                                         // }
                                         if ($value['proj_type'] == 1) {

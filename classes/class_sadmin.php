@@ -10,9 +10,9 @@ class Superadmin {
         $sdate = $data['sdate'];
         $edate = $data['edate'];
         $redate = $data['redate'];
-        // $sdate = date('Y-m-d H:i:s', strtotime($data['sdate']));
-        // $edate = date('Y-m-d H:i:s', strtotime($data['edate']));
-        // $redate =date('Y-m-d H:i:s', strtotime($data['redate']));
+        // $sdate = formatDate($data['sdate'], 'Y-m-d H:i:s');
+        // $edate = formatDate($data['edate'], 'Y-m-d H:i:s');
+        // $redate =formatDate($data['redate'], 'Y-m-d H:i:s');
         $catagories = $data['catagories'];
         $creator_id = $_SESSION['uid'];
 

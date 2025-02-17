@@ -76,7 +76,7 @@ if ($num_rows > 0) {  ?>
                         <td class=" text-center">
                         
                                         
-                             <?php echo date('d-M-Y', strtotime($row['up_update'])); ?></td>
+                             <?php echo formatDate($row['up_update'], 'd-M-Y'); ?></td>
                         <td class=" text-center"> <?php echo $row['up_filename']; ?></td>
                         <td class=" text-center"><a href="uploads/document/<?php echo $path; ?>" class=" text-purple" target="_blank"><?php echo $path; ?></a></td>
                         <!-- <td class=" text-center"> <span class=" badge badge-danger" style=" cursor: pointer;" onclick="remove_opsupload('<?php echo $row['upid']; ?>', '<?php echo $row['up_projid']; ?>', '<?php echo $row['up_packid']; ?>','<?php echo $row['up_stage']; ?>');"><i class="fas fa-trash"></i></span></td> -->

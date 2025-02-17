@@ -52,7 +52,7 @@ if ($page == 0) {
                 <div class="row">
                     <div class=" col-md-4"><span class=" badge badge-primary ">PO Date</span></div>
                     <div class=" col-md-1" style=" color:black;"> : </div>
-                    <div class=" col-md-7" style=" color:black;"><label> <?php echo date('d-m-Y', strtotime($header->poDate)); ?></label></div>
+                    <div class=" col-md-7" style=" color:black;"><label> <?php echo formatDate($header->poDate, 'd-m-Y'); ?></label></div>
                 </div>
 
             </div>
@@ -62,7 +62,7 @@ if ($page == 0) {
                 <div class="row">
                     <div class=" col-md-4"><span class=" badge badge-primary ">PO Start Date</span></div>
                     <div class=" col-md-1" style=" color:black;"> : </div>
-                    <div class=" col-md-7" style=" color:black;"><label> <?php echo date('d-m-Y', strtotime($header->poStartDate)); ?></label></div>
+                    <div class=" col-md-7" style=" color:black;"><label> <?php echo formatDate($header->poStartDate, 'd-m-Y'); ?></label></div>
                 </div>
 
             </div>
@@ -72,7 +72,7 @@ if ($page == 0) {
                 <div class="row">
                     <div class=" col-md-4"><span class=" badge badge-primary ">PO End Date</span></div>
                     <div class=" col-md-1" style=" color:black;"> : </div>
-                    <div class=" col-md-7" style=" color:black;"><label> <?php echo date('d-m-Y', strtotime($header->poEndDate)); ?></label></div>
+                    <div class=" col-md-7" style=" color:black;"><label> <?php echo formatDate($header->poEndDate, 'd-m-Y'); ?></label></div>
                 </div>
 
             </div>
@@ -267,7 +267,7 @@ if ($page == 0) {
 
         $sqlH_insert = "insert into poHeaderApi (poHid,poNumber,poDate,poStartDate,poEndDate,jobCode,supplierID,supplierName,warehouseCode,
                         warehouseDesc,currencyCode,currencyDesc,amendmentSatus,amendmentNumber,poTag,poType,
-                        poStatus,stockTypeCodeDesc) values('" . $poHid . "','" . $header->poNumber . "','" . date('Y-m-d', strtotime($header->poDate)) . "','" . date('Y-m-d', strtotime($header->poStartDate)) . "','" . date('Y-m-d', strtotime($header->poEndDate)) . "',
+                        poStatus,stockTypeCodeDesc) values('" . $poHid . "','" . $header->poNumber . "','" . formatDate($header->poDate, 'Y-m-d') . "','" . formatDate($header->poStartDate, 'Y-m-d') . "','" . formatDate($header->poEndDate, 'Y-m-d') . "',
                         '" . $header->jobCode . "','" . $header->supplierID . "','" . $header->supplierName . "','" . $header->warehouseCode . "','" . $header->warehouseDesc . "',
                         '" . $header->currencyCode . "','" . $header->currencyDesc . "','" . $header->amendmentSatus . "','" . $header->amendmentNumber . "','" . $header->poTag . "','" . $header->poType . "',
                         '" . $header->poStatus . "','" . $header->stockTypeCodeDesc . "')";

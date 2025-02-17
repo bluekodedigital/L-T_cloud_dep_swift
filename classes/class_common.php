@@ -2045,7 +2045,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $pack_name = $row['pm_packagename'];
         //        $stage_name = $row['stage_name'];
         $stage_name = $row['shot_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
 
         $getstage_name = mssql_query("select * from dbo.swift_stage_master where stage_id='" . $sendstageid . "'");
         $getrow = mssql_fetch_array($getstage_name);
@@ -2264,7 +2264,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $pack_name = $row['pm_packagename'];
         //        $stage_name = $row['stage_name'];
         $stage_name = $row['shot_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
 
         $sql1 = mssql_query("select * from usermst where uid='" . $recvid . "'");
         $row1 = mssql_fetch_array($sql1);
@@ -2396,7 +2396,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $pack_name = $row['pm_packagename'];
         //        $stage_name = $row['stage_name'];
         $stage_name = $row['shot_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
         $segment_sql = mssql_query("select cat_id from Project where proj_id='" . $proj_id . "'");
         $sqry = mssql_fetch_array($segment_sql);
         $segment = $sqry['cat_id'];

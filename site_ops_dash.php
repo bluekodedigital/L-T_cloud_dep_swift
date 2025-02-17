@@ -175,7 +175,7 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                         $seg = "";
                     }
                     // $result = $cls_comm->dash_filter($seg);
-                    $result = $cls_report->select_filterprojects_seg2( /* $seg, */$ptid);
+                    $result = $cls_report->select_filterprojects_seg2($seg,$ptid);
                     $res = json_decode($result, true);
                     foreach ($res as $key => $value) {
                         ?>

@@ -178,9 +178,9 @@ $userid = $_SESSION['uid'];
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
                                             <td><span class="badge badge-pill badge-info font-medium text-black ml-1"><?php echo $value['stage_name']; ?></span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                             <td><?php echo $value['pm_revised_lead_time']; ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                             <td><span onclick="view_reports('<?php echo $value['ps_packid']; ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1"  data-toggle="modal" data-target=".bs-example-modal-lg" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send Packages to Tech Spoc"><i class="fas fa-eye"></i> View</span></td>
                                         </tr>
                                     <?php }

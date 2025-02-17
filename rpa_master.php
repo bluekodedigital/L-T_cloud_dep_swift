@@ -189,13 +189,13 @@ include_once('layout/leftsidebar.php');
                                             <td><?php echo $value['sup_name']; ?></td>                                       
                                             <td><?php echo $value['rpa_num']; ?></td>
                                             <td><?php echo $value['rpa_bank']; ?></td>
-                                            <td><?php echo date('d-M-y', strtotime($value['rpa_date'])); ?></td>                                            
+                                            <td><?php echo formatDate($value['rpa_date'], 'd-M-y'); ?></td>                                            
                                             <td>
                                                 <span class="badge badge-pill badge-primary font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    From:- <?php echo date('d-M-y', strtotime($value['rpa_from'])); ?>
+                                                    From:- <?php echo formatDate($value['rpa_from'], 'd-M-y'); ?>
                                                 </span>
                                                 <span class="badge badge-pill badge-danger font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    To:- <?php echo date('d-M-y', strtotime($value['rpa_to'])); ?>
+                                                    To:- <?php echo formatDate($value['rpa_to'], 'd-M-y'); ?>
                                                 </span>
                                             </td>
                                             <td>

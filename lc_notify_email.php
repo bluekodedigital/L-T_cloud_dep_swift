@@ -115,10 +115,10 @@ DATEDIFF(DAY,GETDATE(),(DATEADD(day, (convert(int,lcr_payterms)), lcr_supply_dat
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $potype . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $value['lcr_payterms'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . number_format($value['lcr_supply'], 2) . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($value['lcr_supply_date'])) . '</td>                                       
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($value['lcr_supply_date'], 'd-M-Y') . '</td>                                       
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . number_format($value['lcr_supply_exchange'], 2) . '</td>                                       
                                         <td style=" text-align: center;  border: 1px solid #ddd; ' . $color . ';">' . $payment_due . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($value['DateAdd'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($value['DateAdd'], 'd-M-Y') . '</td>
                     </tr>';
         }
 
@@ -219,9 +219,9 @@ $createTest = new createTest;
 <?php
 
 $today = date('Y-m-d');
-$five = date('Y-m-d', strtotime($today . '+5 days'));
-$ten = date('Y-m-d', strtotime($today . '+10 days'));
-$thirty = date('Y-m-d', strtotime($today . '+30 days'));
+$five = formatDate($today . '+5 days', 'Y-m-d');
+$ten = formatDate($today . '+10 days', 'Y-m-d');
+$thirty = formatDate($today . '+30 days', 'Y-m-d');
 
 
 // $get_today_pendings = $createTest->get_pendings($today);

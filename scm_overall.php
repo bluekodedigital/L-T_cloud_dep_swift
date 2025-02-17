@@ -106,7 +106,7 @@ if($_SESSION['milcom']==1)
                                         $projid = $value['proj_id'];
                                         $get_deviations = $cls_report->get_deviations($pack_id, $stageid, $projid);
                                         $deviations = $get_deviations['daysdif'];
-                                        $expdelivery = date('d-M-Y', strtotime($value['pm_revised_material_req'] . ' +' . $deviations . 'days'));
+                                        $expdelivery = formatDate($value['pm_revised_material_req'] . ' +' . $deviations . 'days', 'd-M-Y');
                                         $current_status = $cls_comm->current_status($value['ps_packid']);
 //                                         $fetch_usertype = $cls_comm->fetch_usertype($value['ps_userid']);
                                         $sent_back = $value['ps_stback'];
@@ -169,13 +169,13 @@ if($_SESSION['milcom']==1)
                                             }
                                                 ?></td>
                                             <td><span class="badge badge-pill badge-info font-medium text-black ml-1 recfrm">            <?php echo $current_status; ?></span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                             <td><?php echo $value['pm_revised_lead_time']; ?></td>
                                             <td><?php echo $expdelivery; ?></td>
                                             <td>
                                                 <?php
-                                                $sdate = date('Y-m-d', strtotime($value['pm_revised_material_req']));
-                                                $ltime = date('Y-m-d', strtotime($expdelivery));
+                                                $sdate = formatDate($value['pm_revised_material_req'], 'Y-m-d');
+                                                $ltime = formatDate($expdelivery, 'Y-m-d');
                                                 $start = new DateTime($sdate);
                                                 $end = new DateTime($ltime);
                                                 $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . '';
@@ -194,7 +194,7 @@ if($_SESSION['milcom']==1)
                                                 <span onclick="view_reports('<?php echo $value['ps_packid']; ?>','<?php echo $projid ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1"  data-toggle="modal" data-target=".bs-example-modal-lg" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send Packages to Tech Spoc"><i class="fas fa-eye"></i> View</span>
                                                 <span onclick="view_reports_table('<?php echo $value['ps_packid']; ?>','<?php echo $projid ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1"  data-toggle="modal" data-target=".bs-example-modal-lg" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="View Report"><i class="fas fa-file-excel"></i> </span>
                                             </td>
-                                            <td><span class="pointer" onclick="view_allattachments('<?php echo $value['proj_name'] ?>', '<?php echo $value['pm_packagename'] ?>', ' <?php echo $value['proj_id'] ?>', ' <?php echo $value['ps_packid'] ?>', '<?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?>', '<?php echo $expdelivery; ?>')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> <i class="fas fa-paperclip text-black"></i> </span>
+                                            <td><span class="pointer" onclick="view_allattachments('<?php echo $value['proj_name'] ?>', '<?php echo $value['pm_packagename'] ?>', ' <?php echo $value['proj_id'] ?>', ' <?php echo $value['ps_packid'] ?>', '<?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?>', '<?php echo $expdelivery; ?>')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"> <i class="fas fa-paperclip text-black"></i> </span>
 
                                             </td>
 

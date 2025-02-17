@@ -117,16 +117,16 @@ if (isset($_GET['pid'])) {
                                                 <?php }
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
-                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">O&M-<?php echo $value['name']; ?><br>(<?php echo date('d-M-Y', strtotime($value['omop_sentdate'])); ?>)</span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                                            <td><?php // echo date('d-M-Y', strtotime($value['actual']));    ?>
+                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">O&M-<?php echo $value['name']; ?><br>(<?php echo formatDate($value['omop_sentdate'], 'd-M-Y'); ?>)</span></td>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                                            <td><?php // echo formatDate($value['actual'], 'd-M-Y');    ?>
                                                 <div class="input-group" id="expdiv" style=" float: left;">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="icon-calender"></i></span>
                                                     </div>
-                                                    <input type="text" value="<?php echo date('d-M-Y', strtotime($exp_date)); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['omop_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
+                                                    <input type="text" value="<?php echo formatDate($exp_date, 'd-M-Y'); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['omop_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
 
                                                 </div>
                                                 <div class=" saveexp" style=" float: right;">
@@ -138,7 +138,7 @@ if (isset($_GET['pid'])) {
                                             </td>
 
 
-                <!--<td><?php // echo date('d-M-Y', strtotime($value['actual']));     ?></td>-->
+                <!--<td><?php // echo formatDate($value['actual'], 'd-M-Y');     ?></td>-->
 
 
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange"   style=" cursor: pointer;" onclick="swal({html: true, title: 'Remarks', text: '<?php echo $value['omop_remarks']; ?>'});"><i class="fas fa-comment"></i> O&M Remarks</label></td>

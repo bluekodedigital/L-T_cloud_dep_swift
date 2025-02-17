@@ -7,8 +7,8 @@ include_once ("../config/inc_function.php");
 if (isset($_POST['scmreject'])) {
     $scm_id = $_POST['scm_id'];
 
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
 //        $expertid=$_POST['expert_id'];
     $remarks = $_POST['remarks'];
     // get project details query
@@ -32,7 +32,7 @@ if (isset($_POST['scmreject'])) {
     $planned_date = $row['planned_date'];
 
     $scm_sentdate = date("Y-m-d h:i:s");
-    $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
 
 
     // update 
@@ -93,8 +93,8 @@ if (isset($_POST['scmreject'])) {
 if (isset($_POST['scmbuyerreject'])) {
     $scm_id = $_POST['scm_id'];
 
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//     $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//     $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
 //        $expertid=$_POST['expert_id'];
     $remarks = $_POST['remarks'];
@@ -127,7 +127,7 @@ if (isset($_POST['scmbuyerreject'])) {
     $planned_date = $row['planned_date'];
 
     $scm_sentdate = date("Y-m-d h:i:s");
-    $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
 
 
     // update 
@@ -181,8 +181,8 @@ if (isset($_POST['scmbuyerreject'])) {
 if (isset($_POST['allocatingtobuyer'])) {
     $buyer_id = $_POST['buyer_id'];
     $scm_id = $_POST['scmbu_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = $_POST['remarks'];
     $ace_value = '';
@@ -204,7 +204,7 @@ if (isset($_POST['allocatingtobuyer'])) {
     $row = mssql_fetch_array($query);
     $planned_date = $row['planned_date'];
     $scm_sentdate = date("Y-m-d h:i:s");
-    $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
 
     // update 
     $sql = "UPDATE swift_SCMSPOC SET sc_planneddate='" . $scm_planneddate . "',sc_expdate='" . $actdate . "',sc_actual='" . $actdate . "',sc_status='1',sc_active='1' WHERE sc_id = '$scm_id'";
@@ -292,8 +292,8 @@ if (isset($_POST['buyer_realocate'])) {
 if (isset($_POST['scmrejecttoexpert'])) {
     $scm_id = $_POST['scm_id'];
 
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
 //        $expertid=$_POST['expert_id'];
     $remarks = $_POST['remarks'];
     // get project details query
@@ -323,7 +323,7 @@ if (isset($_POST['scmrejecttoexpert'])) {
     $planned_date = $row['planned_date'];
 
     $scm_sentdate = date("Y-m-d h:i:s");
-    $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
 
 
     // update 

@@ -9,14 +9,14 @@ $result = $cls_comm->get_lc_data($pack_id);
 $res = json_decode($result, true);
 
 foreach ($res as $key => $value) {
-    $planned_date = date('d-M-Y', strtotime($value['planned_date']));
-    $mat_req_date = date('d-M-Y', strtotime($value['pm_revised_material_req']));
+    $planned_date = formatDate($value['planned_date'], 'd-M-Y');
+    $mat_req_date = formatDate($value['pm_revised_material_req'], 'd-M-Y');
     if ($value['ps_expdate'] == "") {
         $exp_date = date('Y-m-d');
     } else {
         $exp_date = $value['ps_expdate'];
     }
-    $expected_date = date('d-M-Y', strtotime($exp_date));
+    $expected_date = formatDate($exp_date, 'd-M-Y');
     $proj_name = $value['proj_name'];
     $pm_packagename = $value['pm_packagename'];
     $po_num = $value['po_number'];
@@ -30,9 +30,9 @@ $ven_id = $vendor_details['vq_venid'];
 $fetch_lcnumber = $cls_user->fetch_lcnumber($ven_id);
 $fetch_lc = json_decode($fetch_lcnumber, true);
 foreach ($fetch_lc as $key => $value) {
-    $lc_date = date('d-M-y', strtotime($value['lcm_date']));
-    $lc_from = date('d-M-y', strtotime($value['lcm_from']));
-    $lc_to = date('d-M-y', strtotime($value['lcm_to']));
+    $lc_date = formatDate($value['lcm_date'], 'd-M-y');
+    $lc_from = formatDate($value['lcm_from'], 'd-M-y');
+    $lc_to = formatDate($value['lcm_to'], 'd-M-y');
     $lc_value = $value['lcm_value'];
     $lc_balance = $value['lcm_balance'];
     $lcm_id = $value['lcm_id'];

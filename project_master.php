@@ -710,13 +710,13 @@ $generate_token = generate_token();
                                                         <span class="pull-left">Handing over Start Date: <span class="badge badge-success orange"><?php
                                                         $filldates = $cls_comm->filldates(1, $eid);
                                                         if ($filldates['cd_date'] != "") {
-                                                            echo date('d-M-Y', strtotime($filldates['cd_date']));
+                                                            echo formatDate($filldates['cd_date'], 'd-M-Y');
                                                         }
                                                         ?></span></span>
                                                         <span class="pull-right"> Handing over End Date:<label class="badge badge-success brown"> <?php
                                                         $filldates = $cls_comm->filldates(10, $eid);
                                                         if ($filldates['cd_date'] != "") {
-                                                            echo date('d-M-Y', strtotime($filldates['cd_date']));
+                                                            echo formatDate($filldates['cd_date'], 'd-M-Y');
                                                         }
                                                         ?></label></span>
                                                     </div>
@@ -782,10 +782,10 @@ $generate_token = generate_token();
                                                                                     <td> 
                                                                                         <?php if ($filldates['cd_date'] != "") { ?>
                                                             <?php if ($filldates['cd_status'] == "1" || $filldates['cd_status'] == "0") { ?> 
-                                                                                                                                <input type="text" disabled="" value="<?php echo date('d-M-Y', strtotime($filldates['cd_date'])); ?>" style="    width: 65%;" class="mydatepicker " id="date_hover<?php echo $value['ck_id']; ?>" name="date_hover<?php echo $value['ck_id']; ?>"   placeholder="dd/mmm/yyyy">
+                                                                                                                                <input type="text" disabled="" value="<?php echo formatDate($filldates['cd_date'], 'd-M-Y'); ?>" style="    width: 65%;" class="mydatepicker " id="date_hover<?php echo $value['ck_id']; ?>" name="date_hover<?php echo $value['ck_id']; ?>"   placeholder="dd/mmm/yyyy">
 
                                                                                                             <?php } else { ?>
-                                                                                                                                <input type="text"   value="<?php echo date('d-M-Y', strtotime($filldates['cd_date'])); ?>" style="    width: 65%;" class="mydatepicker " id="date_hover<?php echo $value['ck_id']; ?>" name="date_hover<?php echo $value['ck_id']; ?>"   placeholder="dd/mmm/yyyy">
+                                                                                                                                <input type="text"   value="<?php echo formatDate($filldates['cd_date'], 'd-M-Y'); ?>" style="    width: 65%;" class="mydatepicker " id="date_hover<?php echo $value['ck_id']; ?>" name="date_hover<?php echo $value['ck_id']; ?>"   placeholder="dd/mmm/yyyy">
 
                                                                                                             <?php } ?>
 

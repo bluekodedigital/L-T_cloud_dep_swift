@@ -124,16 +124,16 @@ $segment = $_SESSION['swift_dep'];
                                                 <?php }
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
-                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">ENG.-<?php echo $value['name']; ?> <br>(<?php echo date('d-M-Y', strtotime($value['ctops_sentdate'])); ?>)</span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
+                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">ENG.-<?php echo $value['name']; ?> <br>(<?php echo formatDate($value['ctops_sentdate'], 'd-M-Y'); ?>)</span></td>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
                                             <td> 
                                                 <div class="input-group" id="expdiv" style=" float: left;">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="icon-calender"></i></span>
                                                     </div>
-                                                    <input type="text" value="<?php echo date('d-M-Y', strtotime($exp_date)); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['ctops_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
+                                                    <input type="text" value="<?php echo formatDate($exp_date, 'd-M-Y'); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['ctops_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
 
                                                 </div>
                                                 <div class=" saveexp" style=" float: right;">
@@ -145,7 +145,7 @@ $segment = $_SESSION['swift_dep'];
 
                                             </td>
 
-                            <!--<td><?php // echo date('d-M-Y', strtotime($value['actual']));        ?></td>-->
+                            <!--<td><?php // echo formatDate($value['actual'], 'd-M-Y');        ?></td>-->
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange" data-toggle="tooltip" data-placement="bottom" data-original-title="CTO Remarks" style=" cursor: pointer;" onclick="swal({html: true, title: 'Remarks', text: '<?php echo $value['ctops_remarks']; ?>'});"><i class="fas fa-comment"></i> Tech Head Remarks</label></td>
                                             <td>                                               
                                                 <span onclick="filesfromcto('<?php echo $value['ctops_packid'] ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send Packages to Tech Spoc">

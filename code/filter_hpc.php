@@ -63,16 +63,16 @@ if($_SESSION['milcom']==1)
                     <?php }
                     ?>
                     <?php echo $value['pm_packagename'] ?></td>
-                <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">Smart Signoff <br> (<?php echo date('d-M-Y', strtotime($value['so_package_approved_date'])); ?>)</span></td>
-                <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                <td><?php // echo date('d-M-Y', strtotime($value['actual']));      ?>
+                <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">Smart Signoff <br> (<?php echo formatDate($value['so_package_approved_date'], 'd-M-Y'); ?>)</span></td>
+                <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                <td><?php // echo formatDate($value['actual'], 'd-M-Y');      ?>
                     <div class="input-group" id="expdiv" style=" float: left;">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="icon-calender"></i></span>
                         </div>
-                        <input type="text" value="<?php echo date('d-M-Y', strtotime($exp_date)); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['so_pack_id'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
+                        <input type="text" value="<?php echo formatDate($exp_date, 'd-M-Y'); ?>"  class="mydatepicker" id="dasexpected_date<?php echo $value['so_pack_id'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
 
                     </div>
                     <div class=" saveexp" style=" float: right;">
@@ -82,7 +82,7 @@ if($_SESSION['milcom']==1)
                     </div>
 
                 </td>
-    <!--                                            <td><?php // echo date('d-M-Y', strtotime($value['actual']));       ?></td>-->
+    <!--                                            <td><?php // echo formatDate($value['actual'], 'd-M-Y');       ?></td>-->
                 <td>                                               
                     <span onclick="filesfrom_smartsign_loi('<?php echo $value['so_pack_id'] ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style=" cursor: pointer;" data-toggle="tooltip"  data-original-title="Send Packages">
                         <i class="fas fa-paper-plane"></i> 

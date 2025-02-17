@@ -14,11 +14,11 @@ foreach ($res as $key => $value) {
     $proj_name = $value['proj_name'];
     $pack_name = $value['pm_packagename'];
     $proj_id=$value['so_proj_id'];
-    $planned = date('d-M-Y', strtotime($value['planned']));
-//    $expected = date('d-M-Y', strtotime($value['expected']));
-    $expected = date('d-M-Y', strtotime($value['ps_expdate']));
-    $actual = date('d-M-Y', strtotime($value['actual']));
-    $pm_material_req = date('d-M-Y', strtotime($value['pm_revised_material_req']));
+    $planned = formatDate($value['planned'], 'd-M-Y');
+//    $expected = formatDate($value['expected'], 'd-M-Y');
+    $expected = formatDate($value['ps_expdate'], 'd-M-Y');
+    $actual = formatDate($value['actual'], 'd-M-Y');
+    $pm_material_req = formatDate($value['pm_revised_material_req'], 'd-M-Y');
 }
 echo json_encode(array(
     'proj_name' => $proj_name,

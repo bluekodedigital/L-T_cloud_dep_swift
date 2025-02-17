@@ -22,7 +22,7 @@ $SSApprovalDate = $getExpectedSSApproval['revised_planned_date'];
 $getExpectedInitiateSSApproval = $cls_user->getExpectedInitiateSSApproval($pack_id);
 $InitiateSSApprovalDate = $getExpectedInitiateSSApproval['revised_planned_date'];
 
-$pcrdate = date('d-M-Y', strtotime($package_details['pm_createdate']));
+$pcrdate = formatDate($package_details['pm_createdate'], 'd-M-Y');
 if (strtotime($pcrdate) >= strtotime("24-Aug-2021")) {
     $flg = 1;
 } else {
@@ -35,13 +35,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } else {
 
@@ -49,13 +49,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 }
 
@@ -82,7 +82,7 @@ if ($deviations < 0) {
 
                 </span>
             </small>                           
-            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo date('d-M-y', strtotime($package_details['pm_revised_material_req']));    ?></span></small>-->                           
+            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo formatDate($package_details['pm_revised_material_req'], 'd-M-y');    ?></span></small>-->                           
         </div>
         <div class=" col-md-3" id="pde" style=" margin-left: 38% !important">
             <small>Expected SS Approval:- <span class="badge badge-pill badge-info font-12 text-white ml-1">
@@ -93,15 +93,15 @@ if ($deviations < 0) {
 //
 //                        echo $expdelivery;
 //                    } else {
-//                        echo date('d-M-y', strtotime($expe_delidate['ps_actualdate']));
+//                        echo formatDate($expe_delidate['ps_actualdate'], 'd-M-y');
 //                    }
                     ?></span></small>                           
         </div>
         <div class=" col-md-3" id="pdd">
             <small>Deviations:- <span class="badge badge-pill badge-dark font-12 text-white ml-1">
                     <?php
-                    $sdate = date('Y-m-d', strtotime($package_details['pm_revised_material_req']));
-                    $ltime = date('Y-m-d', strtotime($expdelivery));
+                    $sdate = formatDate($package_details['pm_revised_material_req'], 'Y-m-d');
+                    $ltime = formatDate($expdelivery, 'Y-m-d');
                     $start = new DateTime($sdate);
                     $end = new DateTime($ltime);
                     $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';
@@ -237,7 +237,7 @@ if ($deviations < 0) {
                             ?>
                         </td>
 
-                        <td><span class="badge badge-pill badge-primary font-medium text-white ml-1"><?php echo date('d-M-y', strtotime($value['revised_planned_date'])); ?></span></td>
+                        <td><span class="badge badge-pill badge-primary font-medium text-white ml-1"><?php echo formatDate($value['revised_planned_date'], 'd-M-y'); ?></span></td>
                         <td>
                             <?php
                             $get_actualreceive = $cls_user->get_actualreceive($pack_id, $value['ps_stageid']);
@@ -246,7 +246,7 @@ if ($deviations < 0) {
                             } else {
                                 ?>
                                 <span class="badge badge-pill badge-warning font-medium text-white ml-1">
-                                    <?php echo date('d-M-y', strtotime($get_actualreceive)); ?>
+                                    <?php echo formatDate($get_actualreceive, 'd-M-y'); ?>
                                 </span>
 
                             <?php }
@@ -265,11 +265,11 @@ if ($deviations < 0) {
                                             echo date('d-M-y', strtotime($value['revised_planned_date'] . ' - ' . abs($devi) . 'days')); //1Contracts to Ops
                                             $actual_rec = date('d-M-y', strtotime($value['revised_planned_date'] . ' - ' . abs($devi) . 'days'));
                                         } else if ($devi > 0) {
-                                            $actual_rec = date('d-M-y', strtotime($value['revised_planned_date'] . ' + ' . $devi . 'days')); //1Contracts to Ops
-                                            echo date('d-M-y', strtotime($value['revised_planned_date'] . ' + ' . $devi . 'days')); //1Contracts to Ops
+                                            $actual_rec = formatDate($value['revised_planned_date'] . ' + ' . $devi . 'days', 'd-M-y'); //1Contracts to Ops
+                                            echo formatDate($value['revised_planned_date'] . ' + ' . $devi . 'days', 'd-M-y'); //1Contracts to Ops
                                         } else if ($devi == 0) {
-                                            $actual_rec = date('d-M-y', strtotime($value['revised_planned_date']));
-                                            echo date('d-M-y', strtotime($value['revised_planned_date']));
+                                            $actual_rec = formatDate($value['revised_planned_date'], 'd-M-y');
+                                            echo formatDate($value['revised_planned_date'], 'd-M-y');
                                         }
                                         ?> 
                                     </span>
@@ -280,9 +280,9 @@ if ($deviations < 0) {
                                 <span class="badge badge-pill badge-info font-medium text-white ml-1">
                                     <?php
                                     if ($value['ps_actualdate'] != "") {
-                                        echo date('d-M-y', strtotime($value['ps_actualdate']));
+                                        echo formatDate($value['ps_actualdate'], 'd-M-y');
                                     }
-                                    $actual_rec = date('d-M-y', strtotime($value['ps_actualdate']));
+                                    $actual_rec = formatDate($value['ps_actualdate'], 'd-M-y');
                                     ?>
                                 </span>
                             <?php }
@@ -295,8 +295,8 @@ if ($deviations < 0) {
                             if ($get_actualreceive != "") {
 
 
-                                $sdate = date('Y-m-d', strtotime($get_actualreceive));
-                                $ltime = date('Y-m-d', strtotime($actual_rec));
+                                $sdate = formatDate($get_actualreceive, 'Y-m-d');
+                                $ltime = formatDate($actual_rec, 'Y-m-d');
                                 $start = new DateTime($sdate);
                                 $end = new DateTime($ltime);
                                 $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';

@@ -8,9 +8,9 @@ include_once ("../config/inc_function.php");
 if (isset($_POST['lc_apply'])) {
     extract($_POST);
     $today = date('d-M-Y');
-    $end_lc = date('d-M-Y', strtotime($end_lc));
+    $end_lc = formatDate($end_lc, 'd-M-Y');
 
-    $expected = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['expe_date'])));
+    $expected = formatDate(str_replace('/', '-', $_POST['expe_date']), 'Y-m-d h:i:s');
 
     if ($today > $end_lc) {
         echo "<script>window.location.href='../lc_page?msg=0';</script>";

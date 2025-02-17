@@ -373,31 +373,31 @@ order by ps_stageid DESC ";
             $row = mssql_fetch_array($query);
             if ($team_id == 1) {
                 if (trim($row['txp_remarks']) != "") {
-                    echo "<b>Techo Spoc Remarks</b> - " . date('d-M-Y', strtotime($row['txp_sentdate']));
+                    echo "<b>Techo Spoc Remarks</b> - " . formatDate($row['txp_sentdate'], 'd-M-Y');
                     echo "<br>";
                     echo $row['txp_remarks'];
                     echo "<br><br>";
                 }
                 if (trim($row['cto_remarks']) != "") {
-                    echo "<b>Techo Expert Remarks</b> - " . date('d-M-Y', strtotime($row['cto_sentdate']));
+                    echo "<b>Techo Expert Remarks</b> - " . formatDate($row['cto_sentdate'], 'd-M-Y');
                     echo "<br>";
                     echo $row['cto_remarks'];
                     echo "<br><br>";
                 }
                 if (trim($row['ctops_remarks']) != "") {
-                    echo "<b>Techo CTO Remarks</b>- " . date('d-M-Y', strtotime($row['ctops_sentdate']));
+                    echo "<b>Techo CTO Remarks</b>- " . formatDate($row['ctops_sentdate'], 'd-M-Y');
                     echo "<br>";
                     echo $row['ctops_remarks'];
                 }
             } else if ($team_id == 2) {
                 if (trim($row['omop_remarks']) != "") {
-                    echo "<b>OM Remarks</b> -" . date('d-M-Y', strtotime($row['omop_sentdate']));
+                    echo "<b>OM Remarks</b> -" . formatDate($row['omop_sentdate'], 'd-M-Y');
                     echo "<br>";
                     echo $row['omop_remarks'];
                 }
             } else if ($team_id == 3) {
                 if (trim($row['sc_remarks']) != "") {
-                    echo "<b>OPS Remarks</b> -" . date('d-M-Y', strtotime($row['sc_sentdate']));
+                    echo "<b>OPS Remarks</b> -" . formatDate($row['sc_sentdate'], 'd-M-Y');
                     echo "<br>";
                     echo $row['sc_remarks'];
                 }
@@ -416,7 +416,7 @@ order by ps_stageid DESC ";
                 $remarks= '-';
 
             }
-            $msg.='<b>Remarks</b> -' . date('d-M-Y', strtotime($row['st_actual']));
+            $msg.='<b>Remarks</b> -' . formatDate($row['st_actual'], 'd-M-Y');
             $msg.='<br>';
             $msg.=$remarks;
             $msg.='<br>';

@@ -7,8 +7,8 @@ include_once ("../config/inc_function.php");
 
 if (isset($_POST['approve_package'])) {
     $cto_id = $_POST['cto_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $actdate = date('Y-m-d');
     $sql = "SELECT * FROM swift_techCTO WHERE cto_id='" . $cto_id . "'";
@@ -36,7 +36,7 @@ if (isset($_POST['approve_package'])) {
     $planned_date = $row['planned_date'];
 
     $ctops_sentdate = date("Y-m-d h:i:s");
-    $ctops_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $ctops_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
     // update techcto status
     $sql = "UPDATE swift_techCTO SET cto_status = '1',cto_active='1',cto_expdate='$actdate',cto_actual='$actdate' WHERE cto_id = '$cto_id'";
@@ -87,8 +87,8 @@ if (isset($_POST['approve_package'])) {
 }
 if (isset($_POST['reject_package'])) {
     $cto_id = $_POST['cto_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $actdate = date('Y-m-d');
     $sql = "SELECT * FROM swift_techCTO WHERE cto_id='" . $cto_id . "'";
@@ -143,8 +143,8 @@ if (isset($_POST['reject_package'])) {
 if (isset($_POST['sendtocto'])) {
     $cto_id = $_POST['cto_id'];
     $cto_user_id =$_POST['cto_user_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $actdate = date('Y-m-d');
     $sql = "SELECT * FROM swift_techReviewer WHERE techRev_id='" . $cto_id . "'";
@@ -194,7 +194,7 @@ if (isset($_POST['sendtocto'])) {
         $planned_date = $row['planned_date'];
 
         $ctops_sentdate = date("Y-m-d h:i:s");
-        $ctops_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+        $ctops_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
         // update techcto status
 //        $sql = "UPDATE swift_techCTO SET cto_status = '1',cto_active='1',cto_expdate='$actdate',cto_actual='$actdate' WHERE cto_id = '$cto_id'";
@@ -290,7 +290,7 @@ if (isset($_POST['sendtocto'])) {
         $planned_date = $row['planned_date'];
 
         $ctops_sentdate = date("Y-m-d h:i:s");
-        $ctops_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+        $ctops_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
         // update techcto status
         $sql = "UPDATE swift_techReviewer SET techRev_status = '1',techRev_active='1',techRev_expdate='$actdate',techRev_actual='$actdate' WHERE techRev_id = '$cto_id'";
@@ -351,8 +351,8 @@ if (isset($_POST['sendtocto'])) {
 }
 if (isset($_POST['reject_packagebyreviewer'])) {
     $cto_id = $_POST['cto_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $actdate = date('Y-m-d');
     $sql = "SELECT * FROM swift_techReviewer WHERE techRev_id='" . $cto_id . "'";
@@ -401,8 +401,8 @@ if (isset($_POST['reject_packagebyreviewer'])) {
 }
 if (isset($_POST['sentbacktoreviewer'])) {
     $cto_id = $_POST['cto_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $actdate = date('Y-m-d');
     $sql = "SELECT * FROM swift_techCTO WHERE cto_id='" . $cto_id . "'";

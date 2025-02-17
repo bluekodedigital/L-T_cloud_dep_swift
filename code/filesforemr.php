@@ -13,7 +13,7 @@ $so_loi_date = "";
 $loi_remarks = "";
 foreach ($res1 as $key => $value1) {
     $loi_number = $value1['loi_number'];
-    $so_loi_date = date('d-M-Y', strtotime($value1['loi_date']));
+    $so_loi_date = formatDate($value1['loi_date'], 'd-M-Y');
     $loi_remarks = $value1['to_remark'];
     if ($value1['po_wo_status'] == 1) {
         $po_wo = 'PO';
@@ -25,18 +25,18 @@ foreach ($res1 as $key => $value1) {
     $proj_name = $value1['proj_name'];
     $pack_name = $value1['pm_packagename'];
     $proj_id = $value1['pm_projid'];
-    $planned = date('d-M-Y', strtotime($value1['planned']));
-//    $expected = date('d-M-Y', strtotime($value['expected']));
+    $planned = formatDate($value1['planned'], 'd-M-Y');
+//    $expected = formatDate($value['expected'], 'd-M-Y');
 
     if ($value1['ps_expdate'] == "") {
         $exp_date = date('Y-m-d');
     } else {
         $exp_date = $value1['ps_expdate'];
     }
-    $expected = date('d-M-Y', strtotime($exp_date));
-//    $expected = date('d-M-Y', strtotime($value['ps_expdate']));
-    $actual = date('d-M-Y', strtotime($value1['actual']));
-    $pm_material_req = date('d-M-Y', strtotime($value1['pm_revised_material_req']));
+    $expected = formatDate($exp_date, 'd-M-Y');
+//    $expected = formatDate($value['ps_expdate'], 'd-M-Y');
+    $actual = formatDate($value1['actual'], 'd-M-Y');
+    $pm_material_req = formatDate($value1['pm_revised_material_req'], 'd-M-Y');
 }
 
 

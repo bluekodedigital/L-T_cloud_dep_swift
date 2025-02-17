@@ -270,49 +270,49 @@ $uid = $_SESSION['uid'];
                                                     <td class=" freeze2td cell_width vmiddle"><b><?php echo wordwrap($value['pm_packagename'], 20, "<br>\n"); ?></b></td>
                                                     <td class=" freeze3td cell_width vmiddle"><b><?php echo wordwrap($all['sup_name'], 20, "<br>\n"); ?></b></td>
                                                     <td class="vmiddle cell_width2"><span class="badge badge-pill badge-info font-medium text-black ml-1 recfrm"><?php echo $current_status; ?></span></td>
-                                                    <td class="vmiddle cell_width"><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
+                                                    <td class="vmiddle cell_width"><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
                                                     <td contenteditable="true" class="cell_width bg-light-custom last_status<?php echo $packid; ?>"  onkeyup="last_week_status('<?php echo $packid; ?>')"> <?php echo wordwrap($value['last_week_status'], 20, "<br>\n"); ?> </td>
                                                     <td class=""> <?php
                                                         if ($target_date['sm_target'] != "") {
-                                                            echo date('d-M-Y', strtotime($target_date['sm_target']));
+                                                            echo formatDate($target_date['sm_target'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td ><?php echo wordwrap($current_status_1, 30, "<br>\n"); ?></td>
-                                                    <td ><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                                                    <td ><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                                                     <td><?php echo $value['pm_revised_lead_time']; ?></td>
                                                     <td contenteditable="true" class=" bg-light-custom"  >
                                                         
-                                                        <input onchange="last_week_status('<?php echo $packid; ?>')" type="date" value="<?php   if (trim($value['expDateVendor']) != "") { echo date('Y-m-d', strtotime($value['expDateVendor']));  }  ?>" id="expDateVendor<?php echo $packid; ?>">
+                                                        <input onchange="last_week_status('<?php echo $packid; ?>')" type="date" value="<?php   if (trim($value['expDateVendor']) != "") { echo formatDate($value['expDateVendor'], 'Y-m-d');  }  ?>" id="expDateVendor<?php echo $packid; ?>">
 
                                                     </td>
-                                                    <td><?php echo date('d-M-Y', strtotime($value['pm_createdate'])); ?></td>
+                                                    <td><?php echo formatDate($value['pm_createdate'], 'd-M-Y'); ?></td>
                                                     <td><?php
                                                         if ($get_techsignoff['ps_actualdate'] != "") {
-                                                            echo date('d-M-Y', strtotime($get_techsignoff['ps_actualdate']));
+                                                            echo formatDate($get_techsignoff['ps_actualdate'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php
                                                         if ($omsignoff['ps_actualdate'] != "") {
-                                                            echo date('d-M-Y', strtotime($omsignoff['ps_actualdate']));
+                                                            echo formatDate($omsignoff['ps_actualdate'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php
                                                         if ($scm_initial['ps_actualdate'] != "") {
-                                                            echo date('d-M-Y', strtotime($scm_initial['ps_actualdate']));
+                                                            echo formatDate($scm_initial['ps_actualdate'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php
                                                         if ($scm_accpted['ps_actualdate'] != "") {
-                                                            echo date('d-M-Y', strtotime($scm_accpted['ps_actualdate']));
+                                                            echo formatDate($scm_accpted['ps_actualdate'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td>
                                                         <?php
 //                                                    if ($approval_initiate['ps_actualdate'] != "") {
-//                                                        echo date('d-M-Y', strtotime($approval_initiate['ps_actualdate']));
+//                                                        echo formatDate($approval_initiate['ps_actualdate'], 'd-M-Y');
 //                                                    }
                                                         if ($target_date['sm_target'] != "") {
-                                                            echo date('d-M-Y', strtotime($target_date['sm_target']));
+                                                            echo formatDate($target_date['sm_target'], 'd-M-Y');
                                                         }
                                                         ?>
 
@@ -324,24 +324,24 @@ $uid = $_SESSION['uid'];
                                                         ?></td>
                                                     <td><?php
                                                         if ($smartsign_approved['s_date'] != "") {
-                                                            echo $smartsign_approved['dep_name'] . ' - ' . date('d-M-Y', strtotime($smartsign_approved['s_date']));
+                                                            echo $smartsign_approved['dep_name'] . ' - ' . formatDate($smartsign_approved['s_date'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php
                                                         if ($smartsign_approved['s_date'] != "") {
-                                                            echo $smartsign_approved['dep_name'] . ' - ' . date('d-M-Y', strtotime($smartsign_approved['s_date']));
+                                                            echo $smartsign_approved['dep_name'] . ' - ' . formatDate($smartsign_approved['s_date'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php
                                                         if ($sytem_details['so_loi_date'] != "") {
-                                                            echo date('d-M-Y', strtotime($sytem_details['so_loi_date']));
+                                                            echo formatDate($sytem_details['so_loi_date'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td><?php echo $sytem_details['loi_number'] ?></td>
                                                     <td><?php echo $sytem_details['emr_number'] ?></td>
                                                     <td><?php
                                                         if ($sytem_details['emr_createddate'] != "") {
-                                                            echo date('d-M-Y', strtotime($sytem_details['emr_createddate']));
+                                                            echo formatDate($sytem_details['emr_createddate'], 'd-M-Y');
                                                         }
                                                         ?></td>
                                                     <td >

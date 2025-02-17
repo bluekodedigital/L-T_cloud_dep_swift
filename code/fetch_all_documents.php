@@ -63,9 +63,9 @@ if ($num_rows > 0) {  ?>
                 ?>
                     <tr <?php echo $hight_light; ?>>
                         <td class=" text-center"> <?php echo $i + 1; ?></td>
-                        <td class=" text-center"> <?php echo date('d-M-Y', strtotime($row['up_update'])); ?></td>
+                        <td class=" text-center"> <?php echo formatDate($row['up_update'], 'd-M-Y'); ?></td>
                         <td class=" text-center"> <?php echo $row['up_filename']; ?></td>
-                        <td class=" text-center"><a href="uploads/document/<?php echo $path; ?>" class=" text-purple" target="_blank"> <?php echo $row['up_filepath']; ?> </a></td>
+                        <td class=" text-center" style="word-wrap: break-word; white-space: normal; max-width: 200px;"><a href="uploads/document/<?php echo $path; ?>" class=" text-purple" target="_blank"> <?php echo $row['up_filepath']; ?> </a></td>
                         <!--<td class=" text-center"> <span class=" badge badge-danger" style=" cursor: pointer;" onclick="remove_omupload('<?php echo $row['upid']; ?>', '<?php echo $row['up_projid']; ?>', '<?php echo $row['up_packid']; ?>');"><i class="fas fa-trash"></i></span></td>-->
 
                     </tr>

@@ -8,11 +8,11 @@ include_once ("../config/inc_function.php");
 if (isset($_POST['rpa_apply'])) {
     extract($_POST);
     $today = date('d-M-Y');
-    $end_rpa = date('d-M-Y', strtotime($end_rpa));
+    $end_rpa = formatDate($end_rpa, 'd-M-Y');
     $totalRvalue = $rpa_tbrvalue + $ebr_billvalue;
 
-    $expected = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['expe_date'])));
-    $due_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['due_date'])));
+    $expected = formatDate(str_replace('/', '-', $_POST['expe_date']), 'Y-m-d h:i:s');
+    $due_date = formatDate(str_replace('/', '-', $_POST['due_date']), 'Y-m-d h:i:s');
 
     if ($today > $end_rpa) {
         echo "<script>window.location.href='../rpa_page?msg=0';</script>";

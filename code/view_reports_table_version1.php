@@ -41,13 +41,13 @@ if (strtotime($pcrdate) >= strtotime("24-Aug-2021")) {
 if ($psActualDate == "") {
     $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $expdelivery = date('d-M-Y', strtotime($psActualDate));
+    $expdelivery = formatDate($psActualDate, 'd-M-Y');
 }
 
 if ($psActualInitiateDate == "") {
     $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $ssInidate = date('d-M-Y', strtotime($psActualInitiateDate));
+    $ssInidate = formatDate($psActualInitiateDate, 'd-M-Y');
 }
 
 
@@ -56,13 +56,13 @@ if ($psActualInitiateDate == "") {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } else {
 
@@ -70,13 +70,13 @@ if ($psActualInitiateDate == "") {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } */
 
@@ -231,7 +231,7 @@ if ($psActualInitiateDate == "") {
 
                 </span>
             </small>                           
-            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo date('d-M-y', strtotime($package_details['pm_revised_material_req']));      ?></span></small>-->                           
+            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo formatDate($package_details['pm_revised_material_req'], 'd-M-y');      ?></span></small>-->                           
         </div>
         <div class=" col-md-3" id="pde" style=" margin-left: 38% !important">
             <small>Expected SS Approval:- <span class="badge badge-pill badge-info font-12 text-white ml-1">
@@ -242,7 +242,7 @@ if ($psActualInitiateDate == "") {
 //
 //                        echo $expdelivery;
 //                    } else {
-//                        echo date('d-M-y', strtotime($expe_delidate['ps_actualdate']));
+//                        echo formatDate($expe_delidate['ps_actualdate'], 'd-M-y');
 //                    }
                     ?></span></small>                           
         </div>
@@ -408,8 +408,8 @@ if ($psActualInitiateDate == "") {
                                             $actual_rec = date('d-M-y', strtotime(formatDate($value['revised_planned_date'], 'Y-m-d') . ' - ' . abs($devi) . 'days')); //1Contracts to Ops
                                             echo date('d-M-y', strtotime(formatDate($value['revised_planned_date'], 'Y-m-d') . ' - ' . abs($devi) . 'days')); //1Contracts to Ops
                                         } else if ($devi == 0) {
-                                            $actual_rec = date('d-M-y', strtotime(formatDate($value['revised_planned_date'], 'Y-m-d')));
-                                            echo date('d-M-y', strtotime(formatDate($value['revised_planned_date'], 'Y-m-d')));
+                                            $actual_rec = formatDate(formatDate($value['revised_planned_date'], 'Y-m-d', 'd-M-y'));
+                                            echo formatDate(formatDate($value['revised_planned_date'], 'Y-m-d', 'd-M-y'));
                                         }
                                         ?> 
                                     </span>

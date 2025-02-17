@@ -117,10 +117,10 @@ if (isset($_GET['pid'])) {
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
                                             <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">EMR Creation</span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['emr_createddate'])); ?></td>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['emr_createddate'], 'd-M-Y'); ?></td>
                                             <td> <?php echo $value['emr_number']; ?></td>
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange" data-toggle="tooltip" data-original-title="Remarks" style=" cursor: pointer;" onclick="swal({html: true, title: 'Remarks', text: '<?php echo $value['emr_remarks']; ?>'});"><i class="fas fa-comment"></i>Remarks</label></td>
                                             <td><label onclick="filesforemrrepo('<?php echo $value['pm_packid'] ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1 pull-left"   data-original-title="View" style=" cursor: pointer;" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fas fa-paperclip"></i></label></td>

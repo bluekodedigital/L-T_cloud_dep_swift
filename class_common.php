@@ -1189,7 +1189,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $proj_name = $row['proj_name'];
         $pack_name = $row['pm_packagename'];
         $stage_name = $row['stage_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
 
         $message = '<div width="100%" style="background: #f8f8f8;  font-family:verdana; line-height:28px; height:100%;  width: 100%; color: #514d6a;">
     <div style="max-width: 100%;  font-size: 12px">
@@ -1357,7 +1357,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $proj_name = $row['proj_name'];
         $pack_name = $row['pm_packagename'];
         $stage_name = $row['stage_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
         
                 $sql1 = mssql_query("select * from usermst where uid='" . $recvid . "'");
         $row1 = mssql_fetch_array($sql1);
@@ -1479,7 +1479,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $proj_name = $row['proj_name'];
         $pack_name = $row['pm_packagename'];
         $stage_name = $row['stage_name'];
-        $planneddate = date('d-M-Y', strtotime($row['revised_planned_date']));
+        $planneddate = formatDate($row['revised_planned_date'], 'd-M-Y');
         $segment_sql = mssql_query("select cat_id from Project where proj_id='" . $proj_id . "'");
         $sqry = mssql_fetch_array($segment_sql);
         $segment = $sqry['cat_id'];

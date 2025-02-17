@@ -49,7 +49,7 @@ if ($num_rows > 0) {
             ?>
                 <tr>
                     <td class=" text-center"> <?php echo $i + 1; ?></td>
-                    <td class=" text-center"> <?php echo date('d-M-Y', strtotime($row['df_update'])); ?></td>
+                    <td class=" text-center"> <?php echo formatDate($row['df_update'], 'd-M-Y'); ?></td>
                     <td class=" text-center"> <?php echo $doc_name;  ?></td>
                     <td class=" text-center"><a href="uploads/order_document/<?php echo $path; ?>" class=" text-purple" target="_blank"> <?php echo $doc_name; ?> </a></td>
                     <?php if ($df_id > 0) { ?>

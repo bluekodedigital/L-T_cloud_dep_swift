@@ -22,7 +22,7 @@ $SSApprovalDate = $getExpectedSSApproval['revised_planned_date'];
 $getExpectedInitiateSSApproval = $cls_user->getExpectedInitiateSSApproval($pack_id);
 $InitiateSSApprovalDate = $getExpectedInitiateSSApproval['revised_planned_date'];
 
-$pcrdate = date('d-M-Y', strtotime($package_details['pm_createdate']));
+$pcrdate = formatDate($package_details['pm_createdate'], 'd-M-Y');
 if (strtotime($pcrdate) >= strtotime("24-Aug-2021")) {
     $flg = 1;
 } else {
@@ -35,13 +35,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } else {
 
@@ -49,13 +49,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 }
 
@@ -267,7 +267,7 @@ if ($package_details['proj_type'] == 1) {
 
                 </span>
             </small>
-            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo date('d-M-y', strtotime($package_details['pm_revised_material_req']));      
+            <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1"><?php //  echo formatDate($package_details['pm_revised_material_req'], 'd-M-y');      
                                                                                                                             ?></span></small>-->
         </div>
         <div class=" col-md-3" id="pde" style=" margin-left: 38% !important">
@@ -279,15 +279,15 @@ if ($package_details['proj_type'] == 1) {
                     //
                     //                        echo $expdelivery;
                     //                    } else {
-                    //                        echo date('d-M-y', strtotime($expe_delidate['ps_actualdate']));
+                    //                        echo formatDate($expe_delidate['ps_actualdate'], 'd-M-y');
                     //                    }
                     ?></span></small>
         </div>
         <div class=" col-md-3" id="pdd">
             <small>Deviations:- <span class="badge badge-pill badge-dark font-12 text-white ml-1">
                     <?php
-                    //    $sdate = date('Y-m-d', strtotime($package_details['pm_revised_material_req']));
-                    //     $ltime = date('Y-m-d', strtotime($expdelivery));
+                    //    $sdate = formatDate($package_details['pm_revised_material_req'], 'Y-m-d');
+                    //     $ltime = formatDate($expdelivery, 'Y-m-d');
                     //     $start = new DateTime($sdate);
                     //     $end   = new DateTime($ltime);
                     //     $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';
@@ -335,10 +335,10 @@ if ($package_details['proj_type'] == 1) {
 
                                         $sent_back = $value['st_status'];
                                         $target_day = $value['target_day'];
-                                        $pack_created = date('Y-m-d', strtotime($value['pm_createdate']));
-                                        $material_req = date('Y-m-d', strtotime($value['pm_material_req']));
-                                        $rev_planDate = date('Y-m-d', strtotime($value['revised_planned_date']));
-                                        // $rev_planDate = date('Y-m-d', strtotime($value['ps_actualdate']));
+                                        $pack_created = formatDate($value['pm_createdate'], 'Y-m-d');
+                                        $material_req = formatDate($value['pm_material_req'], 'Y-m-d');
+                                        $rev_planDate = formatDate($value['revised_planned_date'], 'Y-m-d');
+                                        // $rev_planDate = formatDate($value['ps_actualdate'], 'Y-m-d');
                                         if ($sent_back == 1) {
                                             $bgcolor = "oranged";
                                             $sent   = $value['shot_name'];
@@ -368,16 +368,16 @@ if ($package_details['proj_type'] == 1) {
 
                                                         ?>
                                                             <span class="badge badge-pill badge-primary font-medium text-white ml-1">
-                                                                <?php echo $rec =  date('d-M-y', strtotime($res[0]->ps_planneddate)); ?></span>
+                                                                <?php echo $rec =  formatDate($res[0]->ps_planneddate, 'd-M-y'); ?></span>
                                                         <?php } ?>
                                                     </p>
                                                     <p style='color: orange;'>
                                                         Actual Receipt :
 
-                                                        <?php //$plan_target  = date('Y-m-d', strtotime($rec . ' + ' . $target_day . ' days')); 
+                                                        <?php //$plan_target  = formatDate($rec . ' + ' . $target_day . ' days', 'Y-m-d'); 
                                                         ?>
                                                         <span class="badge badge-pill badge-warning font-medium text-white ml-1">
-                                                            <?php echo date('d-M-y', strtotime($res[0]->ps_actualdate)); ?>
+                                                            <?php echo formatDate($res[0]->ps_actualdate, 'd-M-y'); ?>
                                                         </span>
                                                     </p>
                                                 <?php } else {
@@ -389,7 +389,7 @@ if ($package_details['proj_type'] == 1) {
                                                     if ($get_planreceive == '0') {
                                                     } else {
                                                         if ($plantarget == '') {
-                                                            $rec2 =  date('d-M-y', strtotime($get_planreceive));
+                                                            $rec2 =  formatDate($get_planreceive, 'd-M-y');
                                                             $print_plan_recipt = $rec2;
                                                         } else {
                                                             $print_plan_recipt = $plantarget;
@@ -397,15 +397,15 @@ if ($package_details['proj_type'] == 1) {
                                                     }
                                                     $plan_target = $cls_user->get_actualreceive($pack_id, $value['st_stageid']);
 
-                                                   // $plan_target  = date('Y-m-d', strtotime($rec2 . ' + ' . $target_day . ' days'));
-                                                    $p_date = date('d-M-y', strtotime($plan_target));
-                                                    $plantarget = date('d-M-y', strtotime($plan_target));
+                                                   // $plan_target  = formatDate($rec2 . ' + ' . $target_day . ' days', 'Y-m-d');
+                                                    $p_date = formatDate($plan_target, 'd-M-y');
+                                                    $plantarget = formatDate($plan_target, 'd-M-y');
                                                     //For Actual
                                                     $get_actualreceive = $cls_user->get_actualreceive($pack_id, $value['st_stageid']);
                                                     if ($get_actualreceive == '0') {
                                                     } else {
                                                         if ($acutualtarget == '') {
-                                                            $rec3 = date('d-M-y', strtotime($get_actualreceive));
+                                                            $rec3 = formatDate($get_actualreceive, 'd-M-y');
                                                         } else {
                                                             $rec3 = $acutualtarget;
                                                         }
@@ -413,9 +413,9 @@ if ($package_details['proj_type'] == 1) {
                                                     $get_actualtarget = $cls_user->get_actualtarget($pack_id, $value['st_stageid']);
                                                     if ($get_actualtarget == '0') {
                                                     } else {
-                                                        $act_target = date('d-M-y', strtotime($get_actualtarget));
+                                                        $act_target = formatDate($get_actualtarget, 'd-M-y');
                                                     }
-                                                    $acutualtarget = date('d-M-y', strtotime($act_target));
+                                                    $acutualtarget = formatDate($act_target, 'd-M-y');
 
 
                                                 ?>
@@ -424,8 +424,8 @@ if ($package_details['proj_type'] == 1) {
                                                     if ($get_planreceive != "") {
 
 
-                                                        $sdate = date('Y-m-d', strtotime($p_date));
-                                                        $ltime = date('Y-m-d', strtotime($act_target));
+                                                        $sdate = formatDate($p_date, 'Y-m-d');
+                                                        $ltime = formatDate($act_target, 'Y-m-d');
                                                         $start = new DateTime($sdate);
                                                         $end = new DateTime($ltime);
                                                         $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';
@@ -459,8 +459,8 @@ if ($package_details['proj_type'] == 1) {
                                                     if ($get_actualreceive != "") {
 
 
-                                                        $sdate = date('Y-m-d', strtotime($rec3));
-                                                        $ltime = date('Y-m-d', strtotime($act_target));
+                                                        $sdate = formatDate($rec3, 'Y-m-d');
+                                                        $ltime = formatDate($act_target, 'Y-m-d');
                                                         $start = new DateTime($sdate);
                                                         $end = new DateTime($ltime);
                                                         $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';

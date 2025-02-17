@@ -10,15 +10,15 @@ $result = $cls_comm->sendtoscmtoopsdata($pack_id);
 $res = json_decode($result, true);
 
 foreach ($res as $key => $value) {
-    $planned_date = date('d-M-Y', strtotime($value['revised_planned_date']));
-    $mat_req_date = date('d-M-Y', strtotime($value['pm_revised_material_req']));
+    $planned_date = formatDate($value['revised_planned_date'], 'd-M-Y');
+    $mat_req_date = formatDate($value['pm_revised_material_req'], 'd-M-Y');
      if ($value['ps_expdate'] == "") {
         $exp_date = date('Y-m-d');
     } else {
         $exp_date = $value['ps_expdate'];
     }
-    $exp_date = date('d-M-Y', strtotime($exp_date));
-//    $exp_date = date('d-M-Y', strtotime($value['ps_expdate']));
+    $exp_date = formatDate($exp_date, 'd-M-Y');
+//    $exp_date = formatDate($value['ps_expdate'], 'd-M-Y');
     $pm_packagename = $value['pm_packagename'];
 }
 echo json_encode(array(

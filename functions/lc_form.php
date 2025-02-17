@@ -8,9 +8,9 @@ if (isset($_REQUEST['lcmst_create'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $lc_number = $lc_num;
-    $lc_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $lc_date)));
-    $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $from_lc)));
-    $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $to_lc)));
+    $lc_date = formatDate(str_replace('/', '-', $lc_date), 'Y-m-d h:i:s');
+    $valid_from = formatDate(str_replace('/', '-', $from_lc), 'Y-m-d h:i:s');
+    $valid_to = formatDate(str_replace('/', '-', $to_lc), 'Y-m-d h:i:s');
     $lc_value = $lc_value;
     $vendor = $vendor;
 // Check LC already Exsits for selected Vendor    
@@ -48,9 +48,9 @@ if (isset($_REQUEST['lcmst_update'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $lc_number = $lc_num;
-    $lc_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $lc_date)));
-    $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $from_lc)));
-    $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $to_lc)));
+    $lc_date = formatDate(str_replace('/', '-', $lc_date), 'Y-m-d h:i:s');
+    $valid_from = formatDate(str_replace('/', '-', $from_lc), 'Y-m-d h:i:s');
+    $valid_to = formatDate(str_replace('/', '-', $to_lc), 'Y-m-d h:i:s');
     $lc_value = $lc_value;
     $vendor = $vendor;
 // Check LC already Exsits for selected Vendor    

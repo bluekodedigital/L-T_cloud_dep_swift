@@ -11,7 +11,7 @@ if (isset($_POST['approve_package'])) {
     $pack_id = $_POST['packageid'];
     $proj_id = $_POST['projectid'];
 
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $forward     = $_POST['forwardto'];
     if ($forward == '') {
@@ -42,9 +42,10 @@ if (isset($_POST['approve_package'])) {
     $sql = "SELECT ps_planneddate as planned_date FROM swift_packagestatus WHERE ps_packid = '$pack_id' and ps_stageid = $sendstageid";
     $query = mssql_query($sql);
     $row = mssql_fetch_array($query);
-    $planned_date = $row['planned_date'];
+
+    $planned_date = formatDate($row['planned_date'],'Y-m-d h:i:s');
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $txp_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
     //By uma New Work Flow
     //Final Approval 
     if ($recvstageid == '') {
@@ -59,8 +60,8 @@ if (isset($_POST['approve_package'])) {
         if ($recvstageid == '10') {
             $buyer_id = $recvid;
             $scm_id   = $_POST['scmbu_id'];
-            //$expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
-            //        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
+            //$expdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
+            //        $actdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
             //$actdate = date('Y-m-d');
             // $remarks = $_POST['remarks'];
             $ace_value = '';
@@ -80,7 +81,7 @@ if (isset($_POST['approve_package'])) {
             // $row = mssql_fetch_array($query);
             // $planned_date = $row['planned_date'];
             // $scm_sentdate = date("Y-m-d h:i:s");
-            // $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+            // $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
 
             // update 
             $sql = "UPDATE swift_SCMSPOC SET sc_planneddate='" . $txp_planneddate . "',sc_expdate='" . $actdate . "',sc_actual='" . $actdate . "',sc_status='1',sc_active='1' WHERE sc_id = '$scm_id'";
@@ -252,8 +253,8 @@ if (isset($_POST['approve_package'])) {
     $sendbackstageid   = mssql_escape($_POST['senbackstage']);
     $sendbackuid       = mssql_escape($_POST['senbackuid']);
     $curdstageid       =  mssql_escape($_POST['cur_stage']);
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-    //    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+    //    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = sanitize($_POST['remarks']);
     $senduserid = $_SESSION['uid'];
@@ -272,9 +273,9 @@ if (isset($_POST['approve_package'])) {
     $sql = "SELECT ps_planneddate as planned_date FROM swift_packagestatus WHERE ps_packid = '$packid' and ps_stageid = '$sendstageid'";
     $query = mssql_query($sql);
     $row = mssql_fetch_array($query);
-    $planned_date = $row['planned_date'];
+    $planned_date = formatDate($row['planned_date'],'Y-m-d h:i:s');
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $txp_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
     //Current  stage update 
     $sql2 = "UPDATE swift_workflow_CurrentStage SET from_stage_id = '$curdstageid',
     to_stage_id = '$sendbackstageid' ,from_uid ='$senduserid', to_uid='$sendbackuid' ,cs_userid='$senduserid' ,
@@ -332,9 +333,9 @@ if (isset($_REQUEST['create_emr'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
     $tsql = mssql_query("select isnull (max(st_id+1),1) as tid from  swift_transactions");
 

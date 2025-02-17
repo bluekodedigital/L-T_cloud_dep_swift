@@ -54,7 +54,7 @@ for ($i = 0; $i < sizeof($quoteid); $i++) {
         $sid = $row['id'];
 
         $sql = "insert into lc_supply_updation (lc_sid,lc_sup_date,lc_sup_val ,lc_sup_ex_rate,lc_sup_uid,lc_sup_qid,lc_sup_vid,lc_sup_lcid )
-                values('" . $sid . "','" . date('Y-m-d', strtotime($supply_date[$i])) . "','" . $supply_value[$i] . "','" . $exchage_rate[$i] . "','" . $uid . "','" . $quoteid[$i] . "','" . $vid . "','" . $lc_id . "' )";
+                values('" . $sid . "','" . formatDate($supply_date[$i], 'Y-m-d') . "','" . $supply_value[$i] . "','" . $exchage_rate[$i] . "','" . $uid . "','" . $quoteid[$i] . "','" . $vid . "','" . $lc_id . "' )";
         $query = mssql_query($sql);
 
         if ($num_rows > 0) {
@@ -62,7 +62,7 @@ for ($i = 0; $i < sizeof($quoteid); $i++) {
             $qret = mssql_query($sql1);
             $row = mssql_fetch_array($qret);
             $total_supply = $row['total_supply'];
-            $update_details = "update lc_creation_details set lcr_supply='" . $total_supply . "',lcr_supply_exchange='" . $exchage_rate[$i] . "',lcr_supply_date='" . date('Y-m-d', strtotime($supply_date[$i])) . "'  where  lcr_id='" . $quoteid[$i] . "'   and lcr_lcid='" . $lc_id . "'";
+            $update_details = "update lc_creation_details set lcr_supply='" . $total_supply . "',lcr_supply_exchange='" . $exchage_rate[$i] . "',lcr_supply_date='" . formatDate($supply_date[$i], 'Y-m-d') . "'  where  lcr_id='" . $quoteid[$i] . "'   and lcr_lcid='" . $lc_id . "'";
             $query = mssql_query($update_details);
         }
     }

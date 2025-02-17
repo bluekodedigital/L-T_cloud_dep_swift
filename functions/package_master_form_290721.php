@@ -52,8 +52,8 @@ include_once ("../config/inc_function.php");
 
             $row = mssql_fetch_array($isql);
             $id = $row['id'];
-            $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-            $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+            $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+            $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
             $sql = "insert into swift_packagemaster(pm_packid,pm_projid,pm_packagename,pm_createdate,pm_material_req,pm_leadtime,pm_userid,tech_status,pm_revised_material_req,pm_revised_lead_time,emr_status,pm_catid,pm_remarks,tech_skip)"
                     . "values('" . $id . "','" . $proj_name . "','" . mssql_escape1($pack_name) . "','" . date('Y-m-d h:i:s') . "','" . $org . "','" . mssql_escape1($lead_time) . "','" . $uid . "','0','" . $mtreq . "','" . mssql_escape1($lead_time) . "','0','" . $pack_cat_name . "','" . $opstospocremarks . "','" . $tech_skip . "')";
 
@@ -62,41 +62,41 @@ include_once ("../config/inc_function.php");
             if ($insert) {
                 $update = mssql_query("update Project set package_status=1 where proj_id='" . $proj_name . "'");
                 $diff = ($lead_time + 54); //15-23-6-15
-                $stages[1] = date('Y-m-d', strtotime($mtreq . '-' . $diff . 'days')); //1Contracts to Ops    
-                $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops    
+                $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                 $inf = ($lead_time + 2);
-                $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
                 $count = sizeof($stages);
 
                 for ($i = 1; $i <= $count; $i++) {
@@ -108,41 +108,41 @@ include_once ("../config/inc_function.php");
                 $contoops = mssql_query("update swift_packagestatus set active=0,ps_expdate='" . date('Y-m-d H:i:s') . "',ps_actualdate='" . date('Y-m-d H:i:s') . "',ps_userid='" . $uid . "' where ps_stageid='1' and ps_packid='" . $id . "' ");
                 $update_stage = mssql_query("update swift_packagestatus set active=1  where ps_stageid='2' and ps_packid='" . $id . "' ");
 
-                $stages[1] = date('Y-m-d', strtotime($org . '-' . $diff . 'days')); //1Contracts to Ops
-                $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                 $inf = ($lead_time + 2);
-                $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
 
                 $counnt = sizeof($stages);
 
@@ -193,14 +193,14 @@ include_once ("../config/inc_function.php");
                             $ids = $row['id'];
 
                             $sentdate = date('Y-m-d');
-//                            $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+//                            $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
 
                             $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $packageid . "' and ps_stageid=13");
                             $prow = mssql_fetch_array($pquery);
-                            $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                            $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
-//                            $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                            $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                            $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                            $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                             $expected_date = $sentdate;
                             $actual_date = $sentdate;
 
@@ -261,23 +261,23 @@ include_once ("../config/inc_function.php");
 
 
                             $sentdate = date('Y-m-d');
-                            //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-//                $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+                            //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+//                $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
                             $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=1");
 //                $pquery = mssql_query($spsql);
                             $prow = mssql_fetch_array($pquery);
-                            $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                            $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
                             $spsql_spoc = mssql_query("select revised_planned_date as planned_spoc from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=3");
 
 //                $pquery_spoc = mssql_query($spsql_spoc);
                             $prow_spoc = mssql_fetch_array($spsql_spoc);
-                            $planneddate_spoc = date('d-M-Y', strtotime($prow_spoc['planned_spoc']));
+                            $planneddate_spoc = formatDate($prow_spoc['planned_spoc'], 'd-M-Y');
                             $get_projname = mssql_query(" select proj_name from   dbo.Project where proj_id='" . $proj_name . "'");
                             $pnameqrow = mssql_fetch_array($get_projname);
 
-//                $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                             $expected_date = $sentdate;
                             $actual_date = $sentdate;
                             $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
@@ -489,14 +489,14 @@ include_once ("../config/inc_function.php");
                             $ids = $row['id'];
 
                             $sentdate = date('Y-m-d');
-//                            $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+//                            $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
 
                             $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $packageid . "' and ps_stageid=13");
                             $prow = mssql_fetch_array($pquery);
-                            $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                            $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
-//                            $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                            $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                            $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                            $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                             $expected_date = $sentdate;
                             $actual_date = $sentdate;
 
@@ -557,23 +557,23 @@ include_once ("../config/inc_function.php");
 
 
                             $sentdate = date('Y-m-d');
-                            //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-//                $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+                            //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+//                $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
                             $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=1");
 //                $pquery = mssql_query($spsql);
                             $prow = mssql_fetch_array($pquery);
-                            $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                            $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
                             $spsql_spoc = mssql_query("select revised_planned_date as planned_spoc from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=3");
 
 //                $pquery_spoc = mssql_query($spsql_spoc);
                             $prow_spoc = mssql_fetch_array($spsql_spoc);
-                            $planneddate_spoc = date('d-M-Y', strtotime($prow_spoc['planned_spoc']));
+                            $planneddate_spoc = formatDate($prow_spoc['planned_spoc'], 'd-M-Y');
                             $get_projname = mssql_query(" select proj_name from   dbo.Project where proj_id='" . $proj_name . "'");
                             $pnameqrow = mssql_fetch_array($get_projname);
 
-//                $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                             $expected_date = $sentdate;
                             $actual_date = $sentdate;
                             $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
@@ -774,23 +774,23 @@ include_once ("../config/inc_function.php");
 
 
                         $sentdate = date('Y-m-d');
-                        //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-//                $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+                        //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+//                $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
                         $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=1");
 //                $pquery = mssql_query($spsql);
                         $prow = mssql_fetch_array($pquery);
-                        $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                        $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
                         $spsql_spoc = mssql_query("select revised_planned_date as planned_spoc from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid=3");
 
 //                $pquery_spoc = mssql_query($spsql_spoc);
                         $prow_spoc = mssql_fetch_array($spsql_spoc);
-                        $planneddate_spoc = date('d-M-Y', strtotime($prow_spoc['planned_spoc']));
+                        $planneddate_spoc = formatDate($prow_spoc['planned_spoc'], 'd-M-Y');
                         $get_projname = mssql_query(" select proj_name from   dbo.Project where proj_id='" . $proj_name . "'");
                         $pnameqrow = mssql_fetch_array($get_projname);
 
-//                $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                         $expected_date = $sentdate;
                         $actual_date = $sentdate;
                         $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
@@ -1028,8 +1028,8 @@ include_once ("../config/inc_function.php");
                     $isql = mssql_query("select isnull (max(pm_packid+1),1) as id from  swift_packagemaster");
                     $row = mssql_fetch_array($isql);
                     $id = $row['id'];
-                    $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-                    $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+                    $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+                    $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
                     $sql = "insert into swift_packagemaster(pm_packid,pm_projid,pm_packagename,pm_createdate,pm_material_req,pm_leadtime,pm_userid,tech_status,pm_revised_material_req,pm_revised_lead_time,emr_status,pm_catid)"
                             . "values('" . $id . "','" . $proj_name . "','" . mssql_escape1($pack_name) . "','" . date('Y-m-d h:i:s') . "','" . $org . "','" . mssql_escape1($lead_time) . "','" . $uid . "','0','" . $mtreq . "','" . mssql_escape1($lead_time) . "','0','" . $cat_rid . "')";
 
@@ -1038,41 +1038,41 @@ include_once ("../config/inc_function.php");
                         $update = mssql_query("update Project set package_status=1 where proj_id='" . $proj_name . "'");
                         //calculation of planned Dates
                         $diff = ($lead_time + 54);
-                        $stages[1] = date('Y-m-d', strtotime($mtreq . '-' . $diff . 'days')); //1Contracts to Ops
-                        $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                        $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                        $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                        $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                        $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                        $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                        $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                        $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                        $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                        $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                        $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                        $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                        $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                        $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                        $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                        $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                        $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                        $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                        $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                        $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                        $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                        $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                        $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                        $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                        $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                        $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                        $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                        $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                        $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                        $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                        $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                        $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                        $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                        $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                        $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                        $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                        $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                        $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                        $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                        $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                        $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                        $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                        $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                        $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                        $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                        $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                        $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                        $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                        $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                        $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                        $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                        $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                        $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                        $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                        $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                        $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                        $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                         $inf = ($lead_time + 2);
-                        $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                        $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                        $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                        $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                        $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                        $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                        $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                        $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                        $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                        $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
                         $countt = sizeof($stages);
                         for ($i = 1; $i <= $countt; $i++) {
                             $sql = "insert into swift_packagestatus(ps_projid,ps_packid,ps_stageid,ps_planneddate,ps_userid,revised_planned_date)"
@@ -1081,41 +1081,41 @@ include_once ("../config/inc_function.php");
                         }
                         $contoops = mssql_query("update swift_packagestatus set  active=0,ps_expdate='" . date('Y-m-d H:i:s') . "',ps_actualdate='" . date('Y-m-d H:i:s') . "',ps_userid='" . $uid . "' where ps_stageid='1' and ps_packid='" . $id . "' ");
                         $update_stage = mssql_query("update swift_packagestatus set active=1  where ps_stageid='2' and ps_packid='" . $id . "' ");
-                        $stages[1] = date('Y-m-d', strtotime($org . '-' . $diff . 'days')); //1Contracts to Ops
-                        $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                        $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                        $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                        $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                        $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                        $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                        $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                        $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                        $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                        $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                        $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                        $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                        $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                        $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                        $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                        $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                        $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                        $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                        $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                        $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                        $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                        $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                        $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                        $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                        $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                        $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                        $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                        $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                        $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                        $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                        $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                        $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                        $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                        $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                        $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                        $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                        $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                        $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                        $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                        $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                        $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                        $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                        $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                        $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                        $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                        $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                        $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                        $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                        $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                        $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                        $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                        $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                        $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                        $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                        $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                        $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                        $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                         $inf = ($lead_time + 2);
-                        $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                        $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                        $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                        $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                        $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                        $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                        $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                        $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                        $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                        $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
                         $counnt = sizeof($stages);
                         for ($i = 1; $i <= $counnt; $i++) {
                             $sql = "update swift_packagestatus set ps_planneddate='" . $stages[$i] . "' where ps_projid='" . $proj_name . "' and ps_packid='" . $id . "' and ps_stageid='" . $i . "'";
@@ -1135,15 +1135,15 @@ include_once ("../config/inc_function.php");
 
 
                         $sentdate = date('Y-m-d');
-                        //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-//                $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+                        //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+//                $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
                         $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $ids . "' and ps_stageid=1");
                         $pquery = mssql_query($spsql);
                         $prow = mssql_fetch_array($pquery);
-                        $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                        $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
-//                $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-//                $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+//                $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+//                $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                         $expected_date = $sentdate;
                         $actual_date = $sentdate;
                         $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
@@ -1189,8 +1189,8 @@ include_once ("../config/inc_function.php");
             $opstospocremarks = 'Nil';
         }
         $stages = array();
-        $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-        $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+        $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+        $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
 
         $sql = "select * from swift_packagemaster where pm_packid='" . $pck_id . "' and pm_projid='" . $proj_name . "'";
         $query = mssql_query($sql);
@@ -1202,41 +1202,41 @@ include_once ("../config/inc_function.php");
             if ($update) {
 
                 $diff = ($lead_time + 54);
-                $stages[1] = date('Y-m-d', strtotime($mtreq . '-' . $diff . 'days')); //1Contracts to Ops
-                $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                 $inf = ($lead_time + 2);
-                $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
 
                 $countt = sizeof($stages);
                 for ($i = 1; $i <= $countt; $i++) {
@@ -1245,41 +1245,41 @@ include_once ("../config/inc_function.php");
                 }
 
                 $diff = ($lead_time + 54);
-                $stages[1] = date('Y-m-d', strtotime($org . '-' . $diff . 'days')); //1Contracts to Ops
-                $stages[2] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //2Ops to Engineering SPOC
-                $stages[3] = date('Y-m-d', strtotime($stages[1] . '+1 days')); //3$SPOC_to_Tech_Expert
-                $stages[4] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //4$Tech_Expert_Clerance
-                $stages[5] = date('Y-m-d', strtotime($stages[3] . '+5 days')); //5$Tech_Expert_to_CTO_for_approval
-                $stages[6] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //6$CTO_Approval
-                $stages[7] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //7$Tech_SPOC_toOps
-                $stages[8] = date('Y-m-d', strtotime($stages[5] . '+2 days')); //8$OpstoOM
-                $stages[9] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //9$OMApproval
-                $stages[10] = date('Y-m-d', strtotime($stages[8] . '+3 days')); //10$OMtoOps 
-                $stages[11] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //11$OpshandingovertoSCM
-                $stages[12] = date('Y-m-d', strtotime($stages[10] . '+1 days')); //12$AcutalOpshandingovertoSCM
-                $stages[13] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //13$FileAcceptancefromOpsDate
-                $stages[14] = date('Y-m-d', strtotime($stages[12] . '+1 days')); //14$FileReceivedDateRevised
-                $stages[15] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //15$ExpectedDateofOrderClosing
-                $stages[16] = date('Y-m-d', strtotime($stages[14] . '+12 days')); //16$PackageSentDate
-                $stages[17] = date('Y-m-d', strtotime($stages[16] . '+4 days')); //17$PackageApprovedDate
-                $stages[18] = date('Y-m-d', strtotime($stages[17] . '+2 days')); //18$LOIdate
-                $stages[19] = date('Y-m-d', strtotime($stages[18] . '+2 days')); //19$EMRdate
-                $stages[20] = date('Y-m-d', strtotime($stages[19] . '+3 days')); //20$PODate
-                $stages[21] = date('Y-m-d', strtotime($stages[20] . '+2 days')); //21$POApprovedDate
-                $stages[22] = date('Y-m-d', strtotime($stages[18] . '+3 days')); //22$WODate
-                $stages[23] = date('Y-m-d', strtotime($stages[22] . '+2 days')); //23$WOApprovedDate
-                $stages[24] = date('Y-m-d', strtotime($stages[21] . '+7 days')); //24$LCDate
-                $stages[25] = date('Y-m-d', strtotime($stages[21] . '+3 days')); //25$VendortoOpsDrawingSamplePOCSubmission
-                $stages[26] = date('Y-m-d', strtotime($stages[25] . '+1 days')); //26$OpstoEngineeringVendor Drawing/POC
-                $stages[27] = date('Y-m-d', strtotime($stages[26] . '+2 days')); //27$EngineeringtoOpsforVendorDesignApproval
-                $stages[28] = date('Y-m-d', strtotime($stages[27] . '+1 days')); //28$OpstoVendorApprovedDrawing
-                $stages[29] = date('Y-m-d', strtotime($stages[28] . '+2 days')); //29$ManufacturingClearance
+                $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
+                $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
+                $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
+                $stages[5] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //5$Tech_Expert_to_CTO_for_approval
+                $stages[6] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //6$CTO_Approval
+                $stages[7] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //7$Tech_SPOC_toOps
+                $stages[8] = formatDate($stages[5] . '+2 days', 'Y-m-d'); //8$OpstoOM
+                $stages[9] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //9$OMApproval
+                $stages[10] = formatDate($stages[8] . '+3 days', 'Y-m-d'); //10$OMtoOps 
+                $stages[11] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //11$OpshandingovertoSCM
+                $stages[12] = formatDate($stages[10] . '+1 days', 'Y-m-d'); //12$AcutalOpshandingovertoSCM
+                $stages[13] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //13$FileAcceptancefromOpsDate
+                $stages[14] = formatDate($stages[12] . '+1 days', 'Y-m-d'); //14$FileReceivedDateRevised
+                $stages[15] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //15$ExpectedDateofOrderClosing
+                $stages[16] = formatDate($stages[14] . '+12 days', 'Y-m-d'); //16$PackageSentDate
+                $stages[17] = formatDate($stages[16] . '+4 days', 'Y-m-d'); //17$PackageApprovedDate
+                $stages[18] = formatDate($stages[17] . '+2 days', 'Y-m-d'); //18$LOIdate
+                $stages[19] = formatDate($stages[18] . '+2 days', 'Y-m-d'); //19$EMRdate
+                $stages[20] = formatDate($stages[19] . '+3 days', 'Y-m-d'); //20$PODate
+                $stages[21] = formatDate($stages[20] . '+2 days', 'Y-m-d'); //21$POApprovedDate
+                $stages[22] = formatDate($stages[18] . '+3 days', 'Y-m-d'); //22$WODate
+                $stages[23] = formatDate($stages[22] . '+2 days', 'Y-m-d'); //23$WOApprovedDate
+                $stages[24] = formatDate($stages[21] . '+7 days', 'Y-m-d'); //24$LCDate
+                $stages[25] = formatDate($stages[21] . '+3 days', 'Y-m-d'); //25$VendortoOpsDrawingSamplePOCSubmission
+                $stages[26] = formatDate($stages[25] . '+1 days', 'Y-m-d'); //26$OpstoEngineeringVendor Drawing/POC
+                $stages[27] = formatDate($stages[26] . '+2 days', 'Y-m-d'); //27$EngineeringtoOpsforVendorDesignApproval
+                $stages[28] = formatDate($stages[27] . '+1 days', 'Y-m-d'); //28$OpstoVendorApprovedDrawing
+                $stages[29] = formatDate($stages[28] . '+2 days', 'Y-m-d'); //29$ManufacturingClearance
                 $inf = ($lead_time + 2);
-                $stages[30] = date('Y-m-d', strtotime($stages[29] . '+' . $inf . 'days')); //30$Inspection
-                $stages[31] = date('Y-m-d', strtotime($stages[30] . '+2 days')); //31$MDCC 
-                $stages[32] = date('Y-m-d', strtotime($stages[31] . '+15 days')); //32$CustomClearanceDate
-                $stages[33] = date('Y-m-d', strtotime($stages[31] . '+3 days')); //33$Mtlsreceivedatsite
-                $stages[34] = date('Y-m-d', strtotime($stages[33] . '+2 days')); //34$MRN
+                $stages[30] = date('d-M-y', strtotime(formatDate($stages[29] . '+', 'Y-m-d') . $inf . 'days')); //30$Inspection
+                $stages[31] = formatDate($stages[30] . '+2 days', 'Y-m-d'); //31$MDCC 
+                $stages[32] = formatDate($stages[31] . '+15 days', 'Y-m-d'); //32$CustomClearanceDate
+                $stages[33] = formatDate($stages[31] . '+3 days', 'Y-m-d'); //33$Mtlsreceivedatsite
+                $stages[34] = formatDate($stages[33] . '+2 days', 'Y-m-d'); //34$MRN
 
                 $count = sizeof($stages);
                 for ($i = 1; $i <= $count; $i++) {

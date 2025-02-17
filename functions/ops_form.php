@@ -14,10 +14,10 @@ if (isset($_REQUEST['sendtospoc'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
             . "values('" . $id . "','" . $packageid . "','" . $projectid . "','" . $uid . "','" . $rec_uid . "','2','3','" . $sentdate . "','','" . $opstospocremarks . "','0','1')";
     $insert = mssql_query($sql);
@@ -50,9 +50,9 @@ if (isset($_REQUEST['sent_back_spoc'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'");
 //    echo "select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'";
     $num_rows = mssql_num_rows($sql);
@@ -92,9 +92,9 @@ if (isset($_REQUEST['sent_toom'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_recvuid='" . $rec_uid . "' and om_active='1'");
     $num_rows = mssql_num_rows($sql);
     if ($num_rows > 0) {
@@ -140,9 +140,9 @@ if (isset($_REQUEST['sent_toscm'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_SCMSPOC where sc_packid='" . $packageid . "' and sc_projid='" . $projectid . "' and sc_recvuid='" . $rec_uid . "' and sc_active='1'");
     $num_rows = mssql_num_rows($sql);
     if ($num_rows > 0) {
@@ -179,9 +179,9 @@ if (isset($_REQUEST['sent_back_spocom'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'");
     // echo "select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'";
     $num_rows = mssql_num_rows($sql);
@@ -228,9 +228,9 @@ if (isset($_REQUEST['sent_toscmom'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_SCMSPOC where sc_packid='" . $packageid . "' and sc_projid='" . $projectid . "' and sc_recvuid='" . $rec_uid . "' and sc_active='1'");
     $num_rows = mssql_num_rows($sql);
     if ($num_rows > 0) {
@@ -267,9 +267,9 @@ if (isset($_REQUEST['sent_toomom'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_recvuid='" . $rec_uid . "' and om_active='1'");
 //        echo  "select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_recvuid='" . $rec_uid . "' and om_active='1'";
     $num_rows = mssql_num_rows($sql);
@@ -306,9 +306,9 @@ if (isset($_REQUEST['sent_to_back_ops'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $rsql = mssql_query("select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_active='1'");
     $r = mssql_fetch_array($rsql);
     $rec_uid = $r['om_senderuid'];
@@ -361,9 +361,9 @@ if (isset($_REQUEST['sent_back_spoc_scm'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'");
     // echo "select * from swift_techspoc where ts_packid='" . $packageid . "' and ts_projid='" . $projectid . "' and ts_recvuid='" . $rec_uid . "' and ts_active='1'";
     $num_rows = mssql_num_rows($sql);
@@ -409,9 +409,9 @@ if (isset($_REQUEST['sent_toscm_scm'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_SCMSPOC where sc_packid='" . $packageid . "' and sc_projid='" . $projectid . "' and sc_recvuid='" . $rec_uid . "' and sc_active='1'");
     $num_rows = mssql_num_rows($sql);
     if ($num_rows > 0) {
@@ -448,9 +448,9 @@ if (isset($_REQUEST['sent_toom_scm'])) {
     $row = mssql_fetch_array($isql);
     $id = $row['id'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $sql = mssql_query("select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_recvuid='" . $rec_uid . "' and om_active='1'");
 //        echo  "select * from swift_OandM where om_packid='" . $packageid . "' and om_projid='" . $projectid . "' and om_recvuid='" . $rec_uid . "' and om_active='1'";
     $num_rows = mssql_num_rows($sql);
@@ -482,9 +482,9 @@ if (isset($_REQUEST['sent_to_buyer'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $tsql = mssql_query("select isnull (max(st_id+1),1) as tid from  swift_transactions");
     $trow = mssql_fetch_array($tsql);
     $tid = $trow['tid'];
@@ -504,9 +504,9 @@ if (isset($_REQUEST['sent_to_tech_expert'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $tsql = mssql_query("select isnull (max(st_id+1),1) as tid from  swift_transactions");
     $trow = mssql_fetch_array($tsql);
     $tid = $trow['tid'];
@@ -582,9 +582,9 @@ if (isset($_REQUEST['update_loi'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
     $so_status = 0;
     if ($po_wo == 2) {
         $po_status = 0;
@@ -606,8 +606,8 @@ if (isset($_REQUEST['update_loi'])) {
     
     
     if ($hpc_app == 1) {
-        $smartini_date = date('Y-m-d', strtotime(str_replace('/', '-', $smartini_date)));
-        $smartapp_date = date('Y-m-d', strtotime(str_replace('/', '-', $smartapp_date)));
+        $smartini_date = formatDate(str_replace('/', '-', $smartini_date), 'Y-m-d');
+        $smartapp_date = formatDate(str_replace('/', '-', $smartapp_date), 'Y-m-d');
         $update_ss = mssql_query("update swift_filesfrom_smartsignoff set so_hw_sw ='" . $po_wo . "',so_commercial_close_date ='" . $smartapp_date . "',so_package_sentdate ='" . $smartini_date . "',so_package_approved_date ='" . $smartapp_date . "',so_status ='" . $so_status . "',po_wo_status ='" . $po_status . "',work_order ='" . $woorder . "' where so_proj_id='" . $projectid . "' and so_pack_id='" . $packageid . "'");
         $ins_swift = mssql_query("insert into swift_filesfrom_smartsignoff (so_id,so_proj_id,so_pack_id,so_hw_sw,so_commercial_close_date,so_package_sentdate,so_package_approved_date,so_status,po_wo_status,work_order,hpc_app) values ('" . $id . "','" . $proj_id . "','" . $pack_id . "','" . $po_wo . "','" . $pack_sentdate . "','" . $pack_sentdate . "','" . $smartapp_date . "','" . $so_status . "','" . $po_status . "','" . $woorder . "',1)");
         $update_status15 = mssql_query("update swift_packagestatus set ps_expdate='" . $smartini_date . "',ps_actualdate='" . $smartini_date . "',ps_remarks='From smart Signoff',active='0' where ps_stageid='15'  and ps_projid='" . $projectid . "' and ps_packid='" . $packageid . "'");
@@ -651,9 +651,9 @@ if (isset($_REQUEST['create_emr'])) {
     extract($_REQUEST);
     $uid = $_SESSION['uid'];
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
     $tsql = mssql_query("select isnull (max(st_id+1),1) as tid from  swift_transactions");
     $trow = mssql_fetch_array($tsql);
@@ -707,9 +707,9 @@ if (isset($_REQUEST['sent_back_toexpert'])) {
 
 
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
     // insert to expert table
     $sql = "SELECT MAX(txp_id) as id FROM swift_techexpert;";
@@ -757,9 +757,9 @@ if (isset($_REQUEST['sent_back_expertom'])) {
 
 
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
     // insert to expert table
     $sql = "SELECT MAX(txp_id) as id FROM swift_techexpert;";
@@ -807,9 +807,9 @@ if (isset($_REQUEST['sent_back_expert_scm'])) {
 
 
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
     // insert to expert table
     $sql = "SELECT MAX(txp_id) as id FROM swift_techexpert;";

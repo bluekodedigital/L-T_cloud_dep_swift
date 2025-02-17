@@ -12,9 +12,9 @@ $res = json_decode($result, true);
 foreach ($res as $key => $value) {
     $lcm_venid = $value['rpa_venid'];
     $lcm_num = $value['rpa_num'];   
-    $lcm_date = date('d-M-Y', strtotime($value['rpa_date']));
-    $lcm_from= date('d-M-Y', strtotime($value['rpa_from']));
-    $lcm_to = date('d-M-Y', strtotime($value['rpa_to']));
+    $lcm_date = formatDate($value['rpa_date'], 'd-M-Y');
+    $lcm_from= formatDate($value['rpa_from'], 'd-M-Y');
+    $lcm_to = formatDate($value['rpa_to'], 'd-M-Y');
     $rpa_bank=$value['rpa_bank'];  
  
 }

@@ -4,7 +4,7 @@ require_once("../dbcon.php");
 
 $doc_name = $_POST['input'];
 $fildate = $_POST['doc_date'];
-$date = date('Y-m-d', strtotime($fildate));
+$date = formatDate($fildate, 'Y-m-d');
 $rand = rand(100, 1000000);
 
 if (0 < $_FILES['file']['error']) {

@@ -130,7 +130,7 @@ $today_date = date("d-M-y");
                                 <?php echo $remark; ?>
                             </span></br />
                             <b><span>Approved On : </span></b> <span>
-                                <?php echo date('d-M-Y', strtotime($approved_on)); ?>
+                                <?php echo formatDate($approved_on, 'd-M-Y'); ?>
                             </span></br /></br />
                             <b><span>Attachment : </span>
                                 <?php if ($doc_path != '') { ?> <span><a
@@ -198,7 +198,7 @@ $today_date = date("d-M-y");
                     <span class="input-group-text" id="basic-addon1">Approved On</span>
                 </div> -->
                 <input type="text" class="form-control mydatepicker" id="po_expected1" name="po_expected"
-                    value="<?php echo date('d-M-y', strtotime(str_replace('/', '-', $today_date))); ?>"
+                    value="<?php echo formatDate(str_replace('/', '-', $today_date, 'd-M-y')); ?>"
                     aria-describedby="basic-addon1">
             </div>
             <input type="hidden" class="form-control mydatepicker" id="po_actual" name="po_actual"

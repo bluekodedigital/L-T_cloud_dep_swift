@@ -637,7 +637,7 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                                 echo formatDate($value['pm_revised_material_req'], 'd-M-Y');
                                                 $diff = ($value['pm_leadtime'] + 59);
                                                 $start = formatDate($value['pm_revised_material_req'], 'Y-m-d');
-                                                $end = date('Y-m-d', strtotime($start . '+' . $diff . 'days'));
+                                                $end = date('d-M-y', strtotime(formatDate($start . '+', 'Y-m-d') . $diff . 'days'));
                                                 ?>
 
 
@@ -933,7 +933,7 @@ include_once('layout/footer.php');
         var lead_time = $('#lead_time').val();
         var today = new Date();
         var d = new Date();
-        d.setDate(d.getDate() + 42);
+      //  d.setDate(d.getDate() + 42);
         d1 = new Date(mat_req_site);
         if (d1 > d) {
             $("#lt_violation").val("0");

@@ -34,7 +34,7 @@ if ($res == 0) {
 } else {
     $msg = '';
     foreach ($res as $key => $value) {
-        $msg .= date('d-M-Y', strtotime($value['scop_sentdate'])) . ':-' . $value['scop_remarks'] . '\n';
+        $msg .= formatDate($value['scop_sentdate'], 'd-M-Y') . ':-' . $value['scop_remarks'] . '\n';
     }
     ?>
 

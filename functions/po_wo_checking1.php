@@ -49,8 +49,8 @@ $today_date = date("d-M-y");
                             </div>
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
-                            //                            echo date('d-M-y', strtotime(str_replace('/', '-', $results['ps_expdate']))); 
-                            $plan_date = date('d-M-y', strtotime(str_replace('/', '-', $results['revised_planned_date'])));
+                            //                            echo formatDate(str_replace('/', '-', $results['ps_expdate'], 'd-M-y')); 
+                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {
@@ -63,7 +63,7 @@ $today_date = date("d-M-y");
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1" style="width: 100px;">Expected</span>
                             </div>
-                            <input type="text" class="form-control mydatepicker" id="wo_expected" name="wo_expected" value="<?php echo date('d-M-y', strtotime(str_replace('/', '-', $Pexpdate))); ?>">
+                            <input type="text" class="form-control mydatepicker" id="wo_expected" name="wo_expected" value="<?php echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y')); ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -105,7 +105,7 @@ $today_date = date("d-M-y");
                             </div>
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
-                            $plan_date = date('d-M-y', strtotime(str_replace('/', '-', $results['revised_planned_date'])));
+                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {
@@ -119,7 +119,7 @@ $today_date = date("d-M-y");
                                 <span class="input-group-text" id="basic-addon1" style="width: 100px;">Expected</span>
                             </div>
                             <input type="text" class="form-control mydatepicker" id="wo_expected1" name="wo_expected" value="<?php
-                                                                                                                                echo date('d-M-y', strtotime(str_replace('/', '-', $Pexpdate)));;
+                                                                                                                                echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y'));;
                                                                                                                                 ?>" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">
@@ -162,7 +162,7 @@ $today_date = date("d-M-y");
                             </div>
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
-                            $plan_date = date('d-M-y', strtotime(str_replace('/', '-', $results['revised_planned_date'])));
+                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {
@@ -176,7 +176,7 @@ $today_date = date("d-M-y");
                                 <span class="input-group-text" id="basic-addon1">Expected</span>
                             </div>
                             <input type="text" class="form-control mydatepicker" id="wo_expected2" name="wo_expected" value="<?php
-                                                                                                                                echo date('d-M-y', strtotime(str_replace('/', '-', $Pexpdate)));;
+                                                                                                                                echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y'));;
                                                                                                                                 ?>" aria-describedby="basic-addon1">
                         </div>
                         <div class="input-group mb-3">

@@ -140,11 +140,11 @@ if (sizeof($opstoom) > 0 || sizeof($omtoscm) > 0 || sizeof($scmtops) > 0) {
             $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optom['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optom['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> ENG - ' . $optom['name'] . '<br>(' . date('d-M-Y', strtotime($optom['sc_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> ENG - ' . $optom['name'] . '<br>(' . formatDate($optom['sc_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $optom['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $optom['sc_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">SCM SPOC to Buyer / OPS</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($optom['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($optom['planned'], 'd-M-Y') . '</td>
                     </tr>';
         }
     }
@@ -159,11 +159,11 @@ if (sizeof($opstoom) > 0 || sizeof($omtoscm) > 0 || sizeof($scmtops) > 0) {
             $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> Buyer - ' . $optoscm['pen'] . '<br>(' . date('d-M-Y', strtotime($optoscm['bu_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> Buyer - ' . $optoscm['pen'] . '<br>(' . formatDate($optoscm['bu_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $optoscm['name'] . 'SCM SPOC </td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $optoscm['sb_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">SCM SPOC to Buyer / OPS</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($optoscm['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($optoscm['planned'], 'd-M-Y') . '</td>
                     </tr>';
         }
     }
@@ -178,11 +178,11 @@ if (sizeof($opstoom) > 0 || sizeof($omtoscm) > 0 || sizeof($scmtops) > 0) {
             $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm1['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm1['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> SCM SPOC - ' . $optoscm1['name'] . '<br>(' . date('d-M-Y', strtotime($optoscm1['bu_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> SCM SPOC - ' . $optoscm1['name'] . '<br>(' . formatDate($optoscm1['bu_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> Buyer -' . $optoscm1['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">-</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">Buyer Acceptance</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($optoscm1['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($optoscm1['planned'], 'd-M-Y') . '</td>
                     </tr>';
         }
     }

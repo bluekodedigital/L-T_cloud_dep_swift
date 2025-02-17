@@ -95,10 +95,10 @@ include_once('layout/leftsidebar.php');
  
                                             <td>
                                                 <span class="badge badge-pill badge-primary font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    From:- <?php echo date('d-M-y', strtotime($value['rpa_from'])); ?>
+                                                    From:- <?php echo formatDate($value['rpa_from'], 'd-M-y'); ?>
                                                 </span>
                                                 <span class="badge badge-pill badge-danger font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    To:- <?php echo date('d-M-y', strtotime($value['rpa_to'])); ?>
+                                                    To:- <?php echo formatDate($value['rpa_to'], 'd-M-y'); ?>
                                                 </span>
                                             </td>
                                               <td>

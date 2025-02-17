@@ -40,8 +40,8 @@
         $buyer_id=$_POST['buyer_id'];
         $scm_id=$_POST['scmbu_id'];
      
-        $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
-        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['al_act_date'])));
+        $expdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
+        $actdate = formatDate(str_replace('/', '-', $_POST['al_act_date']), 'Y-m-d h:i:s');
         $remarks=$_POST['al_remarks'];
         $ace_value=$_POST['ace_value'];
         $sales_value=$_POST['sales_value'];
@@ -62,7 +62,7 @@
         $row = mssql_fetch_array($query);
         $planned_date = $row['planned_date'];
         $scm_sentdate = date("Y-m-d h:i:s");
-        $scm_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+        $scm_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
         
         // update 
         $sql = "UPDATE swift_SCMSPOC SET sc_planneddate='".$scm_planneddate."',sc_expdate='".$actdate."',sc_actual='".$actdate."',sc_status='1',sc_active='1' WHERE sc_id = '$scm_id'";

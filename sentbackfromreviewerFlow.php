@@ -302,10 +302,10 @@ $generate_token = generate_token();
                                                 <span style=" background-color: rgb(44, 36, 158); color:white;"
                                                     class="badge badge-pill  font-medium text-black ml-1 recfrm">
                                                     <?php if ($sent_back == 1) {
-                                                        $sent = $stage_names[0];
+                                                        $sent = $stage_names['cur_stage'];
                                                         echo $current_status = 'Sent back by ' . $sent . '<br>(' . $fromname . ' / ' . $value['nodays'] . ' Days )';
                                                     } else {
-                                                        echo $current_status = $stage_names[1] . '<br>(' . $sendername . ' / ' . $value['nodays'] . ' Days )';
+                                                        echo $current_status = $stage_names['next_stage'] . '<br>(' . $sendername . ' / ' . $value['nodays'] . ' Days )';
                                                     } ?>
                                                 </span>
                                             </td>
@@ -314,8 +314,8 @@ $generate_token = generate_token();
                                                     class="badge badge-pill badge-info font-medium text-white ml-1 recfrm fromtostage">
                                                     <?php if ($Next_stage == 13) {
                                                         echo "Smart Signoff";
-                                                    } else { ?>         <?php echo $stage_names[0];
-                                                    } ?> - <?php echo $stage_names[1] ?>
+                                                    } else { ?>         <?php echo $stage_names['cur_stage'];
+                                                    } ?> - <?php echo $stage_names['next_stage'] ?>
                                                 </span>
                                             </td>
 

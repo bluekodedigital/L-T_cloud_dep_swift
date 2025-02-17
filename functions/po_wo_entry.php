@@ -12,9 +12,9 @@ if (isset($_REQUEST['create_emr'])) {
     $uid = $_SESSION['uid'];
 
     $sentdate = date('Y-m-d');
-    $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
-    $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-    $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+    $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
+    $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+    $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
 
 
     $sql = "select * from swift_workflow_CurrentStage where cs_packid='$packageid'";
@@ -234,7 +234,7 @@ if (isset($_POST['wo_create'])) {
     }
     // update status for smartsignoff table
     //flag=2 and wo_po_status=1 = pocompleted
-    $wo_create = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $wo_actual)));
+    $wo_create = formatDate(str_replace('/', '-', $wo_actual), 'Y-m-d h:i:s');
 
     $sqlpowo = "UPDATE Swift_po_wo_Details SET  wo_flag =2,
     wo_no ='" . $wo_number . "' ,wo_created_on='" . $wo_create . "',wo_complete = '" . $wo_completed . "' ,wo_approved_on='" . $wo_create . "' WHERE  pw_packid = '$pack_id'  and pw_projid= '$proj_id'";

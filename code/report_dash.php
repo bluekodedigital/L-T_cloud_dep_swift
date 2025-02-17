@@ -34,7 +34,7 @@ if ($stage == 0) {
         $res = json_decode($repo, true);
         foreach ($res as $key => $value) {
             $deviations = $value['daysdif'];
-            $expdelivery = date('d-M-Y', strtotime($value['pm_revised_material_req'] . ' +' . $deviations . 'days'));
+            $expdelivery = formatDate($value['pm_revised_material_req'] . ' +' . $deviations . 'days', 'd-M-Y');
             $current_status = $cls_comm->current_status($value['ps_packid']);
             $fetch_usertype = $cls_comm->fetch_usertype($value['ps_userid']);
             $pack_id = $value['ps_packid'];
@@ -89,13 +89,13 @@ if ($stage == 0) {
 
 
                     </span></td>
-                <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
+                <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
                 <td><?php echo $value['pm_revised_lead_time']; ?></td>
                 <td><?php echo $expdelivery; ?></td>
                 <td>
                     <?php
-                    $sdate = date('Y-m-d', strtotime($value['pm_revised_material_req']));
-                    $ltime = date('Y-m-d', strtotime($expdelivery));
+                    $sdate = formatDate($value['pm_revised_material_req'], 'Y-m-d');
+                    $ltime = formatDate($expdelivery, 'Y-m-d');
                     $start = new DateTime($sdate);
                     $end = new DateTime($ltime);
                     $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . '';

@@ -125,41 +125,41 @@ if ($pack_name['proj_type'] == 1) {
                     </tr>
 
                     <tr>
-                        <th class=" bg-primary"> <span class="badge badge-pill  font-12 bold m1 ">Plan: <?php echo date('d-M-y', strtotime($manuclr['planned'])); ?></span></th>
+                        <th class=" bg-primary"> <span class="badge badge-pill  font-12 bold m1 ">Plan: <?php echo formatDate($manuclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-primary"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($manuclr['expected'] == '') {
                                                                                                                     echo date('d-M-y');
                                                                                                                 } else {
-                                                                                                                    echo date('d-M-y', strtotime($manuclr['expected']));
+                                                                                                                    echo formatDate($manuclr['expected'], 'd-M-y');
                                                                                                                 } ?></span></th>
-                        <th class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo date('d-M-y', strtotime($insclr['planned'])); ?></span></th>
+                        <th class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo formatDate($insclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Exp:<?php if ($insclr['expected'] == '') {
                                                                                                                     echo date('d-M-y');
                                                                                                                 } else {
-                                                                                                                    echo date('d-M-y', strtotime($insclr['expected']));
+                                                                                                                    echo formatDate($insclr['expected'], 'd-M-y');
                                                                                                                 } ?></span></th>
-                        <th class=" bg-cyan"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mdcclr['planned'])); ?></span></th>
+                        <th class=" bg-cyan"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo formatDate($mdcclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-cyan"> <span class="badge badge-pill  font-12 text-white ml-1">Exp:<?php if ($mdcclr['expected'] == '') {
                                                                                                                 echo date('d-M-y');
                                                                                                             } else {
-                                                                                                                echo date('d-M-y', strtotime($mdcclr['expected']));
+                                                                                                                echo formatDate($mdcclr['expected'], 'd-M-y');
                                                                                                             } ?></span></th>
-                        <th class=" bg-secondary"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($cusclr['planned'])); ?></span></th>
+                        <th class=" bg-secondary"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo formatDate($cusclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-secondary"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($cusclr['expected'] == '') {
                                                                                                                         echo date('d-M-y');
                                                                                                                     } else {
-                                                                                                                        echo date('d-M-y', strtotime($cusclr['expected']));
+                                                                                                                        echo formatDate($cusclr['expected'], 'd-M-y');
                                                                                                                     } ?></span></th>
-                        <th class=" bg-warning"> <span class="badge badge-pill  font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mtrecvclr['planned'])); ?></span></th>
+                        <th class=" bg-warning"> <span class="badge badge-pill  font-12 text-white ml-1">Plan:<?php echo formatDate($mtrecvclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-warning"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($mtrecvclr['expected'] == '') {
                                                                                                                     echo date('d-M-y');
                                                                                                                 } else {
-                                                                                                                    echo date('d-M-y', strtotime($mtrecvclr['expected']));
+                                                                                                                    echo formatDate($mtrecvclr['expected'], 'd-M-y');
                                                                                                                 } ?></span></th>
-                        <th class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mrnclr['planned'])); ?></span></th>
+                        <th class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo formatDate($mrnclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($mrnclr['expected'] == '') {
                                                                                                                 echo date('d-M-y');
                                                                                                             } else {
-                                                                                                                echo date('d-M-y', strtotime($mrnclr['expected']));
+                                                                                                                echo formatDate($mrnclr['expected'], 'd-M-y');
                                                                                                             } ?></span></th>
 
                     </tr>
@@ -294,7 +294,7 @@ if ($pack_name['proj_type'] == 1) {
                                     </div>
                                     <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="mrndate<?php echo $value['swid']; ?>" class="mydatepicker smalldate" value="<?php if ($value['mrn_date'] == '') {
                                                                                                                                                                                                         } else {
-                                                                                                                                                                                                            echo date('d-M-y', strtotime($value['mrn_date']));
+                                                                                                                                                                                                            echo formatDate($value['mrn_date'], 'd-M-y');
                                                                                                                                                                                                         } ?>">
                                     <span class="badge badge-pill badge-info font-medium text-white ml-1 s_icon" onclick="po_detail_save('<?php echo $pack_id; ?>', 'mrn', '<?php echo $value['swid']; ?>', event, '8')" style=" cursor: pointer;" data-toggle="tooltip" data-original-title="Save Expected date"><i class="fas fa-save"></i></span>
                                 </div>
@@ -317,35 +317,35 @@ if ($pack_name['proj_type'] == 1) {
 
                     <tr>
 
-                        <th style="text-align:center" class=" bg-primary"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo date('d-M-y', strtotime($manuclr['planned'])); ?></span></th>
+                        <th style="text-align:center" class=" bg-primary"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo formatDate($manuclr['planned'], 'd-M-y'); ?></span></th>
                         <th style="text-align:center" class=" bg-primary"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($manuclr['expected'] == '') {
                                                                                                                                                 echo date('d-M-y');
                                                                                                                                             } else {
-                                                                                                                                                echo date('d-M-y', strtotime($manuclr['expected']));
+                                                                                                                                                echo formatDate($manuclr['expected'], 'd-M-y');
                                                                                                                                             } ?></span></th>
-                        <th style="text-align:center" class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo date('d-M-y', strtotime($insclr['planned'])); ?></span></th>
+                        <th style="text-align:center" class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Plan: <?php echo formatDate($insclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-success"> <span class="badge badge-pill   font-12 text-white ml-1">Exp:<?php if ($insclr['expected'] == '') {
                                                                                                                     echo date('d-M-y');
                                                                                                                 } else {
-                                                                                                                    echo date('d-M-y', strtotime($insclr['expected']));
+                                                                                                                    echo formatDate($insclr['expected'], 'd-M-y');
                                                                                                                 } ?></span></th>
-                        <th style="text-align:center" class=" bg-cyan"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mdcclr['planned'])); ?></span></th>
+                        <th style="text-align:center" class=" bg-cyan"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo formatDate($mdcclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-cyan"> <span class="badge badge-pill  font-12 text-white ml-1">Exp:<?php if ($mdcclr['expected'] == '') {
                                                                                                                 echo date('d-M-y');
                                                                                                             } else {
-                                                                                                                echo date('d-M-y', strtotime($mdcclr['expected']));
+                                                                                                                echo formatDate($mdcclr['expected'], 'd-M-y');
                                                                                                             } ?></span></th>
-                        <th style="text-align:center" class=" bg-warning"> <span class="badge badge-pill  font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mtrecvclr['planned'])); ?></span></th>
+                        <th style="text-align:center" class=" bg-warning"> <span class="badge badge-pill  font-12 text-white ml-1">Plan:<?php echo formatDate($mtrecvclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" bg-warning"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($mtrecvclr['expected'] == '') {
                                                                                                                     echo date('d-M-y');
                                                                                                                 } else {
-                                                                                                                    echo date('d-M-y', strtotime($mtrecvclr['expected']));
+                                                                                                                    echo formatDate($mtrecvclr['expected'], 'd-M-y');
                                                                                                                 } ?></span></th>
-                        <th style="text-align:center" class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo date('d-M-y', strtotime($mrnclr['planned'])); ?></span></th>
+                        <th style="text-align:center" class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Plan:<?php echo formatDate($mrnclr['planned'], 'd-M-y'); ?></span></th>
                         <th class=" orange"> <span class="badge badge-pill   font-12 text-white ml-1">Exp: <?php if ($mrnclr['expected'] == '') {
                                                                                                                 echo date('d-M-y');
                                                                                                             } else {
-                                                                                                                echo date('d-M-y', strtotime($mrnclr['expected']));
+                                                                                                                echo formatDate($mrnclr['expected'], 'd-M-y');
                                                                                                             } ?></span></th>
 
                     </tr>
@@ -460,7 +460,7 @@ if ($pack_name['proj_type'] == 1) {
                 </div>
                 <input type="text" id="mrndate<?php echo $value['swid']; ?>" class="mydatepicker smalldate" value="<?php if ($value['mrn_date'] == '') {
                                                                                                                     } else {
-                                                                                                                        echo date('d-M-y', strtotime($value['mrn_date']));
+                                                                                                                        echo formatDate($value['mrn_date'], 'd-M-y');
                                                                                                                     } ?>">
                 <span class="badge badge-pill badge-info font-medium text-white ml-1 s_icon" onclick="po_detail_save('<?php echo $pack_id; ?>', 'mrn', '<?php echo $value['swid']; ?>', event, '8')" style=" cursor: pointer;" data-toggle="tooltip" data-original-title="Save Expected date"><i class="fas fa-save"></i></span>
             </div>

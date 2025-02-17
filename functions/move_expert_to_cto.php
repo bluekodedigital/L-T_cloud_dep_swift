@@ -14,8 +14,8 @@ include_once ("../config/inc_function.php");
 
 if (isset($_POST['approve_package'])) {
     $exp_id = mssql_escape($_POST['exp_id']);
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = mssql_escape($_POST['remarks']);
     $senduserid = $_SESSION['uid'];
@@ -65,7 +65,7 @@ if($_SESSION['milcom']=='1')
     $row = mssql_fetch_array($query);
     $planned_date = $row['planned_date'];
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $txp_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
 
     // update tech expert status
@@ -131,8 +131,8 @@ if($_SESSION['milcom']=='1')
 } 
 elseif (isset($_POST['sent_back_to_spoc'])) {
     $exp_id = mssql_escape($_POST['exp_id']);
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = mssql_escape($_POST['remarks']);
     $senduserid = $_SESSION['uid'];
@@ -153,7 +153,7 @@ elseif (isset($_POST['sent_back_to_spoc'])) {
     $row = mssql_fetch_array($query);
     $planned_date = $row['planned_date'];
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $txp_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
     // update tech expert status
     $sql = "UPDATE swift_techexpert SET txp_status = '1',txp_active='1',txp_expdate='$actdate',txp_actual='$actdate' WHERE txp_id = '$exp_id'";
@@ -212,8 +212,8 @@ elseif (isset($_POST['sent_back_to_spoc'])) {
 } 
 else if (isset($_POST['sendtoreviewer'])) {
     $exp_id = mssql_escape($_POST['exp_id']);
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = mssql_escape($_POST['remarks']);
     $senduserid = $_SESSION['uid'];
@@ -241,7 +241,7 @@ else if (isset($_POST['sendtoreviewer'])) {
     $row = mssql_fetch_array($query);
     $planned_date = $row['planned_date'];
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
+    $txp_planneddate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
 
 
     // update tech expert status

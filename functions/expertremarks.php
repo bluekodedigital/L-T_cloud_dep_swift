@@ -32,7 +32,7 @@ if ($res == 0) {
 } else {
     $msg = '';
     foreach ($res as $key => $value) {
-        $sentdate = date('d-M-Y', strtotime($value['cto_sentdate']));
+        $sentdate = formatDate($value['cto_sentdate'], 'd-M-Y');
         $msg .= $sentdate . ':-' . $value['cto_remarks'] . '\n';
     }
     ?>

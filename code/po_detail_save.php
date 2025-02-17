@@ -16,7 +16,7 @@ $cnum = $_POST['cnum'];
 $date = date('Y-m-d H:i:s');
 $uid = $_SESSION['uid'];
 $date_col = $column_name . '_date';
-$stage_date = date('Y-m-d', strtotime($_POST['stage_date']));
+$stage_date = formatDate($_POST['stage_date'], 'Y-m-d');
 
 $sql_ck = mssql_query("SELECT * FROM swift_poentrysave WHERE swe_packid='" . $packid . "' AND sweid='" . $rid . "'");
 $check = mssql_num_rows($sql_ck);
@@ -53,7 +53,7 @@ $sql = "SELECT revised_planned_date FROM swift_packagestatus WHERE ps_projid= '$
 $query = mssql_query($sql);
 $row = mssql_fetch_array($query);
 //$planned_date = $row['revised_planned_date'];
-$planned_date = date('d-M-y', strtotime(str_replace('/', '-', $row['revised_planned_date'])));
+$planned_date = formatDate(str_replace('/', '-', $row['revised_planned_date'], 'd-M-y'));
 $cqty = mssql_query("SELECT * FROM swift_po_master WHERE po_pack_id='" . $packid . "' AND po_id='" . $rid . "'");
 $row = mssql_fetch_array($cqty);
 $sqty = $row['po_scope_qty'];

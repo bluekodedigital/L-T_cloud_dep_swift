@@ -10,9 +10,9 @@ $result = $cls_comm->get_rpa_data($pack_id);
 $res = json_decode($result, true);
 
 foreach ($res as $key => $value) {
-    $planned_date = date('d-M-Y', strtotime($value['planned_date']));
-    $mat_req_date = date('d-M-Y', strtotime($value['pm_revised_material_req']));
-    $expected_date = date('d-M-Y', strtotime($value['ps_expdate']));
+    $planned_date = formatDate($value['planned_date'], 'd-M-Y');
+    $mat_req_date = formatDate($value['pm_revised_material_req'], 'd-M-Y');
+    $expected_date = formatDate($value['ps_expdate'], 'd-M-Y');
     $proj_name = $value['proj_name'];
     $pm_packagename = $value['pm_packagename'];
     $po_num = $value['po_number'];

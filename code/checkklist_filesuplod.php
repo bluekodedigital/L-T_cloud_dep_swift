@@ -9,7 +9,7 @@ $projid = $_REQUEST['projid'];
 $uid = $_SESSION['uid'];
 $clk_id = $_REQUEST['id'];
 $complete = $_REQUEST['complete'];
-$date = date('Y-m-d', strtotime($_REQUEST['date']));
+$date = formatDate($_REQUEST['date'], 'Y-m-d');
 
 $isql = mssql_query("select isnull (max(cd_id+1),1) as id from  swift_checklist_docs");
 $row = mssql_fetch_array($isql);

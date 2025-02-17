@@ -8,9 +8,9 @@
         $row_id = $_POST['lc_row_id'];
         $pack_id = $_POST['lc_pack_id'];
         $lc_number = $_POST['lc_number'];
-        $lc_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['lc_date'])));
-        $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['start_lc'])));
-        $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['end_lc'])));
+        $lc_date = formatDate(str_replace('/', '-', $_POST['lc_date']), 'Y-m-d h:i:s');
+        $valid_from = formatDate(str_replace('/', '-', $_POST['start_lc']), 'Y-m-d h:i:s');
+        $valid_to = formatDate(str_replace('/', '-', $_POST['end_lc']), 'Y-m-d h:i:s');
         $lc_value = $_POST['lc_value'];
         $remarks = $_POST['remarks'];
         $recvstageid=24;
@@ -66,9 +66,9 @@
         $row_id = $_POST['rpa_row_id'];
         $pack_id = $_POST['rpa_pack_id'];
         $rpa_number = $_POST['rpa_number'];
-        $rpa_date = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['rpa_date'])));
-        $valid_from = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['start_rpa'])));
-        $valid_to = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['end_rpa'])));
+        $rpa_date = formatDate(str_replace('/', '-', $_POST['rpa_date']), 'Y-m-d h:i:s');
+        $valid_from = formatDate(str_replace('/', '-', $_POST['start_rpa']), 'Y-m-d h:i:s');
+        $valid_to = formatDate(str_replace('/', '-', $_POST['end_rpa']), 'Y-m-d h:i:s');
         $rpa_value = $_POST['rpa_value'];
         $remarks = $_POST['remarks'];
         $recvstageid=24;

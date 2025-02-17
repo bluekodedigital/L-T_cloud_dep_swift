@@ -131,15 +131,15 @@ if (isset($_GET['pid'])) {
 
                                                 </span>
                                             </td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                                            <td><?php // echo date('d-M-Y', strtotime($value['actual'])); ?>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                                            <td><?php // echo formatDate($value['actual'], 'd-M-Y'); ?>
                                               <div class="input-group" id="expdiv" style=" float: left;">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"><i class="icon-calender"></i></span>
                                                     </div>
-                                                    <input type="text" value="<?php  echo date('d-M-Y', strtotime($value['ps_expdate'])); ?>"  class="form-control mydatepicker" id="dasexpected_date<?php echo $value['tech_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
+                                                    <input type="text" value="<?php  echo formatDate($value['ps_expdate'], 'd-M-Y'); ?>"  class="form-control mydatepicker" id="dasexpected_date<?php echo $value['tech_packid'] ?>" name="dasexpected_date" required="" placeholder="dd/mmm/yyyy">
 
                                                 </div>
                                                 <div class=" saveexp" style=" float: right;">
@@ -150,7 +150,7 @@ if (isset($_GET['pid'])) {
                                             
                                             
                                             </td>
-<!--                                            <td><?php // echo date('d-M-Y', strtotime($value['actual'])); ?></td>-->
+<!--                                            <td><?php // echo formatDate($value['actual'], 'd-M-Y'); ?></td>-->
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange" data-toggle="tooltip" data-original-title="Remarks" style=" cursor: pointer;" onclick="swal({html: true, title: 'Remarks', text: '<?php echo $value['tech_remarks']; ?>'});"><i class="fas fa-comment"></i>Remarks</label></td>
                                             <td>
                                                 <span style="background-color: #1ABC9C!important;" class="badge badge-pill badge-primary font-medium text-white ml-1"  alt="default" data-toggle="modal" data-target="#model_edit" class="model_img img-fluid" onclick="po_detailsenter('<?php echo $value['tech_packid']; ?>')" ><i class="fas fa-pencil-alt"></i></span>

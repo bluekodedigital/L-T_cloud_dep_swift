@@ -17,7 +17,7 @@ $popay_value = $_POST['popay_value'];
 $lc_id = mssql_escape($_POST['lc_id']);
 $vid = mssql_escape($_POST['vid']);
 $lc_payment_value = mssql_escape($_POST['lc_payment_value']);
-$lc_payment_date = date('Y-m-d', strtotime($_POST['lc_payment_date']));
+$lc_payment_date = formatDate($_POST['lc_payment_date'], 'Y-m-d');
 $lc_exchange_rate = mssql_escape($_POST['lc_exchange_rate']);
 $total_supply = mssql_escape($_POST['total_supply']);
 

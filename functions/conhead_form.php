@@ -13,17 +13,17 @@ if (isset($_POST['project_create'])) {
     $catagories = sanitize($_POST['segment']);
     $h_o_remarks = sanitize($_POST['h_o_remarks']);
     $project_type = sanitize($_POST['proj_type']);
-    $sdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['start_date'])));
-    $edate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['end_date'])));
-    $redate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['revend_date'])));
+    $sdate = formatDate(str_replace('/', '-', $_POST['start_date']), 'Y-m-d h:i:s');
+    $edate = formatDate(str_replace('/', '-', $_POST['end_date']), 'Y-m-d h:i:s');
+    $redate = formatDate(str_replace('/', '-', $_POST['revend_date']), 'Y-m-d h:i:s');
 
-    $client_loi = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $client_loi)));
-    $cont_agree = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $cont_agree)));
-    $kick_meet = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $kick_meet)));
-    $tech_comer = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $tech_comer)));
-    $tech_cost = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $tech_cost)));
-    $ace_sub = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $ace_sub)));
-    $ace_sheet = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $ace_sheet)));
+    $client_loi = formatDate(str_replace('/', '-', $client_loi), 'Y-m-d h:i:s');
+    $cont_agree = formatDate(str_replace('/', '-', $cont_agree), 'Y-m-d h:i:s');
+    $kick_meet = formatDate(str_replace('/', '-', $kick_meet), 'Y-m-d h:i:s');
+    $tech_comer = formatDate(str_replace('/', '-', $tech_comer), 'Y-m-d h:i:s');
+    $tech_cost = formatDate(str_replace('/', '-', $tech_cost), 'Y-m-d h:i:s');
+    $ace_sub = formatDate(str_replace('/', '-', $ace_sub), 'Y-m-d h:i:s');
+    $ace_sheet = formatDate(str_replace('/', '-', $ace_sheet), 'Y-m-d h:i:s');
 
     $data = array(
         'proj_name' => $proj_name,
@@ -62,17 +62,17 @@ if (isset($_POST['project_create'])) {
     $address = sanitize($_POST['proj_address']);
     $catagories = sanitize($_POST['segment']);
      $project_type = sanitize($_POST['proj_type']);
-    $sdate = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['start_date'])));
-    $edate = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['end_date'])));
-    $redate = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['revend_date'])));
+    $sdate = formatDate(str_replace('/', '-', $_POST['start_date']), 'Y-m-d');
+    $edate = formatDate(str_replace('/', '-', $_POST['end_date']), 'Y-m-d');
+    $redate = formatDate(str_replace('/', '-', $_POST['revend_date']), 'Y-m-d');
 
-    $client_loi = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $client_loi)));
-    $cont_agree = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $cont_agree)));
-    $kick_meet = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $kick_meet)));
-    $tech_comer = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $tech_comer)));
-    $tech_cost = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $tech_cost)));
-    $ace_sub = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $ace_sub)));
-    $ace_sheet = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $ace_sheet)));
+    $client_loi = formatDate(str_replace('/', '-', $client_loi), 'Y-m-d h:i:s');
+    $cont_agree = formatDate(str_replace('/', '-', $cont_agree), 'Y-m-d h:i:s');
+    $kick_meet = formatDate(str_replace('/', '-', $kick_meet), 'Y-m-d h:i:s');
+    $tech_comer = formatDate(str_replace('/', '-', $tech_comer), 'Y-m-d h:i:s');
+    $tech_cost = formatDate(str_replace('/', '-', $tech_cost), 'Y-m-d h:i:s');
+    $ace_sub = formatDate(str_replace('/', '-', $ace_sub), 'Y-m-d h:i:s');
+    $ace_sheet = formatDate(str_replace('/', '-', $ace_sheet), 'Y-m-d h:i:s');
     
 //        $sdate = $_POST['start_date'];
 //        $edate = $_POST['end_date'];

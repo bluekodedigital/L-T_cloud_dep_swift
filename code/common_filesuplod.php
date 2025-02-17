@@ -33,7 +33,7 @@ if (0 < $_FILES['file']['error']) {
     //echo $stageid;
     $name1 = $_FILES['file']['name'];
     move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/document/' . $name);
-     echo $sql = "insert into swift_comman_uploads(upid,up_projid,up_packid,up_uid,up_update,up_filename,up_filepath,upactive,rev,up_stage,key_flag) "
+      $sql = "insert into swift_comman_uploads(upid,up_projid,up_packid,up_uid,up_update,up_filename,up_filepath,upactive,rev,up_stage,key_flag) "
         . "values('" . $id . "','" . $projid . "','" . $pack_id . "','" . $uid . "',GETDATE(),'" . $doc_name . "','" . $name . "','1','" . $exp_rev . "','" . $stageid . "','" . $attach_flag . "')";
     $query = mssql_query($sql);
     if ($query) {

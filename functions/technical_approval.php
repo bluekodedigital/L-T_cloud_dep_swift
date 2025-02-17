@@ -7,8 +7,8 @@ include_once ("../config/inc_function.php");
 
 if (isset($_POST['reject'])) {
     $tech_id = $_POST['tech_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $remarks = $_POST['remarks'];
     $senduserid = $_SESSION['uid'];
     $actdate = date('Y-m-d');
@@ -42,7 +42,7 @@ if (isset($_POST['reject'])) {
     $query = mssql_query($sql);
     $row = mssql_fetch_array($query);
     // $planned_date = $row['planned_date'];
-    $planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $row['planned_date'])));
+    $planneddate = formatDate(str_replace('/', '-', $row['planned_date']), 'Y-m-d h:i:s');
 
     $sql = "SELECT MAX(st_id) as id FROM swift_transactions";
     $query = mssql_query($sql);
@@ -63,8 +63,8 @@ if (isset($_POST['reject'])) {
     }
 } else if (isset($_POST['approve'])) {
     $tech_id = $_POST['tech_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//    $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//    $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $remarks = $_POST['remarks'];
     $senduserid = $_SESSION['uid'];
@@ -99,7 +99,7 @@ if (isset($_POST['reject'])) {
     $query = mssql_query($sql);
     $row = mssql_fetch_array($query);
     // $planned_date = $row['planned_date'];
-    $planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $row['planned_date'])));
+    $planneddate = formatDate(str_replace('/', '-', $row['planned_date']), 'Y-m-d h:i:s');
 
     $sql = "SELECT MAX(st_id) as id FROM swift_transactions";
     $query = mssql_query($sql);

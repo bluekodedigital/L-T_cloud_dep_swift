@@ -429,13 +429,13 @@ include_once('layout/leftsidebar.php');
                                                 <?php echo $value['validity']; ?>  
                                             </td>
                                             <td id="lcm<?php echo $key; ?>"><?php echo $value['lcm_num']; ?></td>
-                                            <td><?php echo date('d-M-y', strtotime($value['lcm_date'])); ?></td>
+                                            <td><?php echo formatDate($value['lcm_date'], 'd-M-y'); ?></td>
                                             <td>
                                                 <span class="badge badge-pill badge-primary font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    From:- <?php echo date('d-M-y', strtotime($value['lcm_from'])); ?>
+                                                    From:- <?php echo formatDate($value['lcm_from'], 'd-M-y'); ?>
                                                 </span>
                                                 <span class="badge badge-pill badge-danger font-medium text-white ml-1"  style=" cursor: pointer;" >
-                                                    To:- <?php echo date('d-M-y', strtotime($value['lcm_to'])); ?>
+                                                    To:- <?php echo formatDate($value['lcm_to'], 'd-M-y'); ?>
                                                 </span>
                                             </td>
                                             <td><?php echo $value['lcm_appname']; ?></td>

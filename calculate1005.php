@@ -8,7 +8,7 @@ if (isset($_POST['mat'])) {
     
     $stages = array();
     $lead = $_POST['lead'];
-    $matreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat)));
+    $matreq = formatDate(str_replace('/', '-', $mat), 'Y-m-d');
 
     $Workstagecount = "SELECT sum(target_day) as row_count from swift_workflow_details WHERE mst_id = '$Did' AND active=1 ";
     $scount_query = mssql_query($Workstagecount);
@@ -27,13 +27,13 @@ if (isset($_POST['mat'])) {
         //echo $Days;echo "<br>";
         $stage_ids = $row_wf['stage_id'];
         if ($i == 0) {
-            //$stages[1] = date('Y-m-d', strtotime($org . '-' . $diff . 'days'));
+            //$stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days'));
             // echo $diff;
-            $stages[$stage_ids] = date('Y-m-d', strtotime($mat . '-' . $diff . 'days')); 
+            $stages[$stage_ids] = date('d-M-y', strtotime(formatDate($mat . '-', 'Y-m-d') . $diff . 'days')); 
         // }elseif ($i == $num_rows ) {
         //     $stages[$stage_ids] = $matreq;
         }else{
-            $stages[$stage_ids] = date('Y-m-d', strtotime($previous . $Days . 'days'));
+            $stages[$stage_ids] = date('d-M-y', strtotime(formatDate($previous, 'Y-m-d') . $Days . 'days'));
         }
         $previous = $stages[$stage_ids];
        
@@ -57,7 +57,7 @@ if (isset($_POST['mat'])) {
                     $stagename = $value1['stage_name'];
                    
                     if ($counts <= 24) {
-                        $data = date('d-M-y', strtotime($stages[$stage_id]));
+                        $data = formatDate($stages[$stage_id], 'd-M-y');
                         $status = 'checked';
                     } else {
                         unset($data);

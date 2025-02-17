@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once ("../config/inc_function.php");
+include_once("../config/inc_function.php");
 $csrf_token = $_REQUEST['csrf_token'];
 if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
 
@@ -84,8 +84,9 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
 
 
 
-            $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-            $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+            $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+            $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
+
             $sql = "insert into swift_packagemaster(pm_packid,pm_projid,pm_packagename,pm_createdate,pm_material_req,pm_leadtime,pm_userid,tech_status,pm_revised_material_req,pm_revised_lead_time,emr_status,pm_catid,pm_remarks,tech_skip, pm_wfid,pm_stages,lt_flag)"
                 . "values('" . $id . "','" . $proj_name . "','" . sanitize($pack_name) . "','" . date('Y-m-d h:i:s') . "','" . $org . "','" . sanitize($lead_time) . "','" . $uid . "','0','" . $mtreq . "','" . sanitize($lead_time) . "','0','" . $pack_cat_name . "','" . sanitize($opstospocremarks) . "','" . $tech_skip . "','" . $pm_wfid . "' ,'" . $pm_stages . "' ,'" . $lt_violation . "' )";
 
@@ -126,10 +127,10 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
 
                 if ($pack_status) {
                     // echo "select uid from  swift_packagestatus as a 
-// left join swift_stage_master as b on a.ps_stageid=b.stage_id
-// left join usermst as c on c.usertype=b.usertype
-// where a.active=1 and ps_packid='" .$id. "' 
-// and tech_seg like '%$segment%' $seg";
+                    // left join swift_stage_master as b on a.ps_stageid=b.stage_id
+                    // left join usermst as c on c.usertype=b.usertype
+                    // where a.active=1 and ps_packid='" .$id. "' 
+                    // and tech_seg like '%$segment%' $seg";
                     $rsql = mssql_query("select uid from  swift_packagestatus as a 
                 left join swift_stage_master as b on a.ps_stageid=b.stage_id
                 left join usermst as c on c.usertype=b.usertype
@@ -138,10 +139,9 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
                     $r = mssql_fetch_array($rsql);
                     // $rec_uid = $r['uid'];
 
-
-                    $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid='" . $CurremtStage . "'");
+                    $pquery = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $id . "' and ps_stageid='" . $CurremtStage . "'");
                     $prow = mssql_fetch_array($pquery);
-                    $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                    $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
                     //for current stage from to
                     $sql2 = "insert into swift_workflow_CurrentStage (cs_packid,cs_projid,from_stage_id,to_stage_id,from_uid,to_uid,cs_active,from_remark,to_remark,cs_created_date,cs_userid, cs_actual,cs_expdate)"
@@ -165,9 +165,9 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
                     $pack_id = $packageid;
                     $projid = $projectid;
                     $uid = $_SESSION['uid'];
-                    $attach_flag =0;
+                    $attach_flag = 0;
                     if (isset($_POST['keyattach'])) {
-                        $attach_flag=1;
+                        $attach_flag = 1;
                     }
                     $isql = mssql_query("select isnull (max(upid+1),1) as id from  swift_comman_uploads");
                     $row = mssql_fetch_array($isql);
@@ -183,24 +183,24 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
                     } else if ($ext == 'msg') {
                         echo '.msg format not supported';
                     } else {
-                        $name = $rand .'_'. $_FILES['file']['name'];
+                        $name = $rand . '_' . $_FILES['file']['name'];
                         //echo $stageid;
                         $name1 = $_FILES['file']['name'];
                         move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/document/' . $name);
-                        $sql = "insert into swift_comman_uploads(upid,up_projid,up_packid,up_uid,up_update,up_filename,up_filepath,upactive,rev,up_stage,key_flag) "
+                           $sql = "insert into swift_comman_uploads(upid,up_projid,up_packid,up_uid,up_update,up_filename,up_filepath,upactive,rev,up_stage,key_flag) "
                             . "values('" . $id . "','" . $projid . "','" . $pack_id . "','" . $uid . "',GETDATE(),'" . $doc_name . "','" . $name . "','1','" . $exp_rev . "','" . $stageid . "','" . $attach_flag . "')";
                         $query = mssql_query($sql);
-                        // if ($query) {
-                        //     echo 'success';
-                        // }
+                        if ($query) {
+                            echo 'success';
+                        }
                         echo 'success';
                     }
                     $send_email = $cls_comm->Send_MailNew($projectid, $packageid, $milcom, $CurremtStage, $NextSatge);
                     if ($page_name == 'files') {
-                        echo "<script>window.location.href='../files_from_contract';</script>";
+                         echo "<script>window.location.href='../files_from_contract';</script>";
                         //                    header('Location: ../files_from_contract');
                     } elseif ($page_name == 'masters') {
-                        echo "<script>window.location.href='../package_master';</script>";
+                          echo "<script>window.location.href='../package_master';</script>";
                         //                    header('Location: ../package_master');
                     }
                 }
@@ -265,8 +265,8 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
                     $isql = mssql_query("select isnull (max(pm_packid+1),1) as id from  swift_packagemaster");
                     $row = mssql_fetch_array($isql);
                     $id = $row['id'];
-                    $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-                    $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+                    $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+                    $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
                     $sql = "insert into swift_packagemaster(pm_packid,pm_projid,pm_packagename,pm_createdate,pm_material_req,pm_leadtime,pm_userid,tech_status,pm_revised_material_req,pm_revised_lead_time,emr_status,pm_catid,pm_wfid,pm_stages)"
                         . "values('" . $id . "','" . $proj_name . "','" . sanitize($pack_name) . "','" . date('Y-m-d h:i:s') . "','" . $org . "','" . sanitize($lead_time) . "','" . $uid . "','0','" . $mtreq . "','" . sanitize($lead_time) . "','0','" . $cat_rid . "','" . $pm_wfid . "' ,'" . $pm_stages . "' )";
 
@@ -313,15 +313,15 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
 
 
                         $sentdate = date('Y-m-d');
-                        //$mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-                        //                $planneddate = date('Y-m-d', strtotime(str_replace('/', '-', $planneddate)));
+                        //$mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+                        //                $planneddate = formatDate(str_replace('/', '-', $planneddate), 'Y-m-d');
                         $spsql = mssql_query("select revised_planned_date as planned from swift_packagestatus where ps_packid='" . $ids . "' and ps_stageid=1");
                         $pquery = mssql_query($spsql);
                         $prow = mssql_fetch_array($pquery);
-                        $planneddate = date('Y-m-d', strtotime($prow['planned']));
+                        $planneddate = formatDate($prow['planned'], 'Y-m-d');
 
-                        //                $expected_date = date('Y-m-d', strtotime(str_replace('/', '-', $expected_date)));
-                        //                $actual_date = date('Y-m-d', strtotime(str_replace('/', '-', $actual_date)));
+                        //                $expected_date = formatDate(str_replace('/', '-', $expected_date), 'Y-m-d');
+                        //                $actual_date = formatDate(str_replace('/', '-', $actual_date), 'Y-m-d');
                         $expected_date = $sentdate;
                         $actual_date = $sentdate;
                         $sql = "insert into swift_techspoc ( ts_id,ts_packid,ts_projid,ts_senderuid,ts_recvuid,ts_sendr_stageid,ts_recv_stageid,ts_sentdate,ts_planneddate,ts_remarks,ts_status,ts_active)"
@@ -373,8 +373,8 @@ if (isset($_SESSION['token']) && $csrf_token === $_SESSION['token']) {
             $opstospocremarks = 'Nil';
         }
         $stages = array();
-        $mtreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat_req_site)));
-        $org = date('Y-m-d', strtotime(str_replace('/', '-', $org_schedule)));
+        $mtreq = formatDate(str_replace('/', '-', $mat_req_site), 'Y-m-d');
+        $org = formatDate(str_replace('/', '-', $org_schedule), 'Y-m-d');
 
         $sql = "select * from swift_packagemaster where pm_packid='" . $pck_id . "' and pm_projid='" . $proj_name . "'";
         $query = mssql_query($sql);

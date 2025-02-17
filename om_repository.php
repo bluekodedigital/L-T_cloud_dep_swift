@@ -119,12 +119,12 @@ if($_SESSION['milcom']=='1')
                                                 <?php }
                                                 ?>
                                                 <?php echo $value['pm_packagename'] ?></td>
-                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">OPS-<?php echo $value['name']; ?> <br> (<?php echo date('d-M-Y', strtotime($value['om_sentdate'])); ?>)</span></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['pm_revised_material_req'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['planned'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['ps_expdate'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['ps_actualdate'])); ?></td>
+                                            <td><span class="badge badge-pill badge-info font-medium text-white ml-1 recfrm">OPS-<?php echo $value['name']; ?> <br> (<?php echo formatDate($value['om_sentdate'], 'd-M-Y'); ?>)</span></td>
+                                            <td><?php echo formatDate($value['pm_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['pm_revised_material_req'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['planned'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['ps_expdate'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['ps_actualdate'], 'd-M-Y'); ?></td>
                                             <td><label class="badge badge-pill badge-warning font-medium text-white ml-1 pull-left orange" data-toggle="tooltip" data-original-title="OPS Remarks" style=" cursor: pointer;" onclick="swal( '<?php echo $get_remarks['omop_remarks']; ?>');"><i class="fas fa-comment"></i> OM Remarks</label></td>
                                             <td>                                               
                                                 <span onclick="view_reports('<?php echo $value['om_packid']; ?>')" class="badge badge-pill badge-primary font-medium text-white ml-1" data-toggle="modal" data-target=".bs-example-modal-lg" data-whatever="@mdo" style=" cursor: pointer;" >

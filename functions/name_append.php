@@ -2,8 +2,8 @@
 
 // include_once ("../config/inc_function.php");
 // if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+//     session_start();
+// }
 // $pack_id = mssql_escape($_POST['pack_id']);
 // $stageid = mssql_escape($_POST['stageid']);
 // $projectid = mssql_escape($_POST['projectid']);

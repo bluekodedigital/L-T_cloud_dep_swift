@@ -108,7 +108,7 @@ include_once('layout/leftsidebar.php');
                                             <td class=" text-right"><?php echo $value['lcr_povalue']; ?></td>
                                             <td><?php
                                                 if ($value['lc_pydate'] != "") {
-                                                    echo date('d-M-Y', strtotime($value['lc_pydate']));
+                                                    echo formatDate($value['lc_pydate'], 'd-M-Y');
                                                 }
                                                 ?></td>
                                             <td class=" text-right"><?php echo $value['lc_pyval']; ?></td>                                           

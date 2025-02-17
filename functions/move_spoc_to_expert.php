@@ -6,8 +6,8 @@ if (session_status() === PHP_SESSION_NONE) {
 include_once ("../config/inc_function.php");
 if (isset($_POST['approve_package'])) {
     $spoc_id = $_POST['spoc_id'];
-    $expdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['exp_date'])));
-//        $actdate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $_POST['act_date'])));
+    $expdate = formatDate(str_replace('/', '-', $_POST['exp_date']), 'Y-m-d h:i:s');
+//        $actdate = formatDate(str_replace('/', '-', $_POST['act_date']), 'Y-m-d h:i:s');
     $actdate = date('Y-m-d');
     $expertid = $_POST['expert_id'];
     $remarks = $_POST['remarks'];
@@ -40,7 +40,7 @@ if (isset($_POST['approve_package'])) {
     $planned_date = $row['planned_date'];
 
     $txp_sentdate = date("Y-m-d h:i:s");
-    $txp_planneddate = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $planned_date)));
+    $txp_planneddate = formatDate(str_replace('/', '-', $planned_date), 'Y-m-d h:i:s');
     $txp_status = 0;
     $txp_action = 1;
 

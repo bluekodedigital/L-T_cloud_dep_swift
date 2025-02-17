@@ -279,8 +279,8 @@ foreach ($events as $event):
                                     {
                                         id: '<?php echo $event['id']; ?>',
                                         title: '<?php echo $event['title']; ?>',
-                                        start: '<?php echo date('Y-m-d', strtotime($start)); ?>',
-                                        end: '<?php echo date('Y-m-d', strtotime($end)); ?>',
+                                        start: '<?php echo formatDate($start, 'Y-m-d'); ?>',
+                                        end: '<?php echo formatDate($end, 'Y-m-d'); ?>',
                                         color: '<?php echo $event['color']; ?>',
                                     },
 <?php endforeach; ?>

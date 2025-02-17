@@ -54,13 +54,13 @@ $psActualInitiateDate = formatDate($getExpectedInitiateSSApproval['ps_actualdate
 if ($psActualDate == "") {
     $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $expdelivery = date('d-M-Y', strtotime($psActualDate));
+    $expdelivery = formatDate($psActualDate, 'd-M-Y');
 }
 
 if ($psActualInitiateDate == "") {
     $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $ssInidate = date('d-M-Y', strtotime($psActualInitiateDate));
+    $ssInidate = formatDate($psActualInitiateDate, 'd-M-Y');
 }
 
 /* $getExpectedSSApproval = $cls_user->getExpectedSSApproval_v1($pack_id);
@@ -76,13 +76,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } else {
 
@@ -90,13 +90,13 @@ if ($deviations < 0) {
     if (trim($getExpectedSSApproval['ps_actualdate']) == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($getExpectedSSApproval['ps_actualdate']));
+        $expdelivery = formatDate($getExpectedSSApproval['ps_actualdate'], 'd-M-Y');
     }
 
     if (trim($getExpectedInitiateSSApproval['ps_actualdate']) == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' +' . abs($deviations) . 'days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($getExpectedInitiateSSApproval['ps_actualdate']));
+        $ssInidate = formatDate($getExpectedInitiateSSApproval['ps_actualdate'], 'd-M-Y');
     }
 } */
 //if ($deviations < 0) {
@@ -146,7 +146,7 @@ if ($package_details['proj_type'] == 1) {
                     <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1">-->
                     <?php
                     echo $ssInidate;
-                    //                echo date('d-M-y', strtotime($package_details['pm_revised_material_req'])); 
+                    //                echo formatDate($package_details['pm_revised_material_req'], 'd-M-y'); 
 
                     ?>
                 </span></small>
@@ -161,15 +161,15 @@ if ($package_details['proj_type'] == 1) {
                     //
                     //                        echo $expdelivery;
                     //                    } else {
-                    //                        echo date('d-M-y', strtotime($expe_delidate['ps_actualdate']));
+                    //                        echo formatDate($expe_delidate['ps_actualdate'], 'd-M-y');
                     //                    }
                     ?></span></small>
         </div>
         <div class=" col-md-3" id="pdd">
             <small>Deviations:- <span class="badge badge-pill badge-dark font-12 text-white ml-1">
                     <?php
-                    // $sdate = date('Y-m-d', strtotime($package_details['pm_revised_material_req']));
-                    // $ltime = date('Y-m-d', strtotime($expdelivery));
+                    // $sdate = formatDate($package_details['pm_revised_material_req'], 'Y-m-d');
+                    // $ltime = formatDate($expdelivery, 'Y-m-d');
                     // $start = new DateTime($sdate);
                     // $end = new DateTime($ltime);
                     // $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';

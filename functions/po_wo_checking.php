@@ -80,7 +80,7 @@ $generate_token= generate_token();
                             </div>
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
-                            $plan_date = date('d-M-y', strtotime(str_replace('/', '-', $results['revised_planned_date'])));
+                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {
@@ -95,7 +95,7 @@ $generate_token= generate_token();
                             </div>
 
                             <input type="text" class="form-control mydatepicker" id="po_expected" name="po_expected" value="<?php
-                                                                                                                            echo date('d-M-y', strtotime(str_replace('/', '-', $Pexpdate)));;
+                                                                                                                            echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y'));;
                                                                                                                             ?>" required>
                         </div>
                         <div class="input-group mb-3">
@@ -148,7 +148,7 @@ $generate_token= generate_token();
                         </div>
                         <?php
                         $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
-                        $plan_date = date('d-M-y', strtotime(str_replace('/', '-', $results['revised_planned_date'])));
+                        $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
                         if ($results['ps_expdate'] == "") {
                             $Pexpdate = date('d-M-y');
                         } else {
@@ -163,7 +163,7 @@ $generate_token= generate_token();
                             <span class="input-group-text" id="basic-addon1">Expected</span>
                         </div>
                         <input type="text" class="form-control mydatepicker" id="po_expected1" name="po_expected" value="<?php
-                                                                                                                            echo date('d-M-y', strtotime(str_replace('/', '-', $Pexpdate)));
+                                                                                                                            echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y'));
 
                                                                                                                             ?>" aria-describedby="basic-addon1">
                     </div>

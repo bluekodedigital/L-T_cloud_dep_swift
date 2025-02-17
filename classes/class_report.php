@@ -537,7 +537,7 @@ order by ps_stageid DESC ";
             $row = mssql_fetch_array($query);
             // if ($team_id == 1) {
             if (trim($row['st_remarks']) != "") {
-                echo "<b>Techo Spoc Remarks</b> - " . date('d-M-Y', strtotime($row['st_sentdate']));
+                echo "<b>Techo Spoc Remarks</b> - " . formatDate($row['st_sentdate'], 'd-M-Y');
                 echo "<br>";
                 echo $row['st_remarks'];
                 echo "<br><br>";
@@ -560,7 +560,7 @@ order by ps_stageid DESC ";
             $sql = "SELECT * FROM swift_SCMSPOC WHERE sc_projid='$proj_id' AND sc_packid='$pack_id' AND sc_active='1'";
         }
     }
-    function prev_reamrkslist($projid, $pack_id, $uname)
+    function prev_reamrkslist($projid, $pack_id)
     {
 
         $sql = "select a.*,c.shot_name from swift_transactions as a
@@ -579,7 +579,7 @@ order by ps_stageid DESC ";
                 $remarks = '-';
             }
             $msg .= $shot_name;
-            $msg .= '  - </b>' . date('d-M-Y', strtotime($row['st_actual']));
+            $msg .= '  - </b>' . formatDate($row['st_actual'], 'd-M-Y');
             $msg .= ':';
             $msg .= $remarks;
             $msg .= '<br>';
@@ -598,7 +598,7 @@ order by ps_stageid DESC ";
             if ($remarks == "") {
                 $remarks = '-';
             }
-            $msg .= '<b>Remarks</b> -' . date('d-M-Y', strtotime($row['st_actual']));
+            $msg .= '<b>Remarks</b> -' . formatDate($row['st_actual'], 'd-M-Y');
             $msg .= '';
             $msg .= $remarks;
             $msg .= '';
@@ -617,7 +617,7 @@ order by ps_stageid DESC ";
     //                $remarks= '-';
     //
     //            }
-    //            $msg.='<b>'.$uname.' - Remarks</b> -' . date('d-M-Y', strtotime($row['st_actual']));
+    //            $msg.='<b>'.$uname.' - Remarks</b> -' . formatDate($row['st_actual'], 'd-M-Y');
     //            $msg.='<br>';
     //            $msg.=$remarks;
     //            $msg.='<br>';

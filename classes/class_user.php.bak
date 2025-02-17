@@ -979,7 +979,7 @@ order by ps_stageid ASC ";
         if ($actual == "" || $actual == "NULL") {
             $actualdate = "-";
         } else {
-            $actualdate = date('d-M-Y', strtotime($actual));
+            $actualdate = formatDate($actual, 'd-M-Y');
         }
         echo $actualdate;
     }

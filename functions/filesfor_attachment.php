@@ -14,7 +14,7 @@ $res = json_decode($result, true);
 
 foreach ($res as $key => $value) {
     $planned_date = formatDate($value['revised_planned_date'], 'd-M-y');
-    // $planned_date = date('d-M-Y', strtotime($value['revised_planned_date']));
+    // $planned_date = formatDate($value['revised_planned_date'], 'd-M-Y');
     $mat_req_date = formatDate($value['pm_revised_material_req'], 'd-M-y');
     if ($value['ps_expdate'] == "") {
         $exp_date = date('Y-m-d');

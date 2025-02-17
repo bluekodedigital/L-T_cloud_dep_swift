@@ -298,9 +298,9 @@ $gr_result = $cls_lc->lc_dasboard_graph1();
                                             <td><?php echo $value['lcr_povalue']; ?></td>
                                             <td><?php echo $value['lcm_num']; ?></td>
                                             <td><?php echo $value['lcm_value']; ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['lcm_from'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['lcm_to'])); ?></td>
-                                            <td><?php echo date('d-M-Y', strtotime($value['lcr_supply_date'])); ?></td>
+                                            <td><?php echo formatDate($value['lcm_from'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['lcm_to'], 'd-M-Y'); ?></td>
+                                            <td><?php echo formatDate($value['lcr_supply_date'], 'd-M-Y'); ?></td>
                                             <td><?php echo $value['lcr_supply']; ?></td>
                                             <td><?php echo $value['balance_ship']; ?></td>
                                             <td><?php echo $value['paid_value']; ?></td>

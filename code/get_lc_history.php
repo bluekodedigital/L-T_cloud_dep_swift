@@ -37,12 +37,12 @@ $lc = mssql_escape($_POST['key']);
                     <td><?php echo $value['lcr_ponumber']; ?></td>
                     <td class=" text-right"><?php echo $value['lcr_povalue']; ?></td>
                     
-                    <td><?php echo date('d-M-Y', strtotime($value['lc_sdate'])); ?></td>
+                    <td><?php echo formatDate($value['lc_sdate'], 'd-M-Y'); ?></td>
                     <td class=" text-right"><?php echo $value['lc_sup_val']; ?></td>
                     <td><?php echo $value['lc_sup_ex_rate']; ?></td>
                     <td><?php
                         if ($value['paymet_date'] != "") {
-                            echo date('d-M-Y', strtotime($value['paymet_date']));
+                            echo formatDate($value['paymet_date'], 'd-M-Y');
                         }
                         ?></td>
                     <td class=" text-right"><?php echo $value['paymet_value']; ?></td>                                           

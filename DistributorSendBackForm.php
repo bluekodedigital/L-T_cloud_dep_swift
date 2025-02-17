@@ -25,8 +25,8 @@ $pack_name  = $check_pack['pm_packagename'];
 $proj_name  = $check_pack['proj_name'];
 $pono       = $check_powo['po_no'];
 $wono       = $check_powo['wo_no'];
-$podate     = date('d-M-y', strtotime($check_powo['po_approved_on']));
-$wodate     = date('d-M-y', strtotime($check_powo['wo_approved_on']));
+$podate     = formatDate($check_powo['po_approved_on'], 'd-M-y');
+$wodate     = formatDate($check_powo['wo_approved_on'], 'd-M-y');
 include_once('layout/header2.php');
 include_once('layout/nav2.php');
 

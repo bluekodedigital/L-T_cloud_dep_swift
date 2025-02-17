@@ -21,7 +21,7 @@ if ($get_po_wo_app != "") {
     $po_wo = 0;
 }
 
-$pcrdate = isset($package_details['pm_createdate']) && $package_details['pm_createdate'] instanceof DateTime ? date('d-M-Y', strtotime($package_details['pm_createdate']->format('Y-m-d'))) : '';
+$pcrdate = formatDate($package_details['pm_createdate'], 'd-M-Y');
 
 if (strtotime($pcrdate) >= strtotime("24-Aug-2021")) {
     $flg = 1;
@@ -52,13 +52,13 @@ $psActualInitiateDate = formatDate($getExpectedInitiateSSApproval['ps_actualdate
 if ($psActualDate == "") {
     $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $expdelivery = date('d-M-Y', strtotime($psActualDate));
+    $expdelivery = formatDate($psActualDate, 'd-M-Y');
 }
 
 if ($psActualInitiateDate == "") {
     $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . ' days'));
 } else {
-    $ssInidate = date('d-M-Y', strtotime($psActualInitiateDate));
+    $ssInidate = formatDate($psActualInitiateDate, 'd-M-Y');
 }
 
 
@@ -67,26 +67,26 @@ if ($psActualInitiateDate == "") {
     if ($psActualDate == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . ' days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($psActualDate));
+        $expdelivery = formatDate($psActualDate, 'd-M-Y');
     }
     
     if ($psActualInitiateDate == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . ' days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($psActualInitiateDate));
+        $ssInidate = formatDate($psActualInitiateDate, 'd-M-Y');
     }
 } else {
     
     if ($psActualDate == "") {
         $expdelivery = date('d-M-Y', strtotime($SSApprovalDate . ' -' . abs($deviations) . ' days'));
     } else {
-        $expdelivery = date('d-M-Y', strtotime($psActualDate));
+        $expdelivery = formatDate($psActualDate, 'd-M-Y');
     }
     
     if ($psActualInitiateDate == "") {
         $ssInidate = date('d-M-Y', strtotime($InitiateSSApprovalDate . ' -' . abs($deviations) . ' days'));
     } else {
-        $ssInidate = date('d-M-Y', strtotime($psActualInitiateDate));
+        $ssInidate = formatDate($psActualInitiateDate, 'd-M-Y');
     }
 } */
 //if ($deviations < 0) {
@@ -138,7 +138,7 @@ if ($package_details['proj_type'] == 1) {
                     <!--<small>Material Req. @Site:- <span class="badge badge-pill badge-warning orange font-12 text-white ml-1">-->
                     <?php
                     echo $ssInidate;
-                    //                echo date('d-M-y', strtotime($package_details['pm_revised_material_req'])); 
+                    //                echo formatDate($package_details['pm_revised_material_req'], 'd-M-y'); 
                     
                     ?>
                 </span></small>
@@ -153,15 +153,15 @@ if ($package_details['proj_type'] == 1) {
                     //
                     //                        echo $expdelivery;
                     //                    } else {
-                    //                        echo date('d-M-y', strtotime($expe_delidate['ps_actualdate']));
+                    //                        echo formatDate($expe_delidate['ps_actualdate'], 'd-M-y');
                     //                    }
                     ?></span></small>
         </div>
         <div class=" col-md-3" id="pdd">
             <small>Deviations:- <span class="badge badge-pill badge-dark font-12 text-white ml-1">
                     <?php
-                    // $sdate = date('Y-m-d', strtotime($package_details['pm_revised_material_req']));
-                    // $ltime = date('Y-m-d', strtotime($expdelivery));
+                    // $sdate = formatDate($package_details['pm_revised_material_req'], 'Y-m-d');
+                    // $ltime = formatDate($expdelivery, 'Y-m-d');
                     // $start = new DateTime($sdate);
                     // $end = new DateTime($ltime);
                     // $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . ' days';
@@ -284,8 +284,8 @@ if ($package_details['proj_type'] == 1) {
                             <?php } else { ?>
                                 <p class="deviations1">
                                     <?php
-                                    $sdate = date('Y-m-d', strtotime($get_actualreceive));
-                                    $ltime = date('Y-m-d', strtotime($value['ps_actualdate']));
+                                    $sdate = formatDate($get_actualreceive, 'Y-m-d');
+                                    $ltime = formatDate($value['ps_actualdate'], 'Y-m-d');
                                     $start = new DateTime($sdate);
                                     $end = new DateTime($ltime);
                                     $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . '';
@@ -374,13 +374,13 @@ if ($package_details['proj_type'] == 1) {
                         <div class="container">
                             <p class="palnned">
                                 <span
-                                    class="badge badge-pill badge-primary font-medium text-white ml-1"><?php echo isset($value['revised_planned_date']) && $value['revised_planned_date'] instanceof DateTime ? date('d-M-y', strtotime($value['revised_planned_date']->format('Y-m-d'))) : ''; ?></span>
+                                    class="badge badge-pill badge-primary font-medium text-white ml-1"><?php echo formatDate($value['revised_planned_date'], 'd-M-Y'); ?></span>
                             </p>
                             <?php $get_actualreceive = $cls_user->get_actualreceive($pack_id, $value['ps_stageid']);
                             if ($get_actualreceive == '0') {
                             } else { ?>
                                 <p class="actual_rec"><span class="badge badge-pill badge-warning font-medium text-white ml-1">
-                                        <?php echo date('d-M-y', strtotime($get_actualreceive)); ?>
+                                        <?php echo formatDate($get_actualreceive, 'd-M-y'); ?>
                                     </span>
                                 </p>
                             <?php } ?>
@@ -388,7 +388,7 @@ if ($package_details['proj_type'] == 1) {
 
                             <?php if (isset($value['ps_actualdate']) && $value['ps_actualdate'] instanceof DateTime) { ?>
                                     <span class="badge badge-pill badge-info font-medium text-white ml-1">
-                                        <?php echo isset($value['ps_actualdate']) && $value['ps_actualdate'] instanceof DateTime ? date('d-M-y', strtotime($value['ps_actualdate']->format('Y-m-d'))) : ''; ?>
+                                        <?php echo formatDate($value['ps_actualdate'], 'd-M-Y'); ?>
                                     </span>
                                 <?php } ?>
 
@@ -431,8 +431,8 @@ if ($package_details['proj_type'] == 1) {
                             <?php } else { ?>
                                 <p class="deviations1">
                                     <?php
-                                    $sdate = isset($get_actualreceive) && $get_actualreceive instanceof DateTime ? date('d-M-y', strtotime($get_actualreceive->format('Y-m-d'))) : '';
-                                    $ltime = isset($value['ps_actualdate']) && $value['ps_actualdate'] instanceof DateTime ? date('d-M-y', strtotime($value['ps_actualdate']->format('Y-m-d'))) : '';
+                                    $sdate = formatDate($get_actualreceive, 'd-M-y');
+                                    $ltime = formatDate($value['ps_actualdate'], 'd-M-y');
                                     $start = new DateTime($sdate);
                                     $end = new DateTime($ltime);
                                     $bdate = round(($end->format('U') - $start->format('U')) / (60 * 60 * 24)) . '';

@@ -192,11 +192,11 @@ foreach ($segment as $key => $value) {
                 $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optom['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optom['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> ENG - ' . $optom['name'] . '<br>(' . date('d-M-Y', strtotime($optom['ctops_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> ENG - ' . $optom['name'] . '<br>(' . formatDate($optom['ctops_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $optom['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $optom['ctops_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optom['shot_name'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($optom['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($optom['planned'], 'd-M-Y') . '</td>
                     </tr>';
             }
         }
@@ -210,11 +210,11 @@ foreach ($segment as $key => $value) {
                 $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> O&M - ' . $optoscm['name'] . '<br>(' . date('d-M-Y', strtotime($optoscm['omop_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> O&M - ' . $optoscm['name'] . '<br>(' . formatDate($optoscm['omop_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $optoscm['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $optoscm['omop_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $optoscm['shot_name'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($optoscm['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($optoscm['planned'], 'd-M-Y') . '</td>
                     </tr>';
             }
         }
@@ -227,11 +227,11 @@ foreach ($segment as $key => $value) {
                 $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $scmtops['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $scmtops['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> SCM - ' . $scmtops['name'] . '<br>(' . date('d-M-Y', strtotime($scmtops['scop_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> SCM - ' . $scmtops['name'] . '<br>(' . formatDate($scmtops['scop_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $scmtops['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $scmtops['scop_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $scmtops['shot_name'] . '/ SCM / Technical' . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($scmtops['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($scmtops['planned'], 'd-M-Y') . '</td>
                     </tr>';
             }
         }
@@ -244,11 +244,11 @@ foreach ($segment as $key => $value) {
                 $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $vendraw['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $vendraw['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> OPS - ' . $vendraw['name'] . '<br>(' . date('d-M-Y', strtotime($vendraw['tech_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> OPS - ' . $vendraw['name'] . '<br>(' . formatDate($vendraw['tech_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $vendraw['pen'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $vendraw['tech_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $vendraw['shot_name'] . ' </td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($vendraw['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($vendraw['planned'], 'd-M-Y') . '</td>
                     </tr>';
             }
         }
@@ -261,11 +261,11 @@ foreach ($segment as $key => $value) {
                 $message .= '  <tr>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $opscall['proj_name'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;">' . $opscall['pm_packagename'] . '</td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;"> OPS - ' . $opscall['name'] . '<br>(' . date('d-M-Y', strtotime($opscall['tech_sentdate'])) . ')' . '</td>                               
+                                        <td style=" text-align: center;  border: 1px solid #ddd;"> OPS - ' . $opscall['name'] . '<br>(' . formatDate($opscall['tech_sentdate'], 'd-M-Y') . ')' . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> ' . $opscall['name'] . '</td>                               
                                         <td style=" text-align: center;  border: 1px solid #ddd; max-width:300px">' . $opscall['tech_remarks'] . '</td>
                                         <td style=" text-align: center;  border: 1px solid #ddd;"> Ops to Vendor  </td>
-                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . date('d-M-Y', strtotime($opscall['planned'])) . '</td>
+                                        <td style=" text-align: center;  border: 1px solid #ddd;">' . formatDate($opscall['planned'], 'd-M-Y') . '</td>
                     </tr>';
             }
         }

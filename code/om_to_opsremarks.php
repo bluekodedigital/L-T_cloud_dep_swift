@@ -34,7 +34,7 @@ if ($res == 0) {
 } else {
     $msg = '';
     foreach ($res as $key => $value) {
-        $msg .= date('d-M-Y', strtotime($value['omop_sentdate'])) . ':-' . $value['omop_remarks'] . '\n';
+        $msg .= formatDate($value['omop_sentdate'], 'd-M-Y') . ':-' . $value['omop_remarks'] . '\n';
     }
     ?>
 
