@@ -91,13 +91,13 @@ if($_SESSION['milcom']=='1')
                                         $projname = $cls_comm->project_name($value['sc_projid']);
                                         $packname = $cls_comm->package_name($value['sc_packid']);
                                         $sendername = $cls_comm->get_username($value['sc_senderuid']);
-                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
-                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
-                                        $actual_date = $cls_comm->datechange(formatDate($value['cs_actualdate'], 'Y-m-d'));
-                                        $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
-                                        $org_plandate = $cls_comm->datechange(formatDate($value['org_plandate'], 'Y-m-d'));
-                                        $rev_planned_date = $cls_comm->datechange(formatDate($value['rev_planned_date'], 'Y-m-d'));
-                                        $rdate = $cls_comm->datechange(formatDate($value['cs_sentdate'], 'Y-m-d'));
+                                        $schedule_date = $cls_comm->datechange(formatDate(formatDate($value['schedule_date'], 'Y-m-d', 'Y-m-d')));
+                                        $mat_req = $cls_comm->datechange(formatDate(formatDate($value['mat_req_date'], 'Y-m-d', 'Y-m-d')));
+                                        $actual_date = $cls_comm->datechange(formatDate(formatDate($value['cs_actualdate'], 'Y-m-d', 'Y-m-d')));
+                                        $except_date = $cls_comm->datechange(formatDate(formatDate($value['ps_expdate'], 'Y-m-d', 'Y-m-d')));
+                                        $org_plandate = $cls_comm->datechange(formatDate(formatDate($value['org_plandate'], 'Y-m-d', 'Y-m-d')));
+                                        $rev_planned_date = $cls_comm->datechange(formatDate(formatDate($value['rev_planned_date'], 'Y-m-d', 'Y-m-d')));
+                                        $rdate = $cls_comm->datechange(formatDate(formatDate($value['cs_sentdate'], 'Y-m-d', 'Y-m-d')));
                                         $getid = $value['sc_id'];
                                         $buyer_name = $cls_report->fetch_buyername($value['sc_packid']);
                                         ?>

@@ -95,20 +95,20 @@ include_once('layout/leftsidebar.php');
                                         $projname = $cls_comm->project_name($value['txp_projid']);
                                         $packname = $cls_comm->package_name($value['txp_packid']);
                                         $sendername = $cls_comm->get_username($value['txp_senderuid']);
-                                        $schedule_date = $cls_comm->datechange($value['schedule_date']);
-                                        $mat_req = $cls_comm->datechange($value['mat_req_date']);
-                                        $actual_date = $cls_comm->datechange($value['txp_actual']);
-                                        $except_date = $cls_comm->datechange($value['ps_expdate']);
-                                        $org_plandate = $cls_comm->datechange($value['org_plandate']);
-                                        $rev_planned_date = $cls_comm->datechange($value['rev_planned_date']);
-                                        $sentdte = $cls_comm->datechange($value['txp_sentdate']);
+                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
+                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
+                                        $actual_date = $cls_comm->datechange(formatDate($value['txp_actual'], 'Y-m-d'));
+                                        $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
+                                        $org_plandate = $cls_comm->datechange(formatDate($value['org_plandate'], 'Y-m-d'));
+                                        $rev_planned_date = $cls_comm->datechange(formatDate($value['rev_planned_date'], 'Y-m-d'));
+                                        $sentdte = $cls_comm->datechange(formatDate($value['txp_sentdate'], 'Y-m-d'));
                                         $getid = $value['txp_id'];
 
                                         if ($value['ps_expdate'] == "") {
                                             $except_date = date('Y-m-d');
-                                            $except_date = $cls_comm->datechange($except_date);
+                                            $except_date = $cls_comm->datechange(formatDate($except_date, 'Y-m-d'));
                                         } else {
-                                            $except_date = $cls_comm->datechange($value['ps_expdate']);
+                                            $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
                                         }
                                         ?>
                                         <tr>

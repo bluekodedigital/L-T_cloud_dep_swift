@@ -93,18 +93,18 @@ $userid = $_SESSION['uid'];
                                         $projname = $cls_comm->project_name($value['cto_projid']);
                                         $packname = $cls_comm->package_name($value['cto_packid']);
                                         $sendername = $cls_comm->get_username($value['cto_senderuid']);
-                                        $schedule_date = $cls_comm->datechange($value['schedule_date']);
-                                        $mat_req = $cls_comm->datechange($value['mat_req_date']);
-                                        $actual_date = $cls_comm->datechange($value['ps_actualdate']);
-                                        $planned_date = $cls_comm->datechange($value['planned_date']);
-                                        $expedted = $cls_comm->datechange($value['ps_expdate']);
-                                        $sentdte = $cls_comm->datechange($value['cto_sentdate']);
+                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
+                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
+                                        $actual_date = $cls_comm->datechange(formatDate($value['ps_actualdate'], 'Y-m-d'));
+                                        $planned_date = $cls_comm->datechange(formatDate($value['planned_date'], 'Y-m-d'));
+                                        $expedted = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
+                                        $sentdte = $cls_comm->datechange(formatDate($value['cto_sentdate'], 'Y-m-d'));
                                         $getid = $value['cto_id'];
                                         if ($value['ps_expdate'] == "") {
                                             $except_date = date('Y-m-d');
-                                            $except_date = $cls_comm->datechange($except_date);
+                                            $except_date = $cls_comm->datechange(formatDate($except_date, 'Y-m-d'));
                                         } else {
-                                            $except_date = $cls_comm->datechange($value['ps_expdate']);
+                                            $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
                                         }
                                         ?>
                                         <tr>

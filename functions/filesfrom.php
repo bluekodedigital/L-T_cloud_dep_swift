@@ -1,7 +1,9 @@
 <?php
 
 include_once("../config/inc_function.php");
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $pack_id = mssql_escape($_POST['key']);
 $from = mssql_escape($_POST['from']);
 $tostage = mssql_escape($_POST['to']);

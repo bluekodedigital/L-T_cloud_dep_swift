@@ -49,7 +49,6 @@ if($_SESSION['milcom']!='1')
 }
 
 
-echo $proj_type;
 $result = $cls_report->select_filterprojects_seg2( $seg,  $proj_type);
 
 echo json_encode(

@@ -173,22 +173,22 @@ if ($pack_name['proj_type'] == 1) {
                            <td style=" text-align: center;"><label class="badge badge-pill badge-info font-medium text-white ml-1 pull-left" onclick="pohistoryview('<?php echo $value['swid']; ?>','<?php echo $value['swe_qte']; ?>')" data-toggle="modal" data-target="#myModal1"><i  class=" fa fa-eye"></i></label></td>
                            
                             <td style="text-align: center;"><?php echo $value['mqty']; ?></td>
-                            <td><?php if($value['mqty_date']==''){}else {echo date('d-M-y',strtotime($value['mqty_date'])); } ?></td> 
+                            <td><?php if($value['mqty_date']==''){}else {echo formatDate($value['mqty_date'], 'd-M-y'); } ?></td> 
                             
                             <td style="text-align: center;"><?php echo $value['iqty']; ?></td> 
-                            <td><?php if($value['iqty_date']==''){}else {echo date('d-M-y',strtotime($value['iqty_date']));} ?> </td>
+                            <td><?php if($value['iqty_date']==''){}else {echo formatDate($value['iqty_date'], 'd-M-y');} ?> </td>
                            
                             <td style="text-align: center;"><?php echo $value['mdccqty']; ?></td>
-                            <td><?php if($value['mdccqty_date']==''){}else {echo date('d-M-y',strtotime($value['mdccqty_date'])); }?></td>
+                            <td><?php if($value['mdccqty_date']==''){}else {echo formatDate($value['mdccqty_date'], 'd-M-y'); }?></td>
                             
                             <td style="text-align: center;"> <?php echo $value['cclr_qty']; ?></td>
-                            <td><?php if($value['cclr_qty_date']==''){}else {echo date('d-M-y',strtotime($value['cclr_qty_date'])); }?></td>
+                            <td><?php if($value['cclr_qty_date']==''){}else {echo formatDate($value['cclr_qty_date'], 'd-M-y'); }?></td>
                             
                             <td style="text-align: center;"><?php echo $value['mrqty']; ?></td>
-                            <td><?php if($value['mrqty_date']==''){}else {echo date('d-M-y',strtotime($value['mrqty_date']));} ?></td>
+                            <td><?php if($value['mrqty_date']==''){}else {echo formatDate($value['mrqty_date'], 'd-M-y');} ?></td>
                             
                             <td><?php echo $value['mrn_num']; ?></td>
-                            <td><?php if($value['mrn_date']==''){}else {echo date('d-M-y',strtotime($value['mrn_date']));} ?></td>
+                            <td><?php if($value['mrn_date']==''){}else {echo formatDate($value['mrn_date'], 'd-M-y');} ?></td>
                         
                         </tr>
                     <?php } ?>
@@ -256,19 +256,19 @@ if ($pack_name['proj_type'] == 1) {
                              <td style=" text-align: center;"><label class="badge badge-pill badge-info font-medium text-white ml-1 pull-left" onclick="pohistoryview('<?php echo $value['swid']; ?>','<?php echo $value['swe_qte']; ?>')" data-toggle="modal" data-target="#myModal1"><i  class=" fa fa-eye"></i></label></td>
                            
                             <td><?php echo $value['mqty']; ?> </td>
-                            <td><?php if($value['mqty_date']==''){}else {echo date('d-M-y',strtotime($value['mqty_date'])); } ?></td> 
+                            <td><?php if($value['mqty_date']==''){}else {echo formatDate($value['mqty_date'], 'd-M-y'); } ?></td> 
                             
                             <td><?php echo $value['iqty']; ?></td> 
-                            <td><?php if($value['iqty_date']==''){}else {echo date('d-M-y',strtotime($value['iqty_date']));} ?></td>
+                            <td><?php if($value['iqty_date']==''){}else {echo formatDate($value['iqty_date'], 'd-M-y');} ?></td>
                            
                             <td><?php echo $value['mdccqty']; ?></td>
-                            <td><?php if($value['mdccqty_date']==''){}else {echo date('d-M-y',strtotime($value['mdccqty_date'])); }?></td>
+                            <td><?php if($value['mdccqty_date']==''){}else {echo formatDate($value['mdccqty_date'], 'd-M-y'); }?></td>
                             
                             <td><?php echo $value['mrqty']; ?></td>
-                            <td><?php if($value['mrqty_date']==''){}else {echo date('d-M-y',strtotime($value['mrqty_date']));} ?></td>
+                            <td><?php if($value['mrqty_date']==''){}else {echo formatDate($value['mrqty_date'], 'd-M-y');} ?></td>
                             
                             <td><?php echo $value['mrn_num']; ?></td>
-                            <td><?php if($value['mrn_date']==''){}else {echo date('d-M-y',strtotime($value['mrn_date']));} ?></td>
+                            <td><?php if($value['mrn_date']==''){}else {echo formatDate($value['mrn_date'], 'd-M-y');} ?></td>
                         
                         </tr>
                     <?php } ?>

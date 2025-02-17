@@ -53,7 +53,7 @@ $sql = "SELECT revised_planned_date FROM swift_packagestatus WHERE ps_projid= '$
 $query = mssql_query($sql);
 $row = mssql_fetch_array($query);
 //$planned_date = $row['revised_planned_date'];
-$planned_date = formatDate(str_replace('/', '-', $row['revised_planned_date'], 'd-M-y'));
+$planned_date = formatDate($row['revised_planned_date'], 'd-M-y');
 $cqty = mssql_query("SELECT * FROM swift_po_master WHERE po_pack_id='" . $packid . "' AND po_id='" . $rid . "'");
 $row = mssql_fetch_array($cqty);
 $sqty = $row['po_scope_qty'];

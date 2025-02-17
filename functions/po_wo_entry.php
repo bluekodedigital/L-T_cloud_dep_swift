@@ -434,7 +434,7 @@ if (isset($_POST['wo_create'])) {
     $sql = "SELECT revised_planned_date FROM swift_packagestatus WHERE ps_projid= '$proj_id' AND ps_packid='$pack_id' AND ps_stageid='15'";
     $query = mssql_query($sql);
     $row = mssql_fetch_array($query);
-    $po_planned_date = $row['revised_planned_date'];
+    $po_planned_date = formatDate($row['revised_planned_date'], 'd-M-y');
 
     // transaction table functions
     $sql = "SELECT MAX(st_id) as id FROM swift_transactions";

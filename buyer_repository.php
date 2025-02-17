@@ -90,11 +90,11 @@ if($_SESSION['milcom']==1)
                                         $projname = $cls_comm->project_name($value['so_proj_id']);
                                         $packname = $cls_comm->package_name($value['so_pack_id']);
                                         $sendername = $cls_comm->get_username($value['sc_senderuid']);
-                                        $schedule_date = $cls_comm->datechange($value['schedule_date']);
-                                        $mat_req = $cls_comm->datechange($value['mat_req_date']);
-                                        $planned_date = $cls_comm->datechange($value['planned_date']);
-                                        $except_date = $cls_comm->datechange($value['ps_expdate']);
-                                        $actual_date = $cls_comm->datechange($value['ps_actualdate']);
+                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
+                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
+                                        $planned_date = $cls_comm->datechange(formatDate($value['planned_date'], 'Y-m-d'));
+                                        $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
+                                        $actual_date = $cls_comm->datechange(formatDate($value['ps_actualdate'], 'Y-m-d'));
                                         $getid = $value['so_id'];
                                         $get_loidetails = $cls_user->get_loidetails($getid);
                                         ?>

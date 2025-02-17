@@ -18,6 +18,7 @@ $connectionOptions = [
     "PWD" => "Bl@kode.1?"
 ];
 
+
 $con = sqlsrv_connect($serverName, $connectionOptions);
 if ($con === false) {
     die("Database connection failed: " . print_r(sqlsrv_errors(), true));

@@ -46,7 +46,7 @@ if(isset($_POST['mat'])&& isset($_POST['lead'])){
 
 
 	
-	echo json_encode(array('date'=>date('d-M-y',strtotime($stages[$i]))));
+	echo json_encode(array('date'=>formatDate($stages[$i], 'd-M-y')));
 	
 	
 	

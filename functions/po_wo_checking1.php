@@ -50,7 +50,7 @@ $today_date = date("d-M-y");
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
                             //                            echo formatDate(str_replace('/', '-', $results['ps_expdate'], 'd-M-y')); 
-                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
+                            $plan_date = formatDate($results['revised_planned_date'], 'd-M-y');
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {
@@ -63,7 +63,7 @@ $today_date = date("d-M-y");
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1" style="width: 100px;">Expected</span>
                             </div>
-                            <input type="text" class="form-control mydatepicker" id="wo_expected" name="wo_expected" value="<?php echo formatDate(str_replace('/', '-', $Pexpdate, 'd-M-y')); ?>">
+                            <input type="text" class="form-control mydatepicker" id="wo_expected" name="wo_expected" value="<?php echo formatDate($Pexpdate, 'd-M-y'); ?>">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">

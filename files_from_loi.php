@@ -180,19 +180,20 @@ $generate_token = generate_token();
                                             </td>
                                             <td>
                                                 <?php 
-                                                $value['planned'] = formatDate($value['planned'], 'Y-m-d');
-                                                if (strtotime($value['planned']) > strtotime($value['actual'])) { ?>
+                                                $planned = formatDate($value['planned'], 'Y-m-d');
+                                                $actual = formatDate($value['actual'], 'Y-m-d');
+                                                if ($planned > $actual) { ?>
                                                     <div class="notify pull-left">
                                                         <span class="heartbit greenotify"></span>
                                                         <span class="point greenpoint"></span>
                                                     </div>
 
-                                                <?php } elseif (strtotime($value['planned']) < strtotime($value['actual'])) { ?>
+                                                <?php } elseif ($planned < $actual) { ?>
                                                     <div class="notify pull-left">
                                                         <span class="heartbit"></span>
                                                         <span class="point"></span>
                                                     </div>
-                                                <?php } elseif (strtotime($value['planned']) == strtotime($value['actual'])) { ?>
+                                                <?php } elseif ($planned == $actual) { ?>
                                                     <div class="notify pull-left">
                                                         <span class="heartbit bluenotify"></span>
                                                         <span class="point bluepoint"></span>

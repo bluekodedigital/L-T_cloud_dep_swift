@@ -95,8 +95,8 @@ if (isset($_GET['pid'])) {
                                         <tr>
                                             <td><?php echo $value['proj_name']; ?></td>
                                             <td><?php echo wordwrap($value['pm_packagename'], 30, "<br>\n"); ?></td>
-                                            <td><?php echo date('d-m-y',strtotime($get_wocrdate['ps_actualdate'])); ?></td>
-                                             <td><?php echo date('d-m-y',strtotime($get_woappdate['ps_actualdate'])); ?></td>
+                                            <td><?php echo formatDate($get_wocrdate['ps_actualdate'], 'd-m-y'); ?></td>
+                                             <td><?php echo formatDate($get_woappdate['ps_actualdate'], 'd-m-y'); ?></td>
                                             <td><span class="badge badge-pill badge-info font-medium text-black ml-1"><?php echo $value['wo_number']; ?></span></td>
                                             <td>
                                                 <div class="input-group" id="expdiv" style=" float: left;">

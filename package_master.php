@@ -462,7 +462,7 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                             <div class="col-md-3 mb-3  ">
                                                 <label for="doc_name">Doc Type</label>
                                                 <input type="text" class="form-control" id="doc_name" name="doc_name"
-                                                    readonly value="O&M signoff">
+                                                    readonly value="PR Requester">
                                             </div>
                                             <div class="col-md-6 mb-6">
                                                 <label for="proj_location">Upload File</label>

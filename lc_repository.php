@@ -74,8 +74,8 @@ include_once('layout/leftsidebar.php');
                                     foreach ($res as $key => $value) {
                                         $projname = $cls_comm->project_name($value['lce_projid']);
                                         $packname = $cls_comm->package_name($value['lce_packid']);
-                                        $valid_from = $cls_comm->datechange($value['lcm_from']);
-                                        $valid_to = $cls_comm->datechange($value['lcm_to']);                                       
+                                        $valid_from = $cls_comm->datechange(formatDate($value['lcm_from'], 'Y-m-d'));
+                                        $valid_to = $cls_comm->datechange(formatDate($value['lcm_to'], 'Y-m-d'));                                       
                                         $po_num = $value['lce_ponum'];                                       
                                         ?>
                                         <tr>

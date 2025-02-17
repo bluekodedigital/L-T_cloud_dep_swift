@@ -659,7 +659,7 @@ order by ps_stageid DESC ";
         return $res;
     }
 
-    function select_filterprojects_seg2($seg,  $type)
+    function select_filterprojects_seg2($seg = '',  $type = '')
     {
         $where = "";
         $$where2 = "";
@@ -682,7 +682,6 @@ order by ps_stageid DESC ";
         $sql = "select distinct p.proj_id,p.proj_name from project_assign as pa 
         inner join Project as p on (pa.proj_id = p.proj_id) $where $where2 
         order by p.proj_name ASC";
-        // echo $sql;
         $query = mssql_query($sql);
         $result = array();
         while ($row = mssql_fetch_array($query)) {

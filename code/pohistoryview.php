@@ -44,7 +44,7 @@ $code = $result['po_mat_code'];
             $actions = $row['actions'];
             $qty = $row['h_qty'];
             $date = $row['e_date'];
-            $date = date("d-M-Y", strtotime($date));
+            $date = formatDate($date, 'd-M-y');
         ?>
             <tr>
                 <td><?php echo $i; ?></td>

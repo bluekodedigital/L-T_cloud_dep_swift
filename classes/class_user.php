@@ -1507,7 +1507,7 @@ where ps_stageid=stage_id and ps_stageid=20 and ps_packid='" . $pack_id . "'";
     function files_for_podetailsalter($pid, $segment)
     {
         if ($pid == "") {
-            $sql = "select distinct proj_type,proj_name,po_pack_id,pm_packagename,po_number,pm_revised_material_req,count(*) as count ,SUM(po_scope_qty) as total_Qty,((SUM(mqty)/SUM(po_scope_qty))*100) as manuQty,((SUM(iqty)/SUM(po_scope_qty))*100) as insQty,
+             $sql = "select distinct proj_type,proj_name,po_pack_id,pm_packagename,po_number,pm_revised_material_req,count(*) as count ,SUM(po_scope_qty) as total_Qty,((SUM(mqty)/SUM(po_scope_qty))*100) as manuQty,((SUM(iqty)/SUM(po_scope_qty))*100) as insQty,
             ((SUM(mdccqty)/SUM(po_scope_qty))*100) as mdccQty,((SUM(cclr_qty)/SUM(po_scope_qty))*100) as cclrQty,
             ((SUM(mrqty)/SUM(po_scope_qty))*100) as mrecQty
             from swift_po_master as a

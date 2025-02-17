@@ -294,6 +294,7 @@ $generate_token= generate_token();
                                     <?php
 
                                     $result = $cls_comm->select_swift_workflow($pid, $segment);
+                                   
                                     $res = json_decode($result, true);
 
                                     foreach ($res as $key => $value) {
@@ -303,17 +304,19 @@ $generate_token= generate_token();
                                         $fromname = $cls_comm->get_username($value['from_uid']);
 
                                         $sendername = $cls_comm->get_username($value['to_uid']);
-                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
-                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
-                                        $actual_date = $cls_comm->datechange(formatDate($value['cs_actualdate'], 'Y-m-d'));
-                                        $except_date1 = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
-                                        //echo   $except_date1 = date("Y-m-d", strtotime($cls_comm->datechange($value['ps_expdate'])));
-                                        // echo date("Y-m-d", strtotime($cls_comm->datechange($value['ps_expdate'])));
+                                        $schedule_date = $cls_comm->datechange(formatDate(formatDate($value['schedule_date'], 'Y-m-d', 'Y-m-d')));
+                                        $mat_req = $cls_comm->datechange(formatDate(formatDate($value['mat_req_date'], 'Y-m-d', 'Y-m-d')));
+                                        $actual_date = $cls_comm->datechange(formatDate(formatDate($value['cs_actualdate'], 'Y-m-d', 'Y-m-d')));
+                                        $except_date1 = $cls_comm->datechange(formatDate(formatDate($value['ps_expdate'], 'Y-m-d', 'Y-m-d')));
+                                        //echo   $except_date1 = date("Y-m-d", strtotime($cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'))));
+                                        // echo date("Y-m-d", strtotime($cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'))));
                                         // echo "<br>" ;
                                         //   echo $except_date;
-                                        $org_plandate = $cls_comm->datechange(formatDate($value['org_plandate'], 'Y-m-d'));
-                                        $rev_planned_date = $cls_comm->datechange(formatDate($value['rev_planned_date'], 'Y-m-d'));
-                                        $rdate = $cls_comm->datechange(formatDate($value['cs_sentdate'], 'Y-m-d'));
+                                     
+                                        $org_plandate = $cls_comm->datechange(formatDate(formatDate($value['org_plandate'], 'Y-m-d', 'Y-m-d')));
+                                        $rev_planned_date = $cls_comm->datechange(formatDate(formatDate($value['rev_planned_date'], 'Y-m-d', 'Y-m-d')));
+                                        $rdate = $cls_comm->datechange(formatDate(formatDate($value['cs_sentdate'], 'Y-m-d', 'Y-m-d')));
+                                     
                                         $getid = $value['cs_packid'];
                                         $scmbu_id = $value['sc_id'];
                                         $stageid = $value['to_stage_id'];
@@ -321,11 +324,11 @@ $generate_token= generate_token();
                                         $lt_flag = $value['lt_flag'];
                                         $hold_flag = $value['hold_on'];
                                         $stage_array = explode(",", $pm_stages);
-
+                                        
                                         $key = array_search($stageid, $stage_array);
                                         $Next_stage = $stage_array[$key + 1];
                                         $stage_names = $cls_comm->get_stagenames($getid, $stageid, $Next_stage);
-
+                                        
                                         //$i = array_search('3', array_keys($array));
                                         // $array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
                                         // echo $key = array_search('green', $stage_array); // $key = 2;
@@ -337,7 +340,7 @@ $generate_token= generate_token();
                                         //    $key = array_search('3', $array1);   // $key = 1;
                                         //     echo   $nkey = $key+1;
                                         //     $key2 = array_search($nkey, $array1);   // $key = 1;
-                                    
+                                        
                                         if ($value['ps_expdate'] == "") {
                                             $except_date = date('Y-m-d');
 
@@ -360,7 +363,7 @@ $generate_token= generate_token();
                                         } else {
                                             $ptype = "";
                                             $ptype_col = "";
-                                        }
+                                        }   
                                         ?>
                                             <tr <?php echo $hight_light; ?>>
 
@@ -1117,6 +1120,8 @@ $generate_token= generate_token();
             $.each(userlist, function(index, value) {
                 options += `<option value="${value.uid}">${value.name}</option>`;
             });
+             $('#senbackuid').html('');
+             $('#senbackuid').append(option);
 
             $('#senbackuid').html(options);
         } catch (error) {

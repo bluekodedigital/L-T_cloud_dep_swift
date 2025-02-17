@@ -74,8 +74,8 @@ include_once('layout/leftsidebar.php');
                                     foreach ($res as $key => $value) {
                                         $projname = $cls_comm->project_name($value['lr_projid']);
                                         $packname = $cls_comm->package_name($value['lr_packid']);
-                                        $valid_from = $cls_comm->datechange($value['rpa_valid_from']);
-                                        $valid_to = $cls_comm->datechange($value['rpa_valid_to']);
+                                        $valid_from = $cls_comm->datechange(formatDate($value['rpa_valid_from'], 'Y-m-d'));
+                                        $valid_to = $cls_comm->datechange(formatDate($value['rpa_valid_to'], 'Y-m-d'));
                                         $getid = $value['lr_id'];
                                         $po_num = $value['po_number'];
                                         $wo_num = $value['wo_number'];

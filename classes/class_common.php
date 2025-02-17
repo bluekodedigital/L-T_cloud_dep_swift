@@ -152,10 +152,10 @@ class Common
         if ($pid == "") {
             //  $sql = "select pm_packid,pm_projid,proj_name,pm_packagename,pm_createdate,pm_material_req,pm_revised_material_req,pm_leadtime,pm_userid 
             //     from swift_packagemaster,Project where proj_id=pm_projid and cat_id='" . $segment . "'";
-                $sql = "select pm_packid,pm_projid,proj_name,pm_packagename,pm_createdate,pm_material_req,pm_revised_material_req,pm_leadtime,pm_userid 
+            $sql = "select pm_packid,pm_projid,proj_name,pm_packagename,pm_createdate,pm_material_req,pm_revised_material_req,pm_leadtime,pm_userid 
                 from swift_packagemaster,Project where proj_id=pm_projid ";
         } else {
-             $sql = "select pm_packid,pm_projid,proj_name,pm_packagename,pm_createdate,pm_material_req,pm_revised_material_req,pm_leadtime,pm_userid 
+            $sql = "select pm_packid,pm_projid,proj_name,pm_packagename,pm_createdate,pm_material_req,pm_revised_material_req,pm_leadtime,pm_userid 
                 from swift_packagemaster,Project where proj_id=pm_projid  and proj_id='" . $pid . "'";
         }
 
@@ -167,9 +167,10 @@ class Common
         $res = json_encode($result);
         return $res;
     }
-    function select_packcount($pid,$packid) {
+    function select_packcount($pid, $packid)
+    {
         if ($pid == "") {
-             $sql = "select count(st_id) as row_count from swift_transactions where st_packid='$packid'";
+            $sql = "select count(st_id) as row_count from swift_transactions where st_packid='$packid'";
         } else {
             $sql = "select count(st_id) as row_count from swift_transactions where st_packid='$packid' and st_projid='$pid' ";
         }
@@ -208,7 +209,7 @@ and tech_status=0 and stage_id=1 and ps_packid=pm_packid and  ps_packid='" . $pa
 
     function select_allprojects_seg($segment)
     {
-         $sql = "select * from Project where cat_id='" . $segment . "' order by proj_name ASC";
+        $sql = "select * from Project where cat_id='" . $segment . "' order by proj_name ASC";
         $query = mssql_query($sql);
         $result = array();
         while ($row = mssql_fetch_array($query)) {
@@ -304,7 +305,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
     {
 
         //$sql = "select * from usermst where usertype in('" . $usertype . "') and active = 1";
-          $sql = " select uid,name from swift_stage_master as a 
+        $sql = " select uid,name from swift_stage_master as a 
         inner join usermst as u on u.usertype=a.usertype 
         where a.stage_id='$stageid'  and  u.active = 1";
         // echo   $sql = " select uid,name from swift_stage_master as a 
@@ -319,14 +320,14 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
         $res = json_encode($result);
         return $res;
     }
-     function getusername_backstage($packid, $stageid, $pid)
+    function getusername_backstage($packid, $stageid, $pid)
     {
 
         //$sql = "select * from usermst where usertype in('" . $usertype . "') and active = 1";
         //   $sql = " select uid,name from swift_stage_master as a 
         // inner join usermst as u on u.usertype=a.usertype 
         // where a.stage_id='$stageid'  and  u.active = 1";
-            $sql = " select uid,name from swift_stage_master as a 
+        $sql = " select uid,name from swift_stage_master as a 
         inner join swift_packagestatus as b on b.ps_stageid=a.stage_id 
         inner join usermst as u on u.usertype=a.usertype and b.ps_userid=u.uid
         where a.stage_id='$stageid' and ps_packid='$packid' and ps_projid='$pid' and  u.active = 1";
@@ -347,7 +348,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
         // } else {
         //     $cond = " AND cat_id!='38'";
         // }
-         $senduserid  = $_SESSION['uid'];
+        $senduserid  = $_SESSION['uid'];
         $usertype    = $_SESSION['usertype'];
         if ($usertype == 2) {
             $where = "and to_stage_id='13'";
@@ -367,7 +368,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
              inner join Project as d on a.cs_projid=d.proj_id 
              where  to_stage_id=ps_stageid and cs_active = '0' and  to_uid = '$senduserid'  and  cs_projid= $id $where";
         } else {
-           $sql = "SELECT   d.proj_type,c.hold_on,(isnull(DATEDIFF(DAY,ps_actualdate,GETDATE()),0)) as nodays,ps_stback,pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate as 
+            $sql = "SELECT   d.proj_type,c.hold_on,(isnull(DATEDIFF(DAY,ps_actualdate,GETDATE()),0)) as nodays,ps_stback,pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate as 
             org_plandate,ps_expdate, ps_actualdate,cs_actual,cs_created_date as cs_sentdate, from_remark,to_remark, 
             cs_active,revised_planned_date as rev_planned_date,pm_material_req as schedule_date,pm_revised_material_req
              as mat_req_date,lt_flag  from swift_workflow_CurrentStage as a
@@ -376,7 +377,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
              inner join Project as d on a.cs_projid=d.proj_id 
              where  to_stage_id=ps_stageid and cs_active = '0' and  to_uid = '$senduserid' $where";
         }
-       //print_r($sql);
+        //print_r($sql);
         $query = mssql_query($sql);
         $result = array();
         while ($row = mssql_fetch_array($query)) {
@@ -408,7 +409,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
             // as mat_req_date FROM swift_workflow_CurrentStage, swift_packagestatus,swift_packagemaster,Project 
             // WHERE cs_active = '1' and to_stage_id =ps_stageid and to_uid = '$senduserid' and cs_packid=ps_packid  
             // AND  cs_packid=pm_packid AND cs_packid=pm_packid AND proj_id=cs_projid ";
-             $sql = "SELECT   d.proj_type,c.hold_on,(isnull(DATEDIFF(DAY,ps_actualdate,GETDATE()),0)) as nodays,ps_stback,pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate as 
+            $sql = "SELECT   d.proj_type,c.hold_on,(isnull(DATEDIFF(DAY,ps_actualdate,GETDATE()),0)) as nodays,ps_stback,pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate as 
             org_plandate,ps_expdate, ps_actualdate,cs_actual,cs_created_date as cs_sentdate, from_remark,to_remark, 
             cs_active,revised_planned_date as rev_planned_date,pm_material_req as schedule_date,pm_revised_material_req
              as mat_req_date,lt_flag  from swift_workflow_CurrentStage as a
@@ -458,7 +459,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
             // FROM swift_repository,swift_packagestatus,swift_packagemaster,project WHERE 
             //  active = '1' and rs_packid=ps_packid 
             // AND rs_packid=pm_packid AND pm_projid=proj_id AND rs_to_uid='$uid' $cond";
-             $sql = "SELECT distinct e.proj_type,cs_packid,cs_projid,ps_stageid,to_uid,from_uid,to_stage_id,from_stage_id,
+            $sql = "SELECT distinct e.proj_type,cs_packid,cs_projid,ps_stageid,to_uid,from_uid,to_stage_id,from_stage_id,
              cs_created_date,ps_planneddate as org_plandate, ps_expdate,ps_actualdate,cs_expdate, ps_stageid,cs_actual,
               to_remark,cs_active,revised_planned_date as rev_planned_date, pm_material_req as schedule_date,
               pm_revised_material_req as mat_req_date
@@ -486,7 +487,7 @@ and stage_id=ps_stageid and cat_id='" . $segment . "' and pm_packid=ps_packid an
             $cond = " and cat_id!=38";
         }
         if ($id != "") {
-             $sql = "SELECT distinct c.proj_type,a.pw_packid,a.pw_projid,proj_name,pm_packagename,po_no,po_approved_on,wo_no,wo_approved_on
+            $sql = "SELECT distinct c.proj_type,a.pw_packid,a.pw_projid,proj_name,pm_packagename,po_no,po_approved_on,wo_no,wo_approved_on
             from Swift_po_wo_Details as a
             inner join project as c on a.pw_projid=c.proj_id
             inner join swift_packagemaster as d on a.pw_packid=d.pm_packid
@@ -1109,9 +1110,9 @@ group by ebr_packid,ebr_venid,sup_name,ebr_rpanum,ebr_projid,ebr_ponum,ebr_po_wo
         // $res = json_encode($result);
         return $row;
     }
-    function nextstage($packid, $projid,$md_id)
+    function nextstage($packid, $projid, $md_id)
     {
-         $sql = "SELECT dl_date as approved_on,dl_flag,to_md_id
+        $sql = "SELECT dl_date as approved_on,dl_flag,to_md_id
         from Swift_Disributor_log where dl_packid=$packid and dl_projid=$projid and to_md_id='$md_id' order by dl_flag desc";
         $query = mssql_query($sql);
         $row = mssql_fetch_array($query);
@@ -1134,7 +1135,7 @@ group by ebr_packid,ebr_venid,sup_name,ebr_rpanum,ebr_projid,ebr_ponum,ebr_po_wo
         // $res = json_encode($result);
         // return $res;
     }
-    
+
     function status_order($packid, $projid)
     {
         $sql = "SELECT * from Swift_Buyer_approve where ba_packid='$packid' and ba_projid='$projid'  ";
@@ -1176,7 +1177,7 @@ group by ebr_packid,ebr_venid,sup_name,ebr_rpanum,ebr_projid,ebr_ponum,ebr_po_wo
             $cond = " and milcom_app!='1'";
         }
         $sql = "select * from usermst where usertype = $id and active=1 order by name asc";
-       //echo $sql ;
+        //echo $sql ;
         $query = mssql_query($sql);
         $result = array();
         while ($row = mssql_fetch_array($query)) {
@@ -1365,13 +1366,18 @@ group by ebr_packid,ebr_venid,sup_name,ebr_rpanum,ebr_projid,ebr_ponum,ebr_po_wo
     }
     function get_stagenames($pack_id, $from, $to)
     {
+        if (empty($to)) {
+            $next_stage = "NULL";
+        } else {
+            $next_stage = intval($to);
+        }
         $sql = "SELECT  (select stage_name from swift_stage_master 
        where stage_id=$from ) as cur_stage,(select stage_name from swift_stage_master 
-       where stage_id=$to ) as next_stage
+       where stage_id=$next_stage ) as next_stage
        FROM swift_packagestatus,swift_packagemaster,swift_stage_master,swift_workflow_CurrentStage
        WHERE ps_packid=pm_packid AND stage_id=ps_stageid AND cs_packid=ps_packid  AND ps_packid = '$pack_id' and active=1";
-      //print_r($sql);
-       $query = mssql_query($sql);
+        //print_r($sql);
+        $query = mssql_query($sql);
         $row = mssql_fetch_array($query);
         return $row;
     }
@@ -1459,7 +1465,7 @@ group by ebr_packid,ebr_venid,sup_name,ebr_rpanum,ebr_projid,ebr_ponum,ebr_po_wo
         $res = json_encode($result);
         return $res;
     }
-  
+
 
     // sakthi
     function sendtoopsdata($pack_id)
@@ -2210,8 +2216,9 @@ where ck_projid='$pid' and clk_id='$id' ";
         $row = mssql_fetch_array($query);
         return $row;
     }
-    function projtype($id) {
-         $sql = "SELECT * from SwiftType Where id='$id' ";
+    function projtype($id)
+    {
+        $sql = "SELECT * from SwiftType Where id='$id' ";
         $query = mssql_query($sql);
         $row = mssql_fetch_array($query);
         return $row;
@@ -2551,9 +2558,9 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
     //            return "NULL";
     //        }
     //    }
-    function current_status($packid,$projid)
+    function current_status($packid, $projid)
     {
-         $sql = "select d.name as sname,b.name,b.usertype,c.shot_name,(isnull(DATEDIFF(DAY,a.ps_actualdate,GETDATE()),0)) as nodays,ps_stback, a.* from  dbo.swift_packagestatus as a
+        $sql = "select d.name as sname,b.name,b.usertype,c.shot_name,(isnull(DATEDIFF(DAY,a.ps_actualdate,GETDATE()),0)) as nodays,ps_stback, a.* from  dbo.swift_packagestatus as a
         left join usermst as b on a.ps_userid=b.uid
         left join swift_stage_master as c on a.ps_stageid=c.stage_id  
         left join usermst as d on a.ps_sbuid=d.uid
@@ -2579,13 +2586,14 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $utype = $row['usertype'];
         return $utype;
     }
-    function fetch_usertype_v1($uid) {
+    function fetch_usertype_v1($uid)
+    {
         $con = new dbcon2();
         $dbcon1 = $con->getValue();
         $sql = "select * from usermst where uid='$uid' ";
-        $query = mssql_query($sql,$dbcon1);
+        $query = mssql_query($sql, $dbcon1);
         $row = mssql_fetch_assoc($query);
-        $utype=$row['usertype'];
+        $utype = $row['usertype'];
         return $utype;
     }
 
@@ -2604,7 +2612,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
          swift_packagestatus,swift_packagemaster,Project WHERE cs_active = '1' and to_stage_id =ps_stageid and to_uid = '$uid' 
          and cs_packid=ps_packid and cs_packid=pm_packid AND proj_id=cs_projid and cs_projid = '$id' $cond  ";
         } else {
-              $sql = "SELECT pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate
+            $sql = "SELECT pm_stages,cs_packid,cs_projid,from_uid,to_uid,from_stage_id,to_stage_id, ps_planneddate
           as org_plandate,ps_expdate, ps_actualdate,cs_actual,cs_created_date as cs_sentdate, from_remark,
           to_remark, cs_active,revised_planned_date as rev_planned_date,pm_material_req 
           as schedule_date,pm_revised_material_req as mat_req_date FROM swift_workflow_CurrentStage, 
@@ -2683,9 +2691,9 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
             'to'   => $to,
         );
         print_r($data);
-        $encodedData = json_encode($data);  
+        $encodedData = json_encode($data);
         $curl = curl_init($url);
-       // print_r($encodedData);
+        // print_r($encodedData);
         $data_string = urlencode(json_encode($data));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
@@ -2696,19 +2704,18 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $result = curl_exec($curl);
         // print $result;
         // die();
-// if(curl_errno($curl)) {
-//     $error_message = curl_error($curl);
-//     echo "cURL error: " . $error_message;
-// }
+        // if(curl_errno($curl)) {
+        //     $error_message = curl_error($curl);
+        //     echo "cURL error: " . $error_message;
+        // }
 
         curl_close($curl);
-       
     }
     //For Distributor Process
     function Send_Mail_Dist($projid, $packid, $md_id)
     {
         //$url = 'http://127.0.0.1:8000/api/LinkSendToDist';
-         $url  = 'https://swc.ltts.com/lnt_email_services/api/LinkSendToDist';
+        $url  = 'https://swc.ltts.com/lnt_email_services/api/LinkSendToDist';
         $data = array(
             'projid' => $projid,
             'packid' => $packid,
@@ -2726,7 +2733,7 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
         $result = curl_exec($curl);
         curl_close($curl);
-       //  print $result;exit;
+        //  print $result;exit;
     }
     //By OEM 
     //For Distributor Process
@@ -2766,18 +2773,19 @@ where ps_packid=pm_packid and ps_projid=proj_id and ps_stageid=stage_id and ps_p
         $res = json_encode($result);
         return $res;
     }
-    function select_project_type($id) {
-       
+    function select_project_type($id)
+    {
+
         $where = '';
         $proj_type = isset($_SESSION['proj_type']) ? trim($_SESSION['proj_type']) : '';
         $result = array();
-        if($proj_type != ''){
-            
-        //echo "<pre>"; print_R("select * from SwiftType $where"); exit;
-            if($proj_type != 0){
+        if ($proj_type != '') {
+
+            //echo "<pre>"; print_R("select * from SwiftType $where"); exit;
+            if ($proj_type != 0) {
                 $where = "WHERE id = $proj_type";
             }
-             $sql = "select * from SwiftType $where";
+            $sql = "select * from SwiftType $where";
             $query = mssql_query($sql);
             while ($row = mssql_fetch_array($query)) {
                 $result[] = $row;

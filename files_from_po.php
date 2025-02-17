@@ -145,21 +145,21 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                         $projname = $cls_comm->project_name($value['pm_projid']);
                                         $packname = $cls_comm->package_name($value['pm_packid']);
                                         $sendername = $cls_comm->get_username($value['from_uid']);
-                                        $schedule_date = $cls_comm->datechange(formatDate($value['schedule_date'], 'Y-m-d'));
-                                        $mat_req = $cls_comm->datechange(formatDate($value['mat_req_date'], 'Y-m-d'));
-                                        $actual_date = $cls_comm->datechange(formatDate($value['cs_actualdate'], 'Y-m-d'));
-                                        $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
-                                        $org_plandate = $cls_comm->datechange(formatDate($value['org_plandate'], 'Y-m-d'));
-                                        $rev_planned_date = $cls_comm->datechange(formatDate($value['rev_planned_date'], 'Y-m-d'));
-                                        $rdate = $cls_comm->datechange(formatDate($value['cs_sentdate'], 'Y-m-d'));
+                                        $schedule_date = $cls_comm->datechange(formatDate(formatDate($value['schedule_date'], 'Y-m-d', 'Y-m-d')));
+                                        $mat_req = $cls_comm->datechange(formatDate(formatDate($value['mat_req_date'], 'Y-m-d', 'Y-m-d')));
+                                        $actual_date = $cls_comm->datechange(formatDate(formatDate($value['cs_actualdate'], 'Y-m-d', 'Y-m-d')));
+                                        $except_date = $cls_comm->datechange(formatDate(formatDate($value['ps_expdate'], 'Y-m-d', 'Y-m-d')));
+                                        $org_plandate = $cls_comm->datechange(formatDate(formatDate($value['org_plandate'], 'Y-m-d', 'Y-m-d')));
+                                        $rev_planned_date = $cls_comm->datechange(formatDate(formatDate($value['rev_planned_date'], 'Y-m-d', 'Y-m-d')));
+                                        $rdate = $cls_comm->datechange(formatDate(formatDate($value['cs_sentdate'], 'Y-m-d', 'Y-m-d')));
                                         $hold_flag = $value['hold_on'];
                                         $getid = $value['pw_id'];
 
                                         if ($value['ps_expdate'] == "") {
                                             $except_date = date('Y-m-d');
-                                            $except_date = $cls_comm->datechange($except_date);
+                                            $except_date = $cls_comm->datechange(formatDate($except_date, 'Y-m-d'));
                                         } else {
-                                            $except_date = $cls_comm->datechange($value['ps_expdate']);
+                                            $except_date = $cls_comm->datechange(formatDate($value['ps_expdate'], 'Y-m-d'));
                                         }
                                         if ($value['proj_type'] == 1) {
                                             $ptype = "CO";

@@ -48,7 +48,7 @@ $today_date = date("d-M-y");
                             <?php
                             $results = $cls_comm->select_planned_date($proj_id, $pack_id, $stageid);
 //                            echo formatDate(str_replace('/', '-', $results['ps_expdate'], 'd-M-y')); 
-                            $plan_date = formatDate(str_replace('/', '-', $results['revised_planned_date'], 'd-M-y'));
+                            $plan_date = formatDate($results['revised_planned_date'], 'd-M-y');
                             if ($results['ps_expdate'] == "") {
                                 $Pexpdate = date('d-M-y');
                             } else {

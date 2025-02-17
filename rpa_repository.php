@@ -73,8 +73,8 @@ include_once('layout/leftsidebar.php');
                                     foreach ($res as $key => $value) {
                                         $projname = $cls_comm->project_name($value['ebr_projid']);
                                         $packname = $cls_comm->package_name($value['ebr_packid']);
-                                        $valid_from = $cls_comm->datechange($value['rpa_from']);
-                                        $valid_to = $cls_comm->datechange($value['rpa_to']);                                       
+                                        $valid_from = $cls_comm->datechange(formatDate($value['rpa_from'], 'Y-m-d'));
+                                        $valid_to = $cls_comm->datechange(formatDate($value['rpa_to'], 'Y-m-d'));                                       
                                         $po_num = $value['ebr_ponum'];                                       
                                         ?>
                                         <tr>

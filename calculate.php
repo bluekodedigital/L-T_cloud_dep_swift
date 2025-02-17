@@ -8,8 +8,8 @@ if (isset($_POST['mat'])) {
 
     $stages = array();
     $lead = $_POST['lead'];
-    //$matreq = formatDate(str_replace('/', '-', $mat), 'Y-m-d');
-    $matreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat)));
+    $matreq = formatDate(str_replace('/', '-', $mat), 'Y-m-d');
+    // $matreq = date('Y-m-d', strtotime(str_replace('/', '-', $mat)));
     $userlist = " select * from usermst where usertype =(SELECT b.usertype FROM swift_workflow_details  as a
     inner join swift_stage_master as b on a.stage_id=b.stage_id
     WHERE a.mst_id = $Did ORDER BY a.Did OFFSET 2 ROWS FETCH NEXT 1 ROW ONLY)";
@@ -39,18 +39,16 @@ if (isset($_POST['mat'])) {
     $num_rows = mssql_num_rows($querywf);
     while ($row_wf = mssql_fetch_array($querywf)) {
         $Days = $row_wf['target_day'];
+
         // echo $Days;echo "<br>";
         $stage_ids = $row_wf['stage_id'];
         if ($i == 0) {
-            //$stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days'));
-            // echo $diff;
-            //$stages[$stage_ids] = date('d-M-y', strtotime(formatDate($mat . '-', 'Y-m-d') . $diff . 'days'));
-            $stages[$stage_ids] = formatDate($mat . '-' . $diff, 'd-M-Y');
+            //$stages[1] = date('d-M-y', strtotime(formatDate($org, 'Y-m-d') . (int)$diff . 'days'));
+            $stages[$stage_ids] = date('Y-m-d', strtotime(formatDate($mat, 'Y-m-d') . '-' . (int)$diff . 'days'));
             // }elseif ($i == $num_rows ) {
             //     $stages[$stage_ids] = $matreq;
         } else {
-           // $stages[$stage_ids] = date('d-M-y', strtotime(formatDate($previous, 'Y-m-d') . $Days . 'days'));
-           $stages[$stage_ids] = formatDate($previous . $Days, 'd-M-Y');
+            $stages[$stage_ids] = date('Y-m-d', strtotime(formatDate($previous, 'Y-m-d') . (int)$Days . 'days'));
         }
         $previous = $stages[$stage_ids];
 
@@ -74,7 +72,7 @@ if (isset($_POST['mat'])) {
         $stagename = $value1['stage_name'];
 
         if ($counts <= 24) {
-            $data = formatDate($stages[$stage_id], 'd-M-Y');
+            $data = formatDate($stages[$stage_id], 'd-M-y');
             $status = 'checked';
         } else {
             unset($data);

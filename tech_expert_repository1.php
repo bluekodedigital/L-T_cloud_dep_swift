@@ -73,9 +73,9 @@
                                                 <span class="point greenpoint" ></span>
                                         </div><?php echo $packname?></td>
                                         <td><span class="badge badge-pill badge-info font-medium text-white ml-1">Current Status</span></td>
-                                        <td><?php echo $cls_comm->datechange($value['st_planneddate'])?></td>
-                                        <td><?php echo $cls_comm->datechange($value['st_expdate'])?></td>
-                                        <td><?php echo $cls_comm->datechange($value['st_actual'])?></td>
+                                        <td><?php echo $cls_comm->datechange(formatDate($value['st_planneddate'], 'Y-m-d'))?></td>
+                                        <td><?php echo $cls_comm->datechange(formatDate($value['st_expdate'], 'Y-m-d'))?></td>
+                                        <td><?php echo $cls_comm->datechange(formatDate($value['st_actual'], 'Y-m-d'))?></td>
                                         <td><span onclick="view_reports('<?php echo $value['ts_packid'];?>')" class="badge badge-pill badge-primary font-medium text-white ml-1"  data-toggle="modal" data-target=".bs-example-modal-lg" data-whatever="@mdo" style=" cursor: pointer;"><i class="fas fa-eye"></i> View</span></td>
                                     </tr>
                                     <?php
