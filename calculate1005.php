@@ -27,9 +27,9 @@ if (isset($_POST['mat'])) {
         //echo $Days;echo "<br>";
         $stage_ids = $row_wf['stage_id'];
         if ($i == 0) {
-            //$stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days'));
+            //$stages[1] = date('d-M-y', strtotime(formatDate($org, 'Y-m-d') . '-' . $diff . 'days'));
             // echo $diff;
-            $stages[$stage_ids] = date('d-M-y', strtotime(formatDate($mat . '-', 'Y-m-d') . $diff . 'days')); 
+            $stages[$stage_ids] = date('d-M-y', strtotime(formatDate($mat, 'Y-m-d') . '-' . $diff . 'days')); 
         // }elseif ($i == $num_rows ) {
         //     $stages[$stage_ids] = $matreq;
         }else{
