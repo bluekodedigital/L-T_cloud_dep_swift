@@ -8,7 +8,7 @@ if(isset($_POST['mat'])&& isset($_POST['lead'])){
 	 $matreq = formatDate(str_replace('/', '-', $mat), 'Y-m-d');
       // $orgs = formatDate(str_replace('/', '-', $org), 'Y-m-d');
 	    $diff = ($lead + 54); //15-23-6-15
-            $stages[1] = date('d-M-y', strtotime(formatDate($matreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops    
+            $stages[1] = date('d-M-y', strtotime(formatDate($matreq, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops    
             $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
             $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
             $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance - Expert to Reviewer

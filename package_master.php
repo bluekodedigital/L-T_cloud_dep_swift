@@ -637,7 +637,7 @@ if (isset($_GET['pid']) || isset($_GET['ptid'])) {
                                                 echo formatDate($value['pm_revised_material_req'], 'd-M-Y');
                                                 $diff = ($value['pm_leadtime'] + 59);
                                                 $start = formatDate($value['pm_revised_material_req'], 'Y-m-d');
-                                                $end = date('d-M-y', strtotime(formatDate($start . '+', 'Y-m-d') . $diff . 'days'));
+                                                $end = date('d-M-y', strtotime(formatDate($start, 'Y-m-d') . '+' . $diff . 'days'));
                                                 ?>
 
 

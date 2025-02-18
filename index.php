@@ -122,7 +122,7 @@ if (isset($_POST['btn_login'])) {
 
     <div class="container">
         <div class="main-box">
-            <h1>Log in</h1>
+            <h1>Login</h1>
             <form id="loginform" method="post">
 
 

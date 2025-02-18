@@ -62,7 +62,7 @@ include_once ("../config/inc_function.php");
             if ($insert) {
                 $update = mssql_query("update Project set package_status=1 where proj_id='" . $proj_name . "'");
                 $diff = ($lead_time + 54); //15-23-6-15
-                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops    
+                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops    
                 $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                 $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                 $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance

@@ -1121,9 +1121,7 @@ $generate_token= generate_token();
                 options += `<option value="${value.uid}">${value.name}</option>`;
             });
              $('#senbackuid').html('');
-             $('#senbackuid').append(option);
-
-            $('#senbackuid').html(options);
+             $('#senbackuid').html(options);
         } catch (error) {
             console.error("Error parsing response:", error);
         }
