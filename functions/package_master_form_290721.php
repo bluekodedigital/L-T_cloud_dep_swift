@@ -108,7 +108,7 @@ include_once ("../config/inc_function.php");
                 $contoops = mssql_query("update swift_packagestatus set active=0,ps_expdate='" . date('Y-m-d H:i:s') . "',ps_actualdate='" . date('Y-m-d H:i:s') . "',ps_userid='" . $uid . "' where ps_stageid='1' and ps_packid='" . $id . "' ");
                 $update_stage = mssql_query("update swift_packagestatus set active=1  where ps_stageid='2' and ps_packid='" . $id . "' ");
 
-                $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[1] = date('d-M-y', strtotime(formatDate($org, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops
                 $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                 $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                 $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
@@ -1038,7 +1038,7 @@ include_once ("../config/inc_function.php");
                         $update = mssql_query("update Project set package_status=1 where proj_id='" . $proj_name . "'");
                         //calculation of planned Dates
                         $diff = ($lead_time + 54);
-                        $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                        $stages[1] = date('d-M-y', strtotime(formatDate($mtreq, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops
                         $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                         $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                         $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
@@ -1081,7 +1081,7 @@ include_once ("../config/inc_function.php");
                         }
                         $contoops = mssql_query("update swift_packagestatus set  active=0,ps_expdate='" . date('Y-m-d H:i:s') . "',ps_actualdate='" . date('Y-m-d H:i:s') . "',ps_userid='" . $uid . "' where ps_stageid='1' and ps_packid='" . $id . "' ");
                         $update_stage = mssql_query("update swift_packagestatus set active=1  where ps_stageid='2' and ps_packid='" . $id . "' ");
-                        $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                        $stages[1] = date('d-M-y', strtotime(formatDate($org, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops
                         $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                         $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                         $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
@@ -1202,7 +1202,7 @@ include_once ("../config/inc_function.php");
             if ($update) {
 
                 $diff = ($lead_time + 54);
-                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[1] = date('d-M-y', strtotime(formatDate($mtreq, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops
                 $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                 $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                 $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
@@ -1245,7 +1245,7 @@ include_once ("../config/inc_function.php");
                 }
 
                 $diff = ($lead_time + 54);
-                $stages[1] = date('d-M-y', strtotime(formatDate($org . '-', 'Y-m-d') . $diff . 'days')); //1Contracts to Ops
+                $stages[1] = date('d-M-y', strtotime(formatDate($org, 'Y-m-d') . '-' . $diff . 'days')); //1Contracts to Ops
                 $stages[2] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //2Ops to Engineering SPOC
                 $stages[3] = formatDate($stages[1] . '+1 days', 'Y-m-d'); //3$SPOC_to_Tech_Expert
                 $stages[4] = formatDate($stages[3] . '+5 days', 'Y-m-d'); //4$Tech_Expert_Clerance
